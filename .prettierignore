@@ -1,0 +1,26 @@
+# Compiled & generated output
+/*/dist/
+/app/queries/
+/api/schema.graphql
+/db/types.ts
+/db/models/*
+
+# Cache
+/.cache
+
+# Yarn
+/.yarn
+/.pnp.*
+
+# TypeScript
+/tsconfig.base.json
+
+# Terraform
+.terraform
+*.tfvars.json
+
+# Misc
+/.husky
+*.hbs
+*.ejs
+
