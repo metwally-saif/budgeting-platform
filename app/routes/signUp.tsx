@@ -1,5 +1,6 @@
 import {
   Email,
+  InfoOutlined,
   Lock as LockIcon,
   Person as PersonIcon,
 } from "@mui/icons-material";
@@ -8,13 +9,15 @@ import {
   Box,
   Container,
   FormControl,
+  FormHelperText,
   FormLabel,
   Input,
   Typography,
 } from "@mui/joy";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { SignUpButton } from "../components";
+import { FieldError, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { LoginButton, SignUpButton } from "../components";
 
 export type FormData = {
   username: string;
@@ -23,7 +26,15 @@ export type FormData = {
   confirmPassword: string;
 };
 
-export const Component = function signUp() {
+export type FormErrors = {
+  username?: FieldError;
+  email?: FieldError;
+  password?: FieldError;
+  confirmPassword?: FieldError;
+};
+
+export const Component = function SignUp() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,6 +42,7 @@ export const Component = function signUp() {
     formState: { errors },
     reset,
   } = useForm<FormData>({
+    mode: "onChange", // Validate on change instead of just on submit
     defaultValues: {
       username: "",
       email: "",
@@ -38,15 +50,21 @@ export const Component = function signUp() {
       confirmPassword: "",
     },
   });
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [formData, setFormData] = useState<FormData | null>(null);
+
+  const [formError, setFormError] = useState<string | null>(null);
   const password = watch("password");
 
-  const onSubmit = async (data: FormData) => {
-    setFormData(data);
-    console.log(data);
-    setSubmitSuccess(true);
-    reset();
+  const onSubmit = async () => {
+    try {
+      // Reset the form
+      reset();
+
+      // Redirect to the login page
+      navigate("/login");
+    } catch (err) {
+      console.error("Signup error:", err);
+      setFormError("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -58,79 +76,125 @@ export const Component = function signUp() {
           display: "flex",
           flexDirection: "column",
           gap: 2,
+          py: 4, // Add some padding
         }}
       >
         <Box textAlign="center" mb={2}>
-          <Typography component="h1" gutterBottom>
+          <Typography level="h4" component="h1" gutterBottom>
             Create an Account
           </Typography>
-          <Typography>Enter your details to sign up</Typography>
+          <Typography level="body-md" color="neutral">
+            Enter your details to sign up
+          </Typography>
         </Box>
 
-        <FormControl>
+        {formError && (
+          <Alert
+            color="danger"
+            variant="soft"
+            endDecorator={
+              <button onClick={() => setFormError(null)}>Dismiss</button>
+            }
+          >
+            {formError}
+          </Alert>
+        )}
+
+        <LoginButton signInMethod="google.com" />
+
+        <Typography level="body-md" textAlign="center">
+          Or
+        </Typography>
+
+        <FormControl error={!!errors.username}>
           <FormLabel>Username</FormLabel>
           <Input
             fullWidth
             variant="outlined"
             startDecorator={<PersonIcon />}
-            placeholder="Username"
+            placeholder="Enter your username"
             {...register("username", {
               required: "Username is required",
               minLength: {
                 value: 3,
                 message: "Username must be at least 3 characters",
               },
+              pattern: {
+                value: /^[a-zA-Z0-9_-]+$/,
+                message:
+                  "Username can only contain letters, numbers, underscores and hyphens",
+              },
             })}
           />
+          {errors.username && (
+            <FormHelperText>
+              <InfoOutlined sx={{ mr: 1, fontSize: "sm" }} />
+              {errors.username.message}
+            </FormHelperText>
+          )}
         </FormControl>
 
-        <FormControl>
+        <FormControl error={!!errors.email}>
           <FormLabel>Email</FormLabel>
-
           <Input
             fullWidth
             type="email"
             variant="outlined"
-            error={!!errors.email}
-            placeholder="Email"
+            placeholder="Enter your email"
             startDecorator={<Email />}
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value: /\S+@\S+\.\S+/,
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: "Please enter a valid email",
               },
             })}
           />
+          {errors.email && (
+            <FormHelperText>
+              <InfoOutlined sx={{ mr: 1, fontSize: "sm" }} />
+              {errors.email.message}
+            </FormHelperText>
+          )}
         </FormControl>
 
-        <FormControl>
+        <FormControl error={!!errors.password}>
           <FormLabel>Password</FormLabel>
           <Input
             fullWidth
             type="password"
             variant="outlined"
-            error={!!errors.password}
             startDecorator={<LockIcon />}
-            placeholder="Password"
+            placeholder="Enter your password"
             {...register("password", {
               required: "Password is required",
               minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+              pattern: {
+                value:
+                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                message:
+                  "Password must contain at least one letter, one number, and one special character",
               },
             })}
           />
+          {errors.password && (
+            <FormHelperText>
+              <InfoOutlined sx={{ mr: 1, fontSize: "sm" }} />
+              {errors.password.message}
+            </FormHelperText>
+          )}
         </FormControl>
 
-        <FormControl>
+        <FormControl error={!!errors.confirmPassword}>
           <FormLabel>Confirm Password</FormLabel>
           <Input
             fullWidth
             type="password"
             variant="outlined"
-            placeholder="Confirm Password"
-            error={!!errors.confirmPassword}
+            placeholder="Confirm your password"
             startDecorator={<LockIcon />}
             {...register("confirmPassword", {
               required: "Please confirm your password",
@@ -138,16 +202,31 @@ export const Component = function signUp() {
                 value === password || "Passwords do not match",
             })}
           />
+          {errors.confirmPassword && (
+            <FormHelperText>
+              <InfoOutlined sx={{ mr: 1, fontSize: "sm" }} />
+              {errors.confirmPassword.message}
+            </FormHelperText>
+          )}
         </FormControl>
 
-        <SignUpButton formData={formData} />
+        <SignUpButton formData={watch()} errors={errors} />
 
-        {submitSuccess && (
-          <Alert severity="success" sx={{ mt: 2 }}>
-            Sign up successful! Welcome aboard.
-          </Alert>
-        )}
+        <Typography level="body-sm" textAlign="center" sx={{ mt: 2 }}>
+          Already have an account?{" "}
+          <Typography
+            component="a"
+            href="/login"
+            fontWeight="lg"
+            color="primary"
+          >
+            Sign in
+          </Typography>
+        </Typography>
       </Box>
     </Container>
   );
 };
+
+// Add prop types for better type checking
+Component.displayName = "SignUpPage";

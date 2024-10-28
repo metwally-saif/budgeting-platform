@@ -1,8 +1,6 @@
-
-
 import { Button, ButtonProps } from "@mui/joy";
 import { SignInMethod, useSignIn } from "../core/auth";
-import { AnonymousIcon, GoogleIcon } from "../icons";
+import { GoogleIcon } from "../icons";
 
 export function LoginButton(props: LoginButtonProps): JSX.Element {
   const { signInMethod, ...other } = props;
@@ -11,9 +9,7 @@ export function LoginButton(props: LoginButtonProps): JSX.Element {
   const icon =
     signInMethod === "google.com" ? (
       <GoogleIcon />
-    ) : signInMethod === "anonymous" ? (
-      <AnonymousIcon />
-    ) : null;
+    ) : signInMethod === "email" ? null : null;
 
   return (
     <Button
@@ -24,8 +20,8 @@ export function LoginButton(props: LoginButtonProps): JSX.Element {
       children={
         signInMethod === "google.com"
           ? "Continue via Google"
-          : signInMethod === "anonymous"
-            ? "Continue as anonymous"
+          : signInMethod === "email"
+            ? "Sign in"
             : "unknown"
       }
       {...other}

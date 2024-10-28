@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "privacy", lazy: () => import("./privacy") },
       { path: "terms", lazy: () => import("./terms") },
       { path: "signup", lazy: () => import("./signUp") },
+      { path: "verify-email", lazy: () => import("./verify-email") },
     ],
   },
   {

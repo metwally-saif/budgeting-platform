@@ -1,5 +1,3 @@
-
-
 import { Container, ContainerProps, Typography } from "@mui/joy";
 import { LoginButton } from "../components";
 
@@ -21,6 +19,9 @@ export const Component = function Login(): JSX.Element {
       </Typography>
 
       <LoginButton signInMethod="google.com" />
+      <Typography level="body-md" textAlign="center">
+        Or
+      </Typography>
 
       <LoginButton signInMethod="email" />
     </Container>

@@ -1,9 +1,11 @@
 import {
+  AuthErrorCodes,
   GoogleAuthProvider,
   User,
   UserCredential,
   createUserWithEmailAndPassword,
   getAuth,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
@@ -13,6 +15,7 @@ import { loadable } from "jotai/utils";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormData } from "../routes/signUp";
+import { alert } from "../utils/alert";
 import { app, auth } from "./firebase";
 import { store } from "./store";
 
@@ -40,29 +43,72 @@ export function useCurrentUserLoadable() {
   return useAtomValue(currentUserLoadable);
 }
 
-export function useSignUp(
-  formData: FormData | null,
-): [signUp: () => void, inFlight: boolean] {
-  if (!formData || formData === null) {
-    return [() => {}, false];
-  }
+type SignUpFunction = (formData: FormData) => Promise<void>;
+
+export function useSignUp(): [signUp: SignUpFunction, inFlight: boolean] {
   const navigate = useNavigate();
   const [inFlight, setInFlight] = useState(false);
+  const auth = getAuth(app);
 
-  const signUp = useCallback(() => {
-    const auth = getAuth(app);
-    setInFlight(true);
-    createUserWithEmailAndPassword(auth, formData.email, formData.password)
-      .then(() => {
-        navigate("/");
-        if (auth.currentUser) {
-          updateProfile(auth.currentUser, {
-            displayName: formData.username,
-          });
+  const signUp = useCallback(
+    async (formData: FormData) => {
+      setInFlight(true);
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password,
+        );
+
+        await updateProfile(userCredential.user, {
+          displayName: formData.username,
+        });
+
+        // Send verification email
+        await sendEmailVerification(userCredential.user, {
+          url: `${window.location.origin}/login`,
+          handleCodeInApp: true,
+        });
+
+        // Navigate to a verification pending page instead of home
+        navigate("/verify-email", {
+          state: { email: formData.email },
+        });
+      } catch (error: unknown) {
+        if (!(error instanceof Error)) {
+          alert("An error occurred. Please try again.");
+          return;
         }
-      })
-      .finally(() => setInFlight(false));
-  }, [formData.email, formData.password, navigate]);
+
+        const errorCode = (error as { code?: string }).code;
+        switch (errorCode) {
+          case AuthErrorCodes.EMAIL_EXISTS:
+            alert("Email already exists");
+            break;
+          case AuthErrorCodes.INVALID_EMAIL:
+            alert("Invalid email");
+            break;
+          case AuthErrorCodes.WEAK_PASSWORD:
+            alert("Weak password");
+            break;
+          case AuthErrorCodes.NETWORK_REQUEST_FAILED:
+            alert("Network request failed");
+            break;
+          case AuthErrorCodes.TOO_MANY_ATTEMPTS_TRY_LATER:
+            alert("Too many attempts. Try again later.");
+            break;
+          default:
+            alert("An error occurred. Please try again.");
+        }
+
+        console.error("Sign up error:", error);
+      } finally {
+        setInFlight(false);
+      }
+    },
+    [auth, navigate],
+  );
 
   return [signUp, inFlight] as const;
 }
