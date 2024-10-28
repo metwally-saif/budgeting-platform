@@ -1,5 +1,3 @@
-
-
 /**
  * ESLint configuration
  *

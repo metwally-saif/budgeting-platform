@@ -13,8 +13,7 @@
     "server:build": "yarn workspace server run build"
   },
   "dependencies": {
-    "@google-cloud/storage": "^7.7.0",
-    "@googleapis/identitytoolkit": "^8.0.1",
+    "@graphql-tools/schema": "^10.0.7",
     "@pothos/core": "^3.41.0",
     "@sendgrid/mail": "^8.1.0",
     "dataloader": "^2.2.2",
@@ -22,9 +21,11 @@
     "date-fns-tz": "^2.0.0",
     "db": "workspace:*",
     "envalid": "^8.0.0",
+    "firebase-admin": "^12.6.0",
     "google-auth-library": "^9.6.3",
     "got": "^14.2.0",
     "graphql": "^16.8.1",
+    "graphql-middleware": "^6.1.35",
     "graphql-relay": "^0.10.0",
     "graphql-yoga": "^5.1.1",
     "knex": "^3.1.0",
@@ -41,7 +42,6 @@
     "db"
   ],
   "devDependencies": {
-    "@google-cloud/cloud-sql-connector": "^1.2.2",
     "@graphql-codegen/cli": "5.0.2",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@types/lodash-es": "^4.17.12",

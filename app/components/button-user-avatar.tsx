@@ -1,5 +1,3 @@
-
-
 import { LogoutRounded, SettingsRounded } from "@mui/icons-material";
 import {
   Avatar,

@@ -29,9 +29,11 @@ yarn-error.log*
 /coverage
 *.lcov
 
+budgeting-platform-firebase-adminsdk-4hs0r-c2216b18f1.json
+
 # Environment variables
+.local
 .env.local
-.env.*.local
 .*.override.env
 /env/gcp-key.*.json
 !/env/gcp-key.test.json
@@ -68,3 +70,4 @@ crash.*.log
 # macOS
 # https://github.com/github/gitignore/blob/master/Global/macOS.gitignore
 .DS_Store
+
