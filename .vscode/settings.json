@@ -14,19 +14,6 @@
   "files.associations": {
     ".terraformrc": "terraform"
   },
-  "files.exclude": {
-    "**/.cache": true,
-    "**/.DS_Store": true,
-    "**/.editorconfig": true,
-    "**/.eslintcache": true,
-    "**/.git": true,
-    "**/.gitattributes": true,
-    "**/.husky": true,
-    "**/.pnp.*": true,
-    "**/.prettierignore": true,
-    "**/node_modules": true,
-    "**/yarn.lock": true
-  },
   "search.exclude": {
     "**/dist/": true,
     "**/.pnp.*": true,

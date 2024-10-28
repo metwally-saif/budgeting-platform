@@ -13,6 +13,14 @@ export default interface User {
   time_zone: string | null;
 
   locale: string | null;
+
+  displayName: string | null;
+
+  photoUrl: string | null;
+
+  email: string | null;
+
+  emailVerified: string | null;
 }
 
 /** Represents the initializer for the table public.user */
@@ -22,6 +30,14 @@ export interface UserInitializer {
   time_zone?: string | null;
 
   locale?: string | null;
+
+  displayName?: string | null;
+
+  photoUrl?: string | null;
+
+  email?: string | null;
+
+  emailVerified?: string | null;
 }
 
 /** Represents the mutator for the table public.user */
@@ -31,6 +47,14 @@ export interface UserMutator {
   time_zone?: string | null;
 
   locale?: string | null;
+
+  displayName?: string | null;
+
+  photoUrl?: string | null;
+
+  email?: string | null;
+
+  emailVerified?: string | null;
 }
 
 export const userId = z.string() as unknown as z.Schema<UserId>;
@@ -39,16 +63,28 @@ export const user = z.object({
   id: userId,
   time_zone: z.string().nullable(),
   locale: z.string().nullable(),
+  displayName: z.string().nullable(),
+  photoUrl: z.string().nullable(),
+  email: z.string().nullable(),
+  emailVerified: z.string().nullable(),
 }) as unknown as z.Schema<User>;
 
 export const userInitializer = z.object({
   id: userId,
   time_zone: z.string().optional().nullable(),
   locale: z.string().optional().nullable(),
+  displayName: z.string().optional().nullable(),
+  photoUrl: z.string().optional().nullable(),
+  email: z.string().optional().nullable(),
+  emailVerified: z.string().optional().nullable(),
 }) as unknown as z.Schema<UserInitializer>;
 
 export const userMutator = z.object({
   id: userId.optional(),
   time_zone: z.string().optional().nullable(),
   locale: z.string().optional().nullable(),
+  displayName: z.string().optional().nullable(),
+  photoUrl: z.string().optional().nullable(),
+  email: z.string().optional().nullable(),
+  emailVerified: z.string().optional().nullable(),
 }) as unknown as z.Schema<UserMutator>;

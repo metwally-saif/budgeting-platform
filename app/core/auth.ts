@@ -1,17 +1,18 @@
-
-
 import {
   GoogleAuthProvider,
   User,
   UserCredential,
+  createUserWithEmailAndPassword,
   getAuth,
-  signInAnonymously,
+  signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { atom, useAtomValue } from "jotai";
 import { loadable } from "jotai/utils";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormData } from "../routes/signUp";
 import { app, auth } from "./firebase";
 import { store } from "./store";
 
@@ -39,8 +40,37 @@ export function useCurrentUserLoadable() {
   return useAtomValue(currentUserLoadable);
 }
 
+export function useSignUp(
+  formData: FormData | null,
+): [signUp: () => void, inFlight: boolean] {
+  if (!formData || formData === null) {
+    return [() => {}, false];
+  }
+  const navigate = useNavigate();
+  const [inFlight, setInFlight] = useState(false);
+
+  const signUp = useCallback(() => {
+    const auth = getAuth(app);
+    setInFlight(true);
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then(() => {
+        navigate("/");
+        if (auth.currentUser) {
+          updateProfile(auth.currentUser, {
+            displayName: formData.username,
+          });
+        }
+      })
+      .finally(() => setInFlight(false));
+  }, [formData.email, formData.password, navigate]);
+
+  return [signUp, inFlight] as const;
+}
+
 export function useSignIn(
   signInMethod: SignInMethod,
+  password?: string,
+  email?: string,
 ): [signIn: () => void, inFlight: boolean] {
   const navigate = useNavigate();
   const [inFlight, setInFlight] = useState(false);
@@ -48,9 +78,12 @@ export function useSignIn(
   const signIn = useCallback(() => {
     let p: Promise<UserCredential> | null = null;
 
-    if (signInMethod === "anonymous") {
+    if (signInMethod === "email") {
+      if (!email || !password) {
+        throw new Error("Email and password required");
+      }
       const auth = getAuth(app);
-      p = signInAnonymously(auth);
+      p = signInWithEmailAndPassword(auth, email!, password!);
     }
 
     if (signInMethod === "google.com") {
@@ -74,4 +107,4 @@ export function useSignIn(
   return [signIn, inFlight] as const;
 }
 
-export type SignInMethod = "google.com" | "anonymous";
+export type SignInMethod = "google.com" | "email";

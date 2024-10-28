@@ -1,5 +1,3 @@
-
-
 import type { Knex } from "knex";
 
 /**
@@ -15,13 +13,21 @@ export async function up(db: Knex) {
   // await db.raw(`CREATE EXTENSION IF NOT EXISTS "pgvector"`);
 
   // User roles.
-  await db.raw(`CREATE TYPE user_role AS ENUM ('owner', 'member')`);
-
+  await db.raw(`CREATE TYPE user_role AS ENUM ('admin', 'user', 'member')`);
   // User accounts (excluding fields from the auth provider).
+
   await db.schema.createTable("user", (table) => {
     table.string("id", 40).notNullable().primary();
     table.string("time_zone", 50); // E.g. "America/New_York"
     table.string("locale", 10); // E.g. "en-US"
+    table.string("display_name", 100);
+    table.string("photo_url", 255);
+    table.boolean("email_verified").notNullable().defaultTo(false);
+    table.boolean("disabled").notNullable().defaultTo(false);
+    table.timestamp("created_at").notNullable().defaultTo(db.fn.now());
+    table.timestamp("last_login_at").notNullable().defaultTo(db.fn.now());
+    table.timestamp("updated_at").notNullable().defaultTo(db.fn.now());
+    table.specificType("roles", "user_role[]").notNullable().defaultTo("{}");
   });
 
   // User workspaces/organizations.

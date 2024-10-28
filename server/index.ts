@@ -1,9 +1,10 @@
-
-
 import { createYoga } from "graphql-yoga";
 import uWS from "uWebSockets.js";
 import { db, env } from "./core";
-import { getIdToken } from "./core/auth";
+import { authMiddleware } from "./middleware/authMiddleware";
+
+// import { getIdToken } from "./core/auth";
+
 import { schema } from "./schema";
 
 /**
@@ -12,9 +13,14 @@ import { schema } from "./schema";
  */
 const yoga = createYoga({
   schema,
-  async context({ request }) {
-    const token = await getIdToken(request);
-    return { token };
+  logging: true,
+  context: async (ctx) => {
+    const user = await authMiddleware(ctx);
+    return {
+      ...ctx,
+      user,
+      db,
+    };
   },
 });
 
@@ -25,7 +31,10 @@ const yoga = createYoga({
 const app = uWS
   .App()
   // GraphQL API endpoint.
-  .any("/*", yoga);
+  .any("/*", async (res, req) => {
+    console.log("Received request:", req.getUrl());
+    await yoga(res, req);
+  });
 
 /**
  * Starts the HTTP server.

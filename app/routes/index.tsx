@@ -1,5 +1,3 @@
-
-
 import { createElement } from "react";
 import {
   createBrowserRouter,
@@ -21,6 +19,7 @@ export const router = createBrowserRouter([
       { path: "login", lazy: () => import("./login") },
       { path: "privacy", lazy: () => import("./privacy") },
       { path: "terms", lazy: () => import("./terms") },
+      { path: "signup", lazy: () => import("./signUp") },
     ],
   },
   {

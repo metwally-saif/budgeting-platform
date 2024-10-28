@@ -1,5 +1,3 @@
-
-
 // Database management CLI for PostgreSQL. Usage example:
 //
 //   $ yarn db create           # creates a new database
@@ -72,8 +70,13 @@ program
   .action(async function (_, cmd) {
     await oraPromise(
       async () => {
+        // make migrate to the latest version with knex
         const db = getDatabase(cmd.opts());
-        db.migrate.latest().finally(() => db.destroy());
+        try {
+          await db.migrate.latest();
+        } finally {
+          await db.destroy();
+        }
       },
       {
         text: cmd.description(),
@@ -84,7 +87,7 @@ program
       await oraPromise(
         async () => {
           const db = getDatabase(cmd.opts());
-          db.seed.run().finally(() => db.destroy());
+          console.log(db.seed.run().finally(() => db.destroy()));
         },
         {
           text: "seed database with data",
@@ -173,7 +176,7 @@ function loadEnv(envName?: string) {
 /**
  * Creates a new Knex.js database connection.
  */
-function getDatabase(options?: { env?: string; schema?: string }) {
+export function getDatabase(options?: { env?: string; schema?: string }) {
   loadEnv(options?.env);
   let connector: Connector | undefined = undefined;
   const db = knex({

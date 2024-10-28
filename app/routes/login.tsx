@@ -21,7 +21,8 @@ export const Component = function Login(): JSX.Element {
       </Typography>
 
       <LoginButton signInMethod="google.com" />
-      <LoginButton signInMethod="anonymous" />
+
+      <LoginButton signInMethod="email" />
     </Container>
   );
 };

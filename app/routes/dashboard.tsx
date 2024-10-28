@@ -1,10 +1,19 @@
-
-
 import { Box, Card, CardContent, Container, Typography } from "@mui/joy";
+import { useEffect } from "react";
+import { useCurrentUser } from "../core/auth";
 import { usePageEffect } from "../core/page";
 
 export const Component = function Dashboard(): JSX.Element {
   usePageEffect({ title: "Dashboard" });
+
+  const currentUser = useCurrentUser();
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      console.log(await currentUser?.getIdToken());
+    };
+    fetchToken();
+  }, [currentUser]);
 
   return (
     <Container sx={{ py: 2 }}>
