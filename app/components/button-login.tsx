@@ -3,7 +3,7 @@ import { SignInMethod, useSignIn } from "../core/auth";
 import { GoogleIcon } from "../icons";
 
 export function LoginButton(props: LoginButtonProps): JSX.Element {
-  const { signInMethod, ...other } = props;
+  const { password, email, signInMethod, ...other } = props;
   const [signIn, inFlight] = useSignIn(signInMethod);
 
   const icon =
@@ -11,11 +11,23 @@ export function LoginButton(props: LoginButtonProps): JSX.Element {
       <GoogleIcon />
     ) : signInMethod === "email" ? null : null;
 
+  const onSubmit = async () => {
+    try {
+      if (signInMethod === "email") {
+        signIn(password, email);
+      } else {
+        signIn();
+      }
+    } catch (err) {
+      console.error("Sign in error:", err);
+    }
+  };
+
   return (
     <Button
       startDecorator={icon}
       variant="outlined"
-      onClick={signIn}
+      onClick={onSubmit}
       loading={inFlight}
       children={
         signInMethod === "google.com"
@@ -34,6 +46,8 @@ export type LoginButtonProps = Omit<
     "button",
     {
       signInMethod: SignInMethod;
+      email?: string;
+      password?: string;
     }
   >,
   "children"

@@ -115,40 +115,41 @@ export function useSignUp(): [signUp: SignUpFunction, inFlight: boolean] {
 
 export function useSignIn(
   signInMethod: SignInMethod,
-  password?: string,
-  email?: string,
-): [signIn: () => void, inFlight: boolean] {
+): [signIn: (password?: string, email?: string) => void, inFlight: boolean] {
   const navigate = useNavigate();
   const [inFlight, setInFlight] = useState(false);
 
-  const signIn = useCallback(() => {
-    let p: Promise<UserCredential> | null = null;
+  const signIn = useCallback(
+    (password?: string, email?: string) => {
+      let p: Promise<UserCredential> | null = null;
 
-    if (signInMethod === "email") {
-      if (!email || !password) {
-        throw new Error("Email and password required");
+      if (signInMethod === "email") {
+        if (!email || !password) {
+          throw new Error("Email and password required");
+        }
+        const auth = getAuth(app);
+        p = signInWithEmailAndPassword(auth, email!, password!);
       }
-      const auth = getAuth(app);
-      p = signInWithEmailAndPassword(auth, email!, password!);
-    }
 
-    if (signInMethod === "google.com") {
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-      provider.addScope("profile");
-      provider.addScope("email");
-      provider.setCustomParameters({
-        // login_hint: ...
-        prompt: "consent",
-      });
-      p = signInWithPopup(auth, provider);
-    }
+      if (signInMethod === "google.com") {
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        provider.addScope("profile");
+        provider.addScope("email");
+        provider.setCustomParameters({
+          // login_hint: ...
+          prompt: "consent",
+        });
+        p = signInWithPopup(auth, provider);
+      }
 
-    if (!p) throw new Error(`Not supported: ${signInMethod}`);
+      if (!p) throw new Error(`Not supported: ${signInMethod}`);
 
-    setInFlight(true);
-    p.then(() => navigate("/")).finally(() => setInFlight(false));
-  }, [signInMethod, navigate]);
+      setInFlight(true);
+      p.then(() => navigate("/")).finally(() => setInFlight(false));
+    },
+    [signInMethod, navigate],
+  );
 
   return [signIn, inFlight] as const;
 }
