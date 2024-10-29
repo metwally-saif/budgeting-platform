@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "React App Sample",
+  "short_name": "Spendly",
+  "name": "Spendly AI budgeting app",
   "icons": [
     {
       "src": "favicon.ico",

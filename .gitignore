@@ -32,6 +32,7 @@ yarn-error.log*
 budgeting-platform-firebase-adminsdk-4hs0r-c2216b18f1.json
 
 # Environment variables
+.env
 .local
 .env.local
 .*.override.env
