@@ -91,16 +91,6 @@ export const Component = function Login(): JSX.Element {
             placeholder="Enter your password"
             {...register("password", {
               required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-              pattern: {
-                value:
-                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                message:
-                  "Password must contain at least one letter, one number, and one special character",
-              },
             })}
           />
           {errors.password && (

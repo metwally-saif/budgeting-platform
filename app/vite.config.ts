@@ -1,5 +1,3 @@
-
-
 import react from "@vitejs/plugin-react";
 import { URL, fileURLToPath } from "node:url";
 import { loadEnv } from "vite";
@@ -9,7 +7,6 @@ const publicEnvVars = [
   "APP_ENV",
   "APP_NAME",
   "APP_ORIGIN",
-  "GOOGLE_CLOUD_PROJECT",
   "FIREBASE_APP_ID",
   "FIREBASE_API_KEY",
   "FIREBASE_AUTH_DOMAIN",

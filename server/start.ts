@@ -10,20 +10,20 @@ import getPort, { portNumbers } from "get-port";
 process.env.PORT = `${await getPort({ port: portNumbers(8080, 9000) })}`;
 process.env.PGHOST = process.env.PGHOST ?? "";
 
-let connector: {
-  getOptions: (arg0: {
-    instanceConnectionName: string;
-    //
-    // Usage example:
-    //   $ yarn vite-node --watch ./start.ts
-    //
-    ipType: any;
-  }) => any; close: () => void;
-} | undefined= undefined;
+const connector:
+  | {
+      getOptions: (arg0: {
+        instanceConnectionName: string;
+        //
+        // Usage example:
+        //   $ yarn vite-node --watch ./start.ts
+        //
+        ipType: any;
+      }) => any;
+      close: () => void;
+    }
+  | undefined = undefined;
 const dbHost = process.env.PGHOST ?? "";
-
-// Setup Cloud SQL Connector when database hostname
-
 
 async function listen() {
   const module = await import("./index");
