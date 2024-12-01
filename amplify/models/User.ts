@@ -2,11 +2,18 @@ import { a } from "@aws-amplify/backend";
 
 export const User = a.model({
     id: a.id(),
-    username: a.string(),
+    profileOwner: a.string().required(),
     email: a.string(),
-    password: a.string(),
-    role: a.string(),
+    firstName: a.string(),
+    lastName: a.string(),
+    role: a.string().authorization((allow) => [allow.groups(["Admin"])]),
     preference: a.hasOne("Preference", "userId"),
-    }).authorization((allow) => [allow.guest()]);
+    expenses: a.hasMany("Expense", "userId"),
+    })
+    .identifier(["profileOwner"])
+    .authorization((allow) => [
+        allow.owner(),
+        allow.groups(["Admin"]),
+    ]);
 
 
