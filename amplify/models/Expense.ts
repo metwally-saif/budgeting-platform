@@ -1,6 +1,7 @@
 import { a } from "@aws-amplify/backend";
 
-export const Expense = a.model({
+export const Expense = a
+  .model({
     id: a.id(),
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
@@ -27,9 +28,6 @@ export const Expense = a.model({
     // budgeted: a.boolean().default(false),
     // budgetId: a.string(),
     // budget: a.belongsTo("Budget", "budgetId"),
-})
-.identifier(["userId"])
-.authorization((allow) => [
-    allow.owner(),
-    allow.groups(["Admin"]),
-]);
+  })
+  .identifier(["userId"])
+  .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

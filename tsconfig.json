@@ -8,7 +8,5 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "exclude": [
-    "./amplify_outputs.json",
-  ]
+  "exclude": ["./amplify_outputs.json"]
 }
