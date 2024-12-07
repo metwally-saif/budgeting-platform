@@ -1,6 +1,7 @@
 import { a } from "@aws-amplify/backend";
 
-export const User = a.model({
+export const User = a
+  .model({
     id: a.id(),
     profileOwner: a.string().required(),
     email: a.string(),
@@ -9,11 +10,6 @@ export const User = a.model({
     role: a.string().authorization((allow) => [allow.groups(["Admin"])]),
     preference: a.hasOne("Preference", "userId"),
     expenses: a.hasMany("Expense", "userId"),
-    })
-    .identifier(["profileOwner"])
-    .authorization((allow) => [
-        allow.owner(),
-        allow.groups(["Admin"]),
-    ]);
-
-
+  })
+  .identifier(["profileOwner"])
+  .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

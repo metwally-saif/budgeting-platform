@@ -1,5 +1,5 @@
 /* tslint:disable */
-/* eslint-disable */
+ 
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -55,7 +55,8 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   APITypes.OnCreateExpenseSubscriptionVariables,
   APITypes.OnCreateExpenseSubscription
 >;
-export const onCreateExpenseCategory = /* GraphQL */ `subscription OnCreateExpenseCategory(
+export const onCreateExpenseCategory =
+  /* GraphQL */ `subscription OnCreateExpenseCategory(
   $filter: ModelSubscriptionExpenseCategoryFilterInput
 ) {
   onCreateExpenseCategory(filter: $filter) {
@@ -71,10 +72,11 @@ export const onCreateExpenseCategory = /* GraphQL */ `subscription OnCreateExpen
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateExpenseCategorySubscriptionVariables,
-  APITypes.OnCreateExpenseCategorySubscription
->;
-export const onCreatePreference = /* GraphQL */ `subscription OnCreatePreference(
+    APITypes.OnCreateExpenseCategorySubscriptionVariables,
+    APITypes.OnCreateExpenseCategorySubscription
+  >;
+export const onCreatePreference =
+  /* GraphQL */ `subscription OnCreatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -115,9 +117,9 @@ export const onCreatePreference = /* GraphQL */ `subscription OnCreatePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreatePreferenceSubscriptionVariables,
-  APITypes.OnCreatePreferenceSubscription
->;
+    APITypes.OnCreatePreferenceSubscriptionVariables,
+    APITypes.OnCreatePreferenceSubscription
+  >;
 export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String
@@ -213,7 +215,8 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   APITypes.OnDeleteExpenseSubscriptionVariables,
   APITypes.OnDeleteExpenseSubscription
 >;
-export const onDeleteExpenseCategory = /* GraphQL */ `subscription OnDeleteExpenseCategory(
+export const onDeleteExpenseCategory =
+  /* GraphQL */ `subscription OnDeleteExpenseCategory(
   $filter: ModelSubscriptionExpenseCategoryFilterInput
 ) {
   onDeleteExpenseCategory(filter: $filter) {
@@ -229,10 +232,11 @@ export const onDeleteExpenseCategory = /* GraphQL */ `subscription OnDeleteExpen
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteExpenseCategorySubscriptionVariables,
-  APITypes.OnDeleteExpenseCategorySubscription
->;
-export const onDeletePreference = /* GraphQL */ `subscription OnDeletePreference(
+    APITypes.OnDeleteExpenseCategorySubscriptionVariables,
+    APITypes.OnDeleteExpenseCategorySubscription
+  >;
+export const onDeletePreference =
+  /* GraphQL */ `subscription OnDeletePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -273,9 +277,9 @@ export const onDeletePreference = /* GraphQL */ `subscription OnDeletePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeletePreferenceSubscriptionVariables,
-  APITypes.OnDeletePreferenceSubscription
->;
+    APITypes.OnDeletePreferenceSubscriptionVariables,
+    APITypes.OnDeletePreferenceSubscription
+  >;
 export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String
@@ -371,7 +375,8 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   APITypes.OnUpdateExpenseSubscriptionVariables,
   APITypes.OnUpdateExpenseSubscription
 >;
-export const onUpdateExpenseCategory = /* GraphQL */ `subscription OnUpdateExpenseCategory(
+export const onUpdateExpenseCategory =
+  /* GraphQL */ `subscription OnUpdateExpenseCategory(
   $filter: ModelSubscriptionExpenseCategoryFilterInput
 ) {
   onUpdateExpenseCategory(filter: $filter) {
@@ -387,10 +392,11 @@ export const onUpdateExpenseCategory = /* GraphQL */ `subscription OnUpdateExpen
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateExpenseCategorySubscriptionVariables,
-  APITypes.OnUpdateExpenseCategorySubscription
->;
-export const onUpdatePreference = /* GraphQL */ `subscription OnUpdatePreference(
+    APITypes.OnUpdateExpenseCategorySubscriptionVariables,
+    APITypes.OnUpdateExpenseCategorySubscription
+  >;
+export const onUpdatePreference =
+  /* GraphQL */ `subscription OnUpdatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -431,9 +437,9 @@ export const onUpdatePreference = /* GraphQL */ `subscription OnUpdatePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdatePreferenceSubscriptionVariables,
-  APITypes.OnUpdatePreferenceSubscription
->;
+    APITypes.OnUpdatePreferenceSubscriptionVariables,
+    APITypes.OnUpdatePreferenceSubscription
+  >;
 export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String

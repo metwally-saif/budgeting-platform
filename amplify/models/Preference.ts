@@ -1,6 +1,7 @@
 import { a } from "@aws-amplify/backend";
 
-export const Preference = a.model({
+export const Preference = a
+  .model({
     id: a.id(),
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
@@ -21,7 +22,6 @@ export const Preference = a.model({
     debt: a.float(),
     debtGoal: a.float(),
 
-
     // Preference Tracking
     lastUpdated: a.date(),
 
@@ -29,9 +29,6 @@ export const Preference = a.model({
     // budgeted: a.boolean().default(false),
     // budgetId: a.string(),
     // budget: a.belongsTo("Budget", "budgetId"),
-})
-.identifier(["userId"])
-.authorization((allow) => [
-    allow.owner(),
-    allow.groups(["Admin"]),
-]);
+  })
+  .identifier(["userId"])
+  .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "typecheck": "nx run-many --target=typecheck --all",
-    "lint": "nx run-many --target=lint",
+    "typecheck": "tsc -b tsconfig.app.json --pretty",
+    "lint": "eslint",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,yml,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,tsx,json,yml,md}\"",
     "codegen": "npx ampx generate graphql-client-code --format graphql-codegen  --out amplify/graphql",
@@ -37,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
     "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
     "tailwindcss": "^3.4.15",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",

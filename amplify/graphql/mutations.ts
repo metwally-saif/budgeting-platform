@@ -1,5 +1,5 @@
 /* tslint:disable */
-/* eslint-disable */
+ 
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -55,7 +55,8 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
   APITypes.CreateExpenseMutationVariables,
   APITypes.CreateExpenseMutation
 >;
-export const createExpenseCategory = /* GraphQL */ `mutation CreateExpenseCategory(
+export const createExpenseCategory =
+  /* GraphQL */ `mutation CreateExpenseCategory(
   $condition: ModelExpenseCategoryConditionInput
   $input: CreateExpenseCategoryInput!
 ) {
@@ -72,9 +73,9 @@ export const createExpenseCategory = /* GraphQL */ `mutation CreateExpenseCatego
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateExpenseCategoryMutationVariables,
-  APITypes.CreateExpenseCategoryMutation
->;
+    APITypes.CreateExpenseCategoryMutationVariables,
+    APITypes.CreateExpenseCategoryMutation
+  >;
 export const createPreference = /* GraphQL */ `mutation CreatePreference(
   $condition: ModelPreferenceConditionInput
   $input: CreatePreferenceInput!
@@ -214,7 +215,8 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
   APITypes.DeleteExpenseMutationVariables,
   APITypes.DeleteExpenseMutation
 >;
-export const deleteExpenseCategory = /* GraphQL */ `mutation DeleteExpenseCategory(
+export const deleteExpenseCategory =
+  /* GraphQL */ `mutation DeleteExpenseCategory(
   $condition: ModelExpenseCategoryConditionInput
   $input: DeleteExpenseCategoryInput!
 ) {
@@ -231,9 +233,9 @@ export const deleteExpenseCategory = /* GraphQL */ `mutation DeleteExpenseCatego
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteExpenseCategoryMutationVariables,
-  APITypes.DeleteExpenseCategoryMutation
->;
+    APITypes.DeleteExpenseCategoryMutationVariables,
+    APITypes.DeleteExpenseCategoryMutation
+  >;
 export const deletePreference = /* GraphQL */ `mutation DeletePreference(
   $condition: ModelPreferenceConditionInput
   $input: DeletePreferenceInput!
@@ -373,7 +375,8 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
   APITypes.UpdateExpenseMutationVariables,
   APITypes.UpdateExpenseMutation
 >;
-export const updateExpenseCategory = /* GraphQL */ `mutation UpdateExpenseCategory(
+export const updateExpenseCategory =
+  /* GraphQL */ `mutation UpdateExpenseCategory(
   $condition: ModelExpenseCategoryConditionInput
   $input: UpdateExpenseCategoryInput!
 ) {
@@ -390,9 +393,9 @@ export const updateExpenseCategory = /* GraphQL */ `mutation UpdateExpenseCatego
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateExpenseCategoryMutationVariables,
-  APITypes.UpdateExpenseCategoryMutation
->;
+    APITypes.UpdateExpenseCategoryMutationVariables,
+    APITypes.UpdateExpenseCategoryMutation
+  >;
 export const updatePreference = /* GraphQL */ `mutation UpdatePreference(
   $condition: ModelPreferenceConditionInput
   $input: UpdatePreferenceInput!

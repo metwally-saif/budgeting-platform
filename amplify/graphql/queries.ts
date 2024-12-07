@@ -1,5 +1,5 @@
 /* tslint:disable */
-/* eslint-disable */
+ 
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -52,7 +52,8 @@ export const getExpense = /* GraphQL */ `query GetExpense($userId: String!) {
   APITypes.GetExpenseQueryVariables,
   APITypes.GetExpenseQuery
 >;
-export const getExpenseCategory = /* GraphQL */ `query GetExpenseCategory($id: ID!) {
+export const getExpenseCategory =
+  /* GraphQL */ `query GetExpenseCategory($id: ID!) {
   getExpenseCategory(id: $id) {
     createdAt
     expenses {
@@ -66,10 +67,11 @@ export const getExpenseCategory = /* GraphQL */ `query GetExpenseCategory($id: I
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetExpenseCategoryQueryVariables,
-  APITypes.GetExpenseCategoryQuery
->;
-export const getPreference = /* GraphQL */ `query GetPreference($userId: String!) {
+    APITypes.GetExpenseCategoryQueryVariables,
+    APITypes.GetExpenseCategoryQuery
+  >;
+export const getPreference =
+  /* GraphQL */ `query GetPreference($userId: String!) {
   getPreference(userId: $userId) {
     createdAt
     currency
@@ -107,9 +109,9 @@ export const getPreference = /* GraphQL */ `query GetPreference($userId: String!
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetPreferenceQueryVariables,
-  APITypes.GetPreferenceQuery
->;
+    APITypes.GetPreferenceQueryVariables,
+    APITypes.GetPreferenceQuery
+  >;
 export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   getUser(profileOwner: $profileOwner) {
     createdAt
