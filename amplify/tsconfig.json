@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "$amplify/*": [
+        "../.amplify/generated/*"
+      ]
+    },
+  },
+  "exclude": ["../.amplify/generated/*"],
+  "include": [
+    "graphql/**/*.ts",
+    "functions/**/*.ts",
+    "auth/**/*.ts",
+    "models/**/*.ts",
+    "data/**/*.ts",
+    ".amplify/generated/env/**/*.ts"
+    ]
+}

@@ -1,8 +1,14 @@
 {
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
   "files": [],
   "references": [
-    { "path": "./app" },
-    { "path": "./db" },
-    { "path": "./server" }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "exclude": [
+    "./amplify_outputs.json",
   ]
 }
