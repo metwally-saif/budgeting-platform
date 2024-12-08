@@ -6,6 +6,22 @@ export const Preference = a
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
 
+    financialStatus: a.enum(["Good", "Average", "Poor"]),
+
+    homeOwnership: a.enum(["Rent", "Own", "Other"]),
+
+    transportation: a.enum(["Public", "Private", "Other"]),
+
+    mostSpend: a.enum([
+      "Housing",
+      "Transportation",
+      "Food",
+      "Insurance",
+      "Healthcare",
+      "Entertainment",
+      "Other",
+    ]),
+    subscriptions: a.string().array(),
     // Preference Details
     currency: a.enum(["USD", "EUR"]),
     monthlyIncome: a.float(),
@@ -19,6 +35,14 @@ export const Preference = a
     retirementFund: a.float(),
     retirementFundGoal: a.float(),
     hasDebt: a.boolean(),
+    deptType: a.enum([
+      "CreditCard",
+      "StudentLoan",
+      "AutoLoans",
+      "PersonalLoans",
+      "MedicalDept",
+      "Other",
+    ]),
     debt: a.float(),
     debtGoal: a.float(),
 

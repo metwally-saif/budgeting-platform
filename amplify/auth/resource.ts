@@ -9,6 +9,16 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
+  userAttributes: {
+    familyName: {
+      mutable: true,
+      required: true,
+    },
+    givenName: {
+      mutable: true,
+      required: true,
+    },
+  },
   groups: ["Admin", "User"],
   triggers: {
     postConfirmation,

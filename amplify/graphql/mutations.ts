@@ -1,5 +1,4 @@
 /* tslint:disable */
- 
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -14,18 +13,23 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
 ) {
   createExpense(condition: $condition, input: $input) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -34,6 +38,7 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -55,12 +60,11 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
   APITypes.CreateExpenseMutationVariables,
   APITypes.CreateExpenseMutation
 >;
-export const createExpenseCategory =
-  /* GraphQL */ `mutation CreateExpenseCategory(
-  $condition: ModelExpenseCategoryConditionInput
-  $input: CreateExpenseCategoryInput!
+export const createExpenseType = /* GraphQL */ `mutation CreateExpenseType(
+  $condition: ModelExpenseTypeConditionInput
+  $input: CreateExpenseTypeInput!
 ) {
-  createExpenseCategory(condition: $condition, input: $input) {
+  createExpenseType(condition: $condition, input: $input) {
     createdAt
     expenses {
       nextToken
@@ -68,14 +72,28 @@ export const createExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedMutation<
-    APITypes.CreateExpenseCategoryMutationVariables,
-    APITypes.CreateExpenseCategoryMutation
-  >;
+  APITypes.CreateExpenseTypeMutationVariables,
+  APITypes.CreateExpenseTypeMutation
+>;
 export const createPreference = /* GraphQL */ `mutation CreatePreference(
   $condition: ModelPreferenceConditionInput
   $input: CreatePreferenceInput!
@@ -85,20 +103,26 @@ export const createPreference = /* GraphQL */ `mutation CreatePreference(
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -127,6 +151,10 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   createUser(condition: $condition, input: $input) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -140,20 +168,26 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
@@ -174,18 +208,23 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
 ) {
   deleteExpense(condition: $condition, input: $input) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -194,6 +233,7 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -215,12 +255,11 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
   APITypes.DeleteExpenseMutationVariables,
   APITypes.DeleteExpenseMutation
 >;
-export const deleteExpenseCategory =
-  /* GraphQL */ `mutation DeleteExpenseCategory(
-  $condition: ModelExpenseCategoryConditionInput
-  $input: DeleteExpenseCategoryInput!
+export const deleteExpenseType = /* GraphQL */ `mutation DeleteExpenseType(
+  $condition: ModelExpenseTypeConditionInput
+  $input: DeleteExpenseTypeInput!
 ) {
-  deleteExpenseCategory(condition: $condition, input: $input) {
+  deleteExpenseType(condition: $condition, input: $input) {
     createdAt
     expenses {
       nextToken
@@ -228,14 +267,28 @@ export const deleteExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedMutation<
-    APITypes.DeleteExpenseCategoryMutationVariables,
-    APITypes.DeleteExpenseCategoryMutation
-  >;
+  APITypes.DeleteExpenseTypeMutationVariables,
+  APITypes.DeleteExpenseTypeMutation
+>;
 export const deletePreference = /* GraphQL */ `mutation DeletePreference(
   $condition: ModelPreferenceConditionInput
   $input: DeletePreferenceInput!
@@ -245,20 +298,26 @@ export const deletePreference = /* GraphQL */ `mutation DeletePreference(
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -287,6 +346,10 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   deleteUser(condition: $condition, input: $input) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -300,20 +363,26 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
@@ -334,18 +403,23 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
 ) {
   updateExpense(condition: $condition, input: $input) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -354,6 +428,7 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -375,12 +450,11 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
   APITypes.UpdateExpenseMutationVariables,
   APITypes.UpdateExpenseMutation
 >;
-export const updateExpenseCategory =
-  /* GraphQL */ `mutation UpdateExpenseCategory(
-  $condition: ModelExpenseCategoryConditionInput
-  $input: UpdateExpenseCategoryInput!
+export const updateExpenseType = /* GraphQL */ `mutation UpdateExpenseType(
+  $condition: ModelExpenseTypeConditionInput
+  $input: UpdateExpenseTypeInput!
 ) {
-  updateExpenseCategory(condition: $condition, input: $input) {
+  updateExpenseType(condition: $condition, input: $input) {
     createdAt
     expenses {
       nextToken
@@ -388,14 +462,28 @@ export const updateExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedMutation<
-    APITypes.UpdateExpenseCategoryMutationVariables,
-    APITypes.UpdateExpenseCategoryMutation
-  >;
+  APITypes.UpdateExpenseTypeMutationVariables,
+  APITypes.UpdateExpenseTypeMutation
+>;
 export const updatePreference = /* GraphQL */ `mutation UpdatePreference(
   $condition: ModelPreferenceConditionInput
   $input: UpdatePreferenceInput!
@@ -405,20 +493,26 @@ export const updatePreference = /* GraphQL */ `mutation UpdatePreference(
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -447,6 +541,10 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
   updateUser(condition: $condition, input: $input) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -460,20 +558,26 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
