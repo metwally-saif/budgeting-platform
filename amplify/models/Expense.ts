@@ -6,15 +6,31 @@ export const Expense = a
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
 
+    expenseTypeId: a.string(),
+    expenseType: a.belongsTo("ExpenseType", "expenseTypeId"),
+
     // Expense Details
     name: a.string(),
+    category: a.enum([
+      "Housing",
+      "Transportation",
+      "Food",
+      "Utilities",
+      "Insurance",
+      "Healthcare",
+      "Savings",
+      "Personal",
+      "Recreation",
+      "Debt",
+      "Miscellaneous",
+    ]),
+    hasTarget: a.boolean().default(false),
     amount: a.float(),
-    categoryId: a.string(),
-    category: a.belongsTo("ExpenseCategory", "categoryId"),
+    targetAmount: a.float(),
     date: a.date(),
     recurring: a.boolean().default(false),
     recurringFrequency: a.enum(["Daily", "Weekly", "Monthly", "Yearly"]),
-    recurringEndDate: a.date(),
+    nextMonthIWantToSetAside: a.float(),
 
     // Expense Notes
     notes: a.string(),
@@ -29,5 +45,6 @@ export const Expense = a
     // budgetId: a.string(),
     // budget: a.belongsTo("Budget", "budgetId"),
   })
-  .identifier(["userId"])
+  .identifier(["id"])
+  .secondaryIndexes((index) => [index("userId")])
   .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

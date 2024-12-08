@@ -1,20 +1,22 @@
 import { Authenticator } from "@aws-amplify/ui-react";
-import { Amplify } from "aws-amplify";
+import { useNavigate } from "react-router-dom";
 import "@aws-amplify/ui-react/styles.css";
-import outputs from "../../amplify_outputs.json";
-
-Amplify.configure(outputs);
 
 function LoginPage() {
+  const navigate = useNavigate();
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-        <main>
-          <h1>Hello {user?.username}</h1>
-          <button onClick={signOut}>Sign out</button>
-        </main>
-      )}
-    </Authenticator>
+    <div className=" h-screen w-screen flex justify-center items-center bg-slate-100 flex-col gap-5">
+      <h1 className="text-black">Budget AI</h1>
+      <Authenticator>
+        {({ user }) => {
+          if (user) {
+            navigate("/");
+            return <div>Redirecting...</div>;
+          }
+          return <div>Please sign in</div>;
+        }}
+      </Authenticator>
+    </div>
   );
 }
 

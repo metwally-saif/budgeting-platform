@@ -10,6 +10,7 @@ export const User = a
     role: a.string().authorization((allow) => [allow.groups(["Admin"])]),
     preference: a.hasOne("Preference", "userId"),
     expenses: a.hasMany("Expense", "userId"),
+    expenseTypes: a.hasMany("ExpenseType", "userId"),
   })
   .identifier(["profileOwner"])
   .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

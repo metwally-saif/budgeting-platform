@@ -1,5 +1,4 @@
 /* tslint:disable */
-
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -14,18 +13,23 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
 ) {
   onCreateExpense(filter: $filter, owner: $owner) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -34,6 +38,7 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -55,11 +60,12 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   APITypes.OnCreateExpenseSubscriptionVariables,
   APITypes.OnCreateExpenseSubscription
 >;
-export const onCreateExpenseCategory =
-  /* GraphQL */ `subscription OnCreateExpenseCategory(
-  $filter: ModelSubscriptionExpenseCategoryFilterInput
+export const onCreateExpenseType =
+  /* GraphQL */ `subscription OnCreateExpenseType(
+  $filter: ModelSubscriptionExpenseTypeFilterInput
+  $owner: String
 ) {
-  onCreateExpenseCategory(filter: $filter) {
+  onCreateExpenseType(filter: $filter, owner: $owner) {
     createdAt
     expenses {
       nextToken
@@ -67,13 +73,27 @@ export const onCreateExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnCreateExpenseCategorySubscriptionVariables,
-    APITypes.OnCreateExpenseCategorySubscription
+    APITypes.OnCreateExpenseTypeSubscriptionVariables,
+    APITypes.OnCreateExpenseTypeSubscription
   >;
 export const onCreatePreference =
   /* GraphQL */ `subscription OnCreatePreference(
@@ -85,20 +105,26 @@ export const onCreatePreference =
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -127,6 +153,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   onCreateUser(filter: $filter, owner: $owner) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -140,20 +170,26 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
@@ -174,18 +210,23 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
 ) {
   onDeleteExpense(filter: $filter, owner: $owner) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -194,6 +235,7 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -215,11 +257,12 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   APITypes.OnDeleteExpenseSubscriptionVariables,
   APITypes.OnDeleteExpenseSubscription
 >;
-export const onDeleteExpenseCategory =
-  /* GraphQL */ `subscription OnDeleteExpenseCategory(
-  $filter: ModelSubscriptionExpenseCategoryFilterInput
+export const onDeleteExpenseType =
+  /* GraphQL */ `subscription OnDeleteExpenseType(
+  $filter: ModelSubscriptionExpenseTypeFilterInput
+  $owner: String
 ) {
-  onDeleteExpenseCategory(filter: $filter) {
+  onDeleteExpenseType(filter: $filter, owner: $owner) {
     createdAt
     expenses {
       nextToken
@@ -227,13 +270,27 @@ export const onDeleteExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnDeleteExpenseCategorySubscriptionVariables,
-    APITypes.OnDeleteExpenseCategorySubscription
+    APITypes.OnDeleteExpenseTypeSubscriptionVariables,
+    APITypes.OnDeleteExpenseTypeSubscription
   >;
 export const onDeletePreference =
   /* GraphQL */ `subscription OnDeletePreference(
@@ -245,20 +302,26 @@ export const onDeletePreference =
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -287,6 +350,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   onDeleteUser(filter: $filter, owner: $owner) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -300,20 +367,26 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
@@ -334,18 +407,23 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
 ) {
   onUpdateExpense(filter: $filter, owner: $owner) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -354,6 +432,7 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -375,11 +454,12 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   APITypes.OnUpdateExpenseSubscriptionVariables,
   APITypes.OnUpdateExpenseSubscription
 >;
-export const onUpdateExpenseCategory =
-  /* GraphQL */ `subscription OnUpdateExpenseCategory(
-  $filter: ModelSubscriptionExpenseCategoryFilterInput
+export const onUpdateExpenseType =
+  /* GraphQL */ `subscription OnUpdateExpenseType(
+  $filter: ModelSubscriptionExpenseTypeFilterInput
+  $owner: String
 ) {
-  onUpdateExpenseCategory(filter: $filter) {
+  onUpdateExpenseType(filter: $filter, owner: $owner) {
     createdAt
     expenses {
       nextToken
@@ -387,13 +467,27 @@ export const onUpdateExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnUpdateExpenseCategorySubscriptionVariables,
-    APITypes.OnUpdateExpenseCategorySubscription
+    APITypes.OnUpdateExpenseTypeSubscriptionVariables,
+    APITypes.OnUpdateExpenseTypeSubscription
   >;
 export const onUpdatePreference =
   /* GraphQL */ `subscription OnUpdatePreference(
@@ -405,20 +499,26 @@ export const onUpdatePreference =
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -447,6 +547,10 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
   onUpdateUser(filter: $filter, owner: $owner) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -460,20 +564,26 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename

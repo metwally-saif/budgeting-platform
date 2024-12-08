@@ -1,5 +1,4 @@
 /* tslint:disable */
-
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -8,21 +7,26 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getExpense = /* GraphQL */ `query GetExpense($userId: String!) {
-  getExpense(userId: $userId) {
+export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
+  getExpense(id: $id) {
     amount
-    category {
+    category
+    createdAt
+    date
+    expenseType {
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
-    categoryId
-    createdAt
-    date
+    expenseTypeId
+    hasTarget
     id
     name
+    nextMonthIWantToSetAside
     notes
     owner
     paid
@@ -31,6 +35,7 @@ export const getExpense = /* GraphQL */ `query GetExpense($userId: String!) {
     recurring
     recurringEndDate
     recurringFrequency
+    targetAmount
     updatedAt
     user {
       createdAt
@@ -52,9 +57,8 @@ export const getExpense = /* GraphQL */ `query GetExpense($userId: String!) {
   APITypes.GetExpenseQueryVariables,
   APITypes.GetExpenseQuery
 >;
-export const getExpenseCategory =
-  /* GraphQL */ `query GetExpenseCategory($id: ID!) {
-  getExpenseCategory(id: $id) {
+export const getExpenseType = /* GraphQL */ `query GetExpenseType($id: ID!) {
+  getExpenseType(id: $id) {
     createdAt
     expenses {
       nextToken
@@ -62,14 +66,28 @@ export const getExpenseCategory =
     }
     id
     name
+    owner
     updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
     __typename
   }
 }
 ` as GeneratedQuery<
-    APITypes.GetExpenseCategoryQueryVariables,
-    APITypes.GetExpenseCategoryQuery
-  >;
+  APITypes.GetExpenseTypeQueryVariables,
+  APITypes.GetExpenseTypeQuery
+>;
 export const getPreference =
   /* GraphQL */ `query GetPreference($userId: String!) {
   getPreference(userId: $userId) {
@@ -77,20 +95,26 @@ export const getPreference =
     currency
     debt
     debtGoal
+    deptType
     emergencyFund
     emergencyFundGoal
+    financialStatus
     hasDebt
     hasEmergencyFund
     hasRetirementFund
+    homeOwnership
     id
     lastUpdated
     monthlyExpense
     monthlyIncome
+    mostSpend
     owner
     retirementFund
     retirementFundGoal
     savingsBalance
     savingsGoal
+    subscriptions
+    transportation
     updatedAt
     user {
       createdAt
@@ -116,6 +140,10 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   getUser(profileOwner: $profileOwner) {
     createdAt
     email
+    expenseTypes {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -129,20 +157,26 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
@@ -154,14 +188,91 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
-export const listExpenseCategories = /* GraphQL */ `query ListExpenseCategories(
-  $filter: ModelExpenseCategoryFilterInput
+export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
+  $filter: ModelExpenseFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listExpenseByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      amount
+      category
+      createdAt
+      date
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      paid
+      paymentDate
+      paymentMethod
+      recurring
+      recurringEndDate
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListExpenseByUserIdQueryVariables,
+  APITypes.ListExpenseByUserIdQuery
+>;
+export const listExpenseTypeByUserId =
+  /* GraphQL */ `query ListExpenseTypeByUserId(
+  $filter: ModelExpenseTypeFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listExpenseTypeByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListExpenseTypeByUserIdQueryVariables,
+    APITypes.ListExpenseTypeByUserIdQuery
+  >;
+export const listExpenseTypes = /* GraphQL */ `query ListExpenseTypes(
+  $filter: ModelExpenseTypeFilterInput
   $id: ID
   $limit: Int
   $nextToken: String
   $sortDirection: ModelSortDirection
 ) {
-  listExpenseCategories(
+  listExpenseTypes(
     filter: $filter
     id: $id
     limit: $limit
@@ -172,7 +283,9 @@ export const listExpenseCategories = /* GraphQL */ `query ListExpenseCategories(
       createdAt
       id
       name
+      owner
       updatedAt
+      userId
       __typename
     }
     nextToken
@@ -180,30 +293,33 @@ export const listExpenseCategories = /* GraphQL */ `query ListExpenseCategories(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListExpenseCategoriesQueryVariables,
-  APITypes.ListExpenseCategoriesQuery
+  APITypes.ListExpenseTypesQueryVariables,
+  APITypes.ListExpenseTypesQuery
 >;
 export const listExpenses = /* GraphQL */ `query ListExpenses(
   $filter: ModelExpenseFilterInput
+  $id: ID
   $limit: Int
   $nextToken: String
   $sortDirection: ModelSortDirection
-  $userId: String
 ) {
   listExpenses(
     filter: $filter
+    id: $id
     limit: $limit
     nextToken: $nextToken
     sortDirection: $sortDirection
-    userId: $userId
   ) {
     items {
       amount
-      categoryId
+      category
       createdAt
       date
+      expenseTypeId
+      hasTarget
       id
       name
+      nextMonthIWantToSetAside
       notes
       owner
       paid
@@ -212,6 +328,7 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
       recurring
       recurringEndDate
       recurringFrequency
+      targetAmount
       updatedAt
       userId
       __typename
@@ -243,20 +360,26 @@ export const listPreferences = /* GraphQL */ `query ListPreferences(
       currency
       debt
       debtGoal
+      deptType
       emergencyFund
       emergencyFundGoal
+      financialStatus
       hasDebt
       hasEmergencyFund
       hasRetirementFund
+      homeOwnership
       id
       lastUpdated
       monthlyExpense
       monthlyIncome
+      mostSpend
       owner
       retirementFund
       retirementFundGoal
       savingsBalance
       savingsGoal
+      subscriptions
+      transportation
       updatedAt
       userId
       __typename
