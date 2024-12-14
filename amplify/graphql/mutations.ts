@@ -7,12 +7,45 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const createBankAccount = /* GraphQL */ `mutation CreateBankAccount(
+  $condition: ModelBankAccountConditionInput
+  $input: CreateBankAccountInput!
+) {
+  createBankAccount(condition: $condition, input: $input) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateBankAccountMutationVariables,
+  APITypes.CreateBankAccountMutation
+>;
 export const createExpense = /* GraphQL */ `mutation CreateExpense(
   $condition: ModelExpenseConditionInput
   $input: CreateExpenseInput!
 ) {
   createExpense(condition: $condition, input: $input) {
     amount
+    assigned
     category
     createdAt
     date
@@ -32,11 +65,7 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -149,6 +178,10 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   $input: CreateUserInput!
 ) {
   createUser(condition: $condition, input: $input) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {
@@ -202,12 +235,45 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   APITypes.CreateUserMutationVariables,
   APITypes.CreateUserMutation
 >;
+export const deleteBankAccount = /* GraphQL */ `mutation DeleteBankAccount(
+  $condition: ModelBankAccountConditionInput
+  $input: DeleteBankAccountInput!
+) {
+  deleteBankAccount(condition: $condition, input: $input) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteBankAccountMutationVariables,
+  APITypes.DeleteBankAccountMutation
+>;
 export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
   $condition: ModelExpenseConditionInput
   $input: DeleteExpenseInput!
 ) {
   deleteExpense(condition: $condition, input: $input) {
     amount
+    assigned
     category
     createdAt
     date
@@ -227,11 +293,7 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -344,6 +406,10 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   $input: DeleteUserInput!
 ) {
   deleteUser(condition: $condition, input: $input) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {
@@ -397,12 +463,45 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   APITypes.DeleteUserMutationVariables,
   APITypes.DeleteUserMutation
 >;
+export const updateBankAccount = /* GraphQL */ `mutation UpdateBankAccount(
+  $condition: ModelBankAccountConditionInput
+  $input: UpdateBankAccountInput!
+) {
+  updateBankAccount(condition: $condition, input: $input) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateBankAccountMutationVariables,
+  APITypes.UpdateBankAccountMutation
+>;
 export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
   $condition: ModelExpenseConditionInput
   $input: UpdateExpenseInput!
 ) {
   updateExpense(condition: $condition, input: $input) {
     amount
+    assigned
     category
     createdAt
     date
@@ -422,11 +521,7 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -539,6 +634,10 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
   $input: UpdateUserInput!
 ) {
   updateUser(condition: $condition, input: $input) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {

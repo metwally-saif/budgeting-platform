@@ -35,15 +35,7 @@ export const Expense = a
     // Expense Notes
     notes: a.string(),
 
-    // Expense Tracking
-    paid: a.boolean().default(false),
-    paymentMethod: a.string(),
-    paymentDate: a.date(),
-
-    // Expense Budgeting
-    // budgeted: a.boolean().default(false),
-    // budgetId: a.string(),
-    // budget: a.belongsTo("Budget", "budgetId"),
+    assigned: a.float(),
   })
   .identifier(["id"])
   .secondaryIndexes((index) => [index("userId")])

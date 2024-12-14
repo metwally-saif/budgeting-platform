@@ -7,9 +7,39 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getBankAccount = /* GraphQL */ `query GetBankAccount($id: ID!) {
+  getBankAccount(id: $id) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetBankAccountQueryVariables,
+  APITypes.GetBankAccountQuery
+>;
 export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
   getExpense(id: $id) {
     amount
+    assigned
     category
     createdAt
     date
@@ -29,11 +59,7 @@ export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -138,6 +164,10 @@ export const getPreference =
   >;
 export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   getUser(profileOwner: $profileOwner) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {
@@ -188,6 +218,73 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+export const listBankAccountByUserId =
+  /* GraphQL */ `query ListBankAccountByUserId(
+  $filter: ModelBankAccountFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listBankAccountByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListBankAccountByUserIdQueryVariables,
+    APITypes.ListBankAccountByUserIdQuery
+  >;
+export const listBankAccounts = /* GraphQL */ `query ListBankAccounts(
+  $filter: ModelBankAccountFilterInput
+  $id: ID
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listBankAccounts(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListBankAccountsQueryVariables,
+  APITypes.ListBankAccountsQuery
+>;
 export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
   $filter: ModelExpenseFilterInput
   $limit: Int
@@ -204,6 +301,7 @@ export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
   ) {
     items {
       amount
+      assigned
       category
       createdAt
       date
@@ -214,11 +312,7 @@ export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
       nextMonthIWantToSetAside
       notes
       owner
-      paid
-      paymentDate
-      paymentMethod
       recurring
-      recurringEndDate
       recurringFrequency
       targetAmount
       updatedAt
@@ -312,6 +406,7 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
   ) {
     items {
       amount
+      assigned
       category
       createdAt
       date
@@ -322,11 +417,7 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
       nextMonthIWantToSetAside
       notes
       owner
-      paid
-      paymentDate
-      paymentMethod
       recurring
-      recurringEndDate
       recurringFrequency
       targetAmount
       updatedAt
