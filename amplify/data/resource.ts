@@ -1,7 +1,6 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { User, Preference, Expense, ExpenseType } from "../models";
+import { User, Preference, Expense, ExpenseType, BankAccount } from "../models";
 import { postConfirmation } from "../auth/postConfirmation/resource";
-import { categorizeExpense } from "../functions";
 
 const schema = a
   .schema({
@@ -9,11 +8,9 @@ const schema = a
     Preference,
     Expense,
     ExpenseType,
+    BankAccount,
   })
-  .authorization((allow) => [
-    allow.resource(postConfirmation),
-    allow.resource(categorizeExpense),
-  ]);
+  .authorization((allow) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 

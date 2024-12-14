@@ -4,13 +4,16 @@ import type { Schema } from "../../amplify/data/resource";
 import { useUser } from ".";
 import {
   CreatePreferenceInput,
+  ExpenseType,
   Preference,
   UpdatePreferenceInput,
 } from "../../amplify/graphql/API";
 
+import getInitialExpenses from "../utils/analyze-create-expenses";
+
 export function usePreference() {
   const { user } = useUser();
-  const [preference, setPreference] = useState<Preference>(null);
+  const [preference, setPreference] = useState<Preference | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   // Memoize the client to prevent recreation on every render
@@ -36,7 +39,8 @@ export function usePreference() {
     } catch (error) {
       setError(error as Error);
     }
-  }, [client, user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     fetchPreference();
@@ -62,13 +66,28 @@ export function useAddPreference() {
         setSaving(true);
         // create three expense types for the user: Bills, Needs, Wants
         const expenseTypes = ["Bills", "Needs", "Wants"];
+        const addedTypes = [];
         for (const expenseType of expenseTypes) {
-          await client.models.ExpenseType.create({
-            name: expenseType,
-            userId: user.sub,
-          });
+          addedTypes.push(
+            await client.models.ExpenseType.create({
+              name: expenseType,
+              userId: user.sub,
+            }).then((res) => res.data as unknown as ExpenseType),
+          );
         }
         const res = await client.models.Preference.create({ ...input });
+        if (!res?.data) {
+          setError(new Error("Failed to create preference"));
+          return;
+        }
+        const initialExpenses = getInitialExpenses(
+          res.data as unknown as Preference,
+          user.sub,
+          addedTypes,
+        );
+        for (const expense of initialExpenses) {
+          await client.models.Expense.create(expense);
+        }
         console.log(res);
       } catch (error) {
         setError(error as Error);

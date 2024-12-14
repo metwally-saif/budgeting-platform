@@ -53,7 +53,7 @@ const steps = [
 ];
 
 // PreferenceModal Component
-const PreferenceModal = () => {
+const PreferenceModal = ({ refresh }: { refresh(): void }) => {
   const { error } = usePreference();
   const [open, setOpen] = useState(true);
 
@@ -141,7 +141,6 @@ const PreferenceModal = () => {
   }
 
   const handleFormSubmit = (data: PreferenceFormData) => {
-    console.log("Form Data:", data);
     createPreference({
       userId: user.sub,
       hasDebt: data.hasDebt,
@@ -181,6 +180,7 @@ const PreferenceModal = () => {
     });
     reset();
     setActiveStep(0);
+    refresh();
     setOpen(false);
   };
 

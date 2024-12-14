@@ -7,12 +7,46 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
+export const onCreateBankAccount =
+  /* GraphQL */ `subscription OnCreateBankAccount(
+  $filter: ModelSubscriptionBankAccountFilterInput
+  $owner: String
+) {
+  onCreateBankAccount(filter: $filter, owner: $owner) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateBankAccountSubscriptionVariables,
+    APITypes.OnCreateBankAccountSubscription
+  >;
 export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
 ) {
   onCreateExpense(filter: $filter, owner: $owner) {
     amount
+    assigned
     category
     createdAt
     date
@@ -32,11 +66,7 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -151,6 +181,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   $owner: String
 ) {
   onCreateUser(filter: $filter, owner: $owner) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {
@@ -204,12 +238,46 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   APITypes.OnCreateUserSubscriptionVariables,
   APITypes.OnCreateUserSubscription
 >;
+export const onDeleteBankAccount =
+  /* GraphQL */ `subscription OnDeleteBankAccount(
+  $filter: ModelSubscriptionBankAccountFilterInput
+  $owner: String
+) {
+  onDeleteBankAccount(filter: $filter, owner: $owner) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnDeleteBankAccountSubscriptionVariables,
+    APITypes.OnDeleteBankAccountSubscription
+  >;
 export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
 ) {
   onDeleteExpense(filter: $filter, owner: $owner) {
     amount
+    assigned
     category
     createdAt
     date
@@ -229,11 +297,7 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -348,6 +412,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   $owner: String
 ) {
   onDeleteUser(filter: $filter, owner: $owner) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {
@@ -401,12 +469,46 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   APITypes.OnDeleteUserSubscriptionVariables,
   APITypes.OnDeleteUserSubscription
 >;
+export const onUpdateBankAccount =
+  /* GraphQL */ `subscription OnUpdateBankAccount(
+  $filter: ModelSubscriptionBankAccountFilterInput
+  $owner: String
+) {
+  onUpdateBankAccount(filter: $filter, owner: $owner) {
+    balance
+    createdAt
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnUpdateBankAccountSubscriptionVariables,
+    APITypes.OnUpdateBankAccountSubscription
+  >;
 export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
 ) {
   onUpdateExpense(filter: $filter, owner: $owner) {
     amount
+    assigned
     category
     createdAt
     date
@@ -426,11 +528,7 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
     nextMonthIWantToSetAside
     notes
     owner
-    paid
-    paymentDate
-    paymentMethod
     recurring
-    recurringEndDate
     recurringFrequency
     targetAmount
     updatedAt
@@ -545,6 +643,10 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
   $owner: String
 ) {
   onUpdateUser(filter: $filter, owner: $owner) {
+    bankAccounts {
+      nextToken
+      __typename
+    }
     createdAt
     email
     expenseTypes {

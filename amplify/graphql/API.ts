@@ -1,9 +1,78 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export type BankAccount = {
+  __typename: "BankAccount";
+  balance?: number | null;
+  createdAt: string;
+  id: string;
+  name?: string | null;
+  owner?: string | null;
+  type?: BankAccountType | null;
+  updatedAt: string;
+  user?: User | null;
+  userId: string;
+};
+
+export enum BankAccountType {
+  Cash = "Cash",
+  Checking = "Checking",
+  Credit_Card = "Credit_Card",
+  Line_of_Credit = "Line_of_Credit",
+  Savings = "Savings",
+}
+
+export type User = {
+  __typename: "User";
+  bankAccounts?: ModelBankAccountConnection | null;
+  createdAt: string;
+  email?: string | null;
+  expenseTypes?: ModelExpenseTypeConnection | null;
+  expenses?: ModelExpenseConnection | null;
+  firstName?: string | null;
+  id?: string | null;
+  lastName?: string | null;
+  owner?: string | null;
+  preference?: Preference | null;
+  profileOwner: string;
+  role?: string | null;
+  updatedAt: string;
+};
+
+export type ModelBankAccountConnection = {
+  __typename: "ModelBankAccountConnection";
+  items: Array<BankAccount | null>;
+  nextToken?: string | null;
+};
+
+export type ModelExpenseTypeConnection = {
+  __typename: "ModelExpenseTypeConnection";
+  items: Array<ExpenseType | null>;
+  nextToken?: string | null;
+};
+
+export type ExpenseType = {
+  __typename: "ExpenseType";
+  createdAt: string;
+  expenses?: ModelExpenseConnection | null;
+  id: string;
+  name: string;
+  owner?: string | null;
+  updatedAt: string;
+  user?: User | null;
+  userId: string;
+};
+
+export type ModelExpenseConnection = {
+  __typename: "ModelExpenseConnection";
+  items: Array<Expense | null>;
+  nextToken?: string | null;
+};
+
 export type Expense = {
   __typename: "Expense";
   amount?: number | null;
+  assigned?: number | null;
   category?: ExpenseCategory | null;
   createdAt: string;
   date?: string | null;
@@ -15,11 +84,7 @@ export type Expense = {
   nextMonthIWantToSetAside?: number | null;
   notes?: string | null;
   owner?: string | null;
-  paid?: boolean | null;
-  paymentDate?: string | null;
-  paymentMethod?: string | null;
   recurring?: boolean | null;
-  recurringEndDate?: string | null;
   recurringFrequency?: ExpenseRecurringFrequency | null;
   targetAmount?: number | null;
   updatedAt: string;
@@ -41,45 +106,12 @@ export enum ExpenseCategory {
   Utilities = "Utilities",
 }
 
-export type ExpenseType = {
-  __typename: "ExpenseType";
-  createdAt: string;
-  expenses?: ModelExpenseConnection | null;
-  id: string;
-  name: string;
-  owner?: string | null;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
-};
-
-export type ModelExpenseConnection = {
-  __typename: "ModelExpenseConnection";
-  items: Array<Expense | null>;
-  nextToken?: string | null;
-};
-
-export type User = {
-  __typename: "User";
-  createdAt: string;
-  email?: string | null;
-  expenseTypes?: ModelExpenseTypeConnection | null;
-  expenses?: ModelExpenseConnection | null;
-  firstName?: string | null;
-  id?: string | null;
-  lastName?: string | null;
-  owner?: string | null;
-  preference?: Preference | null;
-  profileOwner: string;
-  role?: string | null;
-  updatedAt: string;
-};
-
-export type ModelExpenseTypeConnection = {
-  __typename: "ModelExpenseTypeConnection";
-  items: Array<ExpenseType | null>;
-  nextToken?: string | null;
-};
+export enum ExpenseRecurringFrequency {
+  Daily = "Daily",
+  Monthly = "Monthly",
+  Weekly = "Weekly",
+  Yearly = "Yearly",
+}
 
 export type Preference = {
   __typename: "Preference";
@@ -154,35 +186,16 @@ export enum PreferenceTransportation {
   Public = "Public",
 }
 
-export enum ExpenseRecurringFrequency {
-  Daily = "Daily",
-  Monthly = "Monthly",
-  Weekly = "Weekly",
-  Yearly = "Yearly",
-}
-
-export type ModelExpenseFilterInput = {
-  amount?: ModelFloatInput | null;
-  and?: Array<ModelExpenseFilterInput | null> | null;
-  category?: ModelExpenseCategoryInput | null;
+export type ModelBankAccountFilterInput = {
+  and?: Array<ModelBankAccountFilterInput | null> | null;
+  balance?: ModelFloatInput | null;
   createdAt?: ModelStringInput | null;
-  date?: ModelStringInput | null;
-  expenseTypeId?: ModelStringInput | null;
-  hasTarget?: ModelBooleanInput | null;
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
-  nextMonthIWantToSetAside?: ModelFloatInput | null;
-  not?: ModelExpenseFilterInput | null;
-  notes?: ModelStringInput | null;
-  or?: Array<ModelExpenseFilterInput | null> | null;
+  not?: ModelBankAccountFilterInput | null;
+  or?: Array<ModelBankAccountFilterInput | null> | null;
   owner?: ModelStringInput | null;
-  paid?: ModelBooleanInput | null;
-  paymentDate?: ModelStringInput | null;
-  paymentMethod?: ModelStringInput | null;
-  recurring?: ModelBooleanInput | null;
-  recurringEndDate?: ModelStringInput | null;
-  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null;
-  targetAmount?: ModelFloatInput | null;
+  type?: ModelBankAccountTypeInput | null;
   updatedAt?: ModelStringInput | null;
   userId?: ModelStringInput | null;
 };
@@ -212,11 +225,6 @@ export enum ModelAttributeTypes {
   stringSet = "stringSet",
 }
 
-export type ModelExpenseCategoryInput = {
-  eq?: ExpenseCategory | null;
-  ne?: ExpenseCategory | null;
-};
-
 export type ModelStringInput = {
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
@@ -243,13 +251,6 @@ export type ModelSizeInput = {
   ne?: number | null;
 };
 
-export type ModelBooleanInput = {
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  eq?: boolean | null;
-  ne?: boolean | null;
-};
-
 export type ModelIDInput = {
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
@@ -266,15 +267,55 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
-export type ModelExpenseRecurringFrequencyInput = {
-  eq?: ExpenseRecurringFrequency | null;
-  ne?: ExpenseRecurringFrequency | null;
+export type ModelBankAccountTypeInput = {
+  eq?: BankAccountType | null;
+  ne?: BankAccountType | null;
 };
 
 export enum ModelSortDirection {
   ASC = "ASC",
   DESC = "DESC",
 }
+
+export type ModelExpenseFilterInput = {
+  amount?: ModelFloatInput | null;
+  and?: Array<ModelExpenseFilterInput | null> | null;
+  assigned?: ModelFloatInput | null;
+  category?: ModelExpenseCategoryInput | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  expenseTypeId?: ModelStringInput | null;
+  hasTarget?: ModelBooleanInput | null;
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  nextMonthIWantToSetAside?: ModelFloatInput | null;
+  not?: ModelExpenseFilterInput | null;
+  notes?: ModelStringInput | null;
+  or?: Array<ModelExpenseFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  recurring?: ModelBooleanInput | null;
+  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null;
+  targetAmount?: ModelFloatInput | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
+export type ModelExpenseCategoryInput = {
+  eq?: ExpenseCategory | null;
+  ne?: ExpenseCategory | null;
+};
+
+export type ModelBooleanInput = {
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  eq?: boolean | null;
+  ne?: boolean | null;
+};
+
+export type ModelExpenseRecurringFrequencyInput = {
+  eq?: ExpenseRecurringFrequency | null;
+  ne?: ExpenseRecurringFrequency | null;
+};
 
 export type ModelExpenseTypeFilterInput = {
   and?: Array<ModelExpenseTypeFilterInput | null> | null;
@@ -377,9 +418,31 @@ export type ModelUserConnection = {
   nextToken?: string | null;
 };
 
+export type ModelBankAccountConditionInput = {
+  and?: Array<ModelBankAccountConditionInput | null> | null;
+  balance?: ModelFloatInput | null;
+  createdAt?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  not?: ModelBankAccountConditionInput | null;
+  or?: Array<ModelBankAccountConditionInput | null> | null;
+  owner?: ModelStringInput | null;
+  type?: ModelBankAccountTypeInput | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
+export type CreateBankAccountInput = {
+  balance?: number | null;
+  id?: string | null;
+  name?: string | null;
+  type?: BankAccountType | null;
+  userId: string;
+};
+
 export type ModelExpenseConditionInput = {
   amount?: ModelFloatInput | null;
   and?: Array<ModelExpenseConditionInput | null> | null;
+  assigned?: ModelFloatInput | null;
   category?: ModelExpenseCategoryInput | null;
   createdAt?: ModelStringInput | null;
   date?: ModelStringInput | null;
@@ -391,11 +454,7 @@ export type ModelExpenseConditionInput = {
   notes?: ModelStringInput | null;
   or?: Array<ModelExpenseConditionInput | null> | null;
   owner?: ModelStringInput | null;
-  paid?: ModelBooleanInput | null;
-  paymentDate?: ModelStringInput | null;
-  paymentMethod?: ModelStringInput | null;
   recurring?: ModelBooleanInput | null;
-  recurringEndDate?: ModelStringInput | null;
   recurringFrequency?: ModelExpenseRecurringFrequencyInput | null;
   targetAmount?: ModelFloatInput | null;
   updatedAt?: ModelStringInput | null;
@@ -404,6 +463,7 @@ export type ModelExpenseConditionInput = {
 
 export type CreateExpenseInput = {
   amount?: number | null;
+  assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
   expenseTypeId?: string | null;
@@ -412,11 +472,7 @@ export type CreateExpenseInput = {
   name?: string | null;
   nextMonthIWantToSetAside?: number | null;
   notes?: string | null;
-  paid?: boolean | null;
-  paymentDate?: string | null;
-  paymentMethod?: string | null;
   recurring?: boolean | null;
-  recurringEndDate?: string | null;
   recurringFrequency?: ExpenseRecurringFrequency | null;
   targetAmount?: number | null;
   userId: string;
@@ -517,6 +573,10 @@ export type CreateUserInput = {
   role?: string | null;
 };
 
+export type DeleteBankAccountInput = {
+  id: string;
+};
+
 export type DeleteExpenseInput = {
   id: string;
 };
@@ -533,8 +593,17 @@ export type DeleteUserInput = {
   profileOwner: string;
 };
 
+export type UpdateBankAccountInput = {
+  balance?: number | null;
+  id: string;
+  name?: string | null;
+  type?: BankAccountType | null;
+  userId?: string | null;
+};
+
 export type UpdateExpenseInput = {
   amount?: number | null;
+  assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
   expenseTypeId?: string | null;
@@ -543,11 +612,7 @@ export type UpdateExpenseInput = {
   name?: string | null;
   nextMonthIWantToSetAside?: number | null;
   notes?: string | null;
-  paid?: boolean | null;
-  paymentDate?: string | null;
-  paymentMethod?: string | null;
   recurring?: boolean | null;
-  recurringEndDate?: string | null;
   recurringFrequency?: ExpenseRecurringFrequency | null;
   targetAmount?: number | null;
   userId?: string | null;
@@ -594,27 +659,15 @@ export type UpdateUserInput = {
   role?: string | null;
 };
 
-export type ModelSubscriptionExpenseFilterInput = {
-  amount?: ModelSubscriptionFloatInput | null;
-  and?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
-  category?: ModelSubscriptionStringInput | null;
+export type ModelSubscriptionBankAccountFilterInput = {
+  and?: Array<ModelSubscriptionBankAccountFilterInput | null> | null;
+  balance?: ModelSubscriptionFloatInput | null;
   createdAt?: ModelSubscriptionStringInput | null;
-  date?: ModelSubscriptionStringInput | null;
-  expenseTypeId?: ModelSubscriptionStringInput | null;
-  hasTarget?: ModelSubscriptionBooleanInput | null;
   id?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
-  nextMonthIWantToSetAside?: ModelSubscriptionFloatInput | null;
-  notes?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
+  or?: Array<ModelSubscriptionBankAccountFilterInput | null> | null;
   owner?: ModelStringInput | null;
-  paid?: ModelSubscriptionBooleanInput | null;
-  paymentDate?: ModelSubscriptionStringInput | null;
-  paymentMethod?: ModelSubscriptionStringInput | null;
-  recurring?: ModelSubscriptionBooleanInput | null;
-  recurringEndDate?: ModelSubscriptionStringInput | null;
-  recurringFrequency?: ModelSubscriptionStringInput | null;
-  targetAmount?: ModelSubscriptionFloatInput | null;
+  type?: ModelSubscriptionStringInput | null;
   updatedAt?: ModelSubscriptionStringInput | null;
   userId?: ModelSubscriptionStringInput | null;
 };
@@ -646,11 +699,6 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array<string | null> | null;
 };
 
-export type ModelSubscriptionBooleanInput = {
-  eq?: boolean | null;
-  ne?: boolean | null;
-};
-
 export type ModelSubscriptionIDInput = {
   beginsWith?: string | null;
   between?: Array<string | null> | null;
@@ -664,6 +712,33 @@ export type ModelSubscriptionIDInput = {
   ne?: string | null;
   notContains?: string | null;
   notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionExpenseFilterInput = {
+  amount?: ModelSubscriptionFloatInput | null;
+  and?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
+  assigned?: ModelSubscriptionFloatInput | null;
+  category?: ModelSubscriptionStringInput | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  date?: ModelSubscriptionStringInput | null;
+  expenseTypeId?: ModelSubscriptionStringInput | null;
+  hasTarget?: ModelSubscriptionBooleanInput | null;
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  nextMonthIWantToSetAside?: ModelSubscriptionFloatInput | null;
+  notes?: ModelSubscriptionStringInput | null;
+  or?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  recurring?: ModelSubscriptionBooleanInput | null;
+  recurringFrequency?: ModelSubscriptionStringInput | null;
+  targetAmount?: ModelSubscriptionFloatInput | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
+  userId?: ModelSubscriptionStringInput | null;
+};
+
+export type ModelSubscriptionBooleanInput = {
+  eq?: boolean | null;
+  ne?: boolean | null;
 };
 
 export type ModelSubscriptionExpenseTypeFilterInput = {
@@ -722,6 +797,36 @@ export type ModelSubscriptionUserFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null;
 };
 
+export type GetBankAccountQueryVariables = {
+  id: string;
+};
+
+export type GetBankAccountQuery = {
+  getBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type GetExpenseQueryVariables = {
   id: string;
 };
@@ -730,6 +835,7 @@ export type GetExpenseQuery = {
   getExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -749,11 +855,7 @@ export type GetExpenseQuery = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -860,6 +962,10 @@ export type GetUserQueryVariables = {
 export type GetUserQuery = {
   getUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -909,6 +1015,58 @@ export type GetUserQuery = {
   } | null;
 };
 
+export type ListBankAccountByUserIdQueryVariables = {
+  filter?: ModelBankAccountFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+  userId: string;
+};
+
+export type ListBankAccountByUserIdQuery = {
+  listBankAccountByUserId?: {
+    __typename: "ModelBankAccountConnection";
+    items: Array<{
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListBankAccountsQueryVariables = {
+  filter?: ModelBankAccountFilterInput | null;
+  id?: string | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+};
+
+export type ListBankAccountsQuery = {
+  listBankAccounts?: {
+    __typename: "ModelBankAccountConnection";
+    items: Array<{
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
 export type ListExpenseByUserIdQueryVariables = {
   filter?: ModelExpenseFilterInput | null;
   limit?: number | null;
@@ -923,6 +1081,7 @@ export type ListExpenseByUserIdQuery = {
     items: Array<{
       __typename: "Expense";
       amount?: number | null;
+      assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
       date?: string | null;
@@ -933,11 +1092,7 @@ export type ListExpenseByUserIdQuery = {
       nextMonthIWantToSetAside?: number | null;
       notes?: string | null;
       owner?: string | null;
-      paid?: boolean | null;
-      paymentDate?: string | null;
-      paymentMethod?: string | null;
       recurring?: boolean | null;
-      recurringEndDate?: string | null;
       recurringFrequency?: ExpenseRecurringFrequency | null;
       targetAmount?: number | null;
       updatedAt: string;
@@ -1009,6 +1164,7 @@ export type ListExpensesQuery = {
     items: Array<{
       __typename: "Expense";
       amount?: number | null;
+      assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
       date?: string | null;
@@ -1019,11 +1175,7 @@ export type ListExpensesQuery = {
       nextMonthIWantToSetAside?: number | null;
       notes?: string | null;
       owner?: string | null;
-      paid?: boolean | null;
-      paymentDate?: string | null;
-      paymentMethod?: string | null;
       recurring?: boolean | null;
-      recurringEndDate?: string | null;
       recurringFrequency?: ExpenseRecurringFrequency | null;
       targetAmount?: number | null;
       updatedAt: string;
@@ -1104,6 +1256,37 @@ export type ListUsersQuery = {
   } | null;
 };
 
+export type CreateBankAccountMutationVariables = {
+  condition?: ModelBankAccountConditionInput | null;
+  input: CreateBankAccountInput;
+};
+
+export type CreateBankAccountMutation = {
+  createBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type CreateExpenseMutationVariables = {
   condition?: ModelExpenseConditionInput | null;
   input: CreateExpenseInput;
@@ -1113,6 +1296,7 @@ export type CreateExpenseMutation = {
   createExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -1132,11 +1316,7 @@ export type CreateExpenseMutation = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -1246,6 +1426,10 @@ export type CreateUserMutationVariables = {
 export type CreateUserMutation = {
   createUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -1295,6 +1479,37 @@ export type CreateUserMutation = {
   } | null;
 };
 
+export type DeleteBankAccountMutationVariables = {
+  condition?: ModelBankAccountConditionInput | null;
+  input: DeleteBankAccountInput;
+};
+
+export type DeleteBankAccountMutation = {
+  deleteBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type DeleteExpenseMutationVariables = {
   condition?: ModelExpenseConditionInput | null;
   input: DeleteExpenseInput;
@@ -1304,6 +1519,7 @@ export type DeleteExpenseMutation = {
   deleteExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -1323,11 +1539,7 @@ export type DeleteExpenseMutation = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -1437,6 +1649,10 @@ export type DeleteUserMutationVariables = {
 export type DeleteUserMutation = {
   deleteUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -1486,6 +1702,37 @@ export type DeleteUserMutation = {
   } | null;
 };
 
+export type UpdateBankAccountMutationVariables = {
+  condition?: ModelBankAccountConditionInput | null;
+  input: UpdateBankAccountInput;
+};
+
+export type UpdateBankAccountMutation = {
+  updateBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type UpdateExpenseMutationVariables = {
   condition?: ModelExpenseConditionInput | null;
   input: UpdateExpenseInput;
@@ -1495,6 +1742,7 @@ export type UpdateExpenseMutation = {
   updateExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -1514,11 +1762,7 @@ export type UpdateExpenseMutation = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -1628,6 +1872,10 @@ export type UpdateUserMutationVariables = {
 export type UpdateUserMutation = {
   updateUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -1677,6 +1925,37 @@ export type UpdateUserMutation = {
   } | null;
 };
 
+export type OnCreateBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnCreateBankAccountSubscription = {
+  onCreateBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnCreateExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionExpenseFilterInput | null;
   owner?: string | null;
@@ -1686,6 +1965,7 @@ export type OnCreateExpenseSubscription = {
   onCreateExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -1705,11 +1985,7 @@ export type OnCreateExpenseSubscription = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -1819,6 +2095,10 @@ export type OnCreateUserSubscriptionVariables = {
 export type OnCreateUserSubscription = {
   onCreateUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -1868,6 +2148,37 @@ export type OnCreateUserSubscription = {
   } | null;
 };
 
+export type OnDeleteBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnDeleteBankAccountSubscription = {
+  onDeleteBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnDeleteExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionExpenseFilterInput | null;
   owner?: string | null;
@@ -1877,6 +2188,7 @@ export type OnDeleteExpenseSubscription = {
   onDeleteExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -1896,11 +2208,7 @@ export type OnDeleteExpenseSubscription = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -2010,6 +2318,10 @@ export type OnDeleteUserSubscriptionVariables = {
 export type OnDeleteUserSubscription = {
   onDeleteUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
@@ -2059,6 +2371,37 @@ export type OnDeleteUserSubscription = {
   } | null;
 };
 
+export type OnUpdateBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnUpdateBankAccountSubscription = {
+  onUpdateBankAccount?: {
+    __typename: "BankAccount";
+    balance?: number | null;
+    createdAt: string;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: BankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnUpdateExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionExpenseFilterInput | null;
   owner?: string | null;
@@ -2068,6 +2411,7 @@ export type OnUpdateExpenseSubscription = {
   onUpdateExpense?: {
     __typename: "Expense";
     amount?: number | null;
+    assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
@@ -2087,11 +2431,7 @@ export type OnUpdateExpenseSubscription = {
     nextMonthIWantToSetAside?: number | null;
     notes?: string | null;
     owner?: string | null;
-    paid?: boolean | null;
-    paymentDate?: string | null;
-    paymentMethod?: string | null;
     recurring?: boolean | null;
-    recurringEndDate?: string | null;
     recurringFrequency?: ExpenseRecurringFrequency | null;
     targetAmount?: number | null;
     updatedAt: string;
@@ -2201,6 +2541,10 @@ export type OnUpdateUserSubscriptionVariables = {
 export type OnUpdateUserSubscription = {
   onUpdateUser?: {
     __typename: "User";
+    bankAccounts?: {
+      __typename: "ModelBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     createdAt: string;
     email?: string | null;
     expenseTypes?: {
