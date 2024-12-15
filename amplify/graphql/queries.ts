@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -43,6 +44,7 @@ export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
     category
     createdAt
     date
+    dueDate
     expenseType {
       createdAt
       id
@@ -305,6 +307,7 @@ export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
       category
       createdAt
       date
+      dueDate
       expenseTypeId
       hasTarget
       id
@@ -410,6 +413,7 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
       category
       createdAt
       date
+      dueDate
       expenseTypeId
       hasTarget
       id

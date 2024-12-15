@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type BankAccount = {
@@ -76,6 +77,7 @@ export type Expense = {
   category?: ExpenseCategory | null;
   createdAt: string;
   date?: string | null;
+  dueDate?: string | null;
   expenseType?: ExpenseType | null;
   expenseTypeId?: string | null;
   hasTarget?: boolean | null;
@@ -284,6 +286,7 @@ export type ModelExpenseFilterInput = {
   category?: ModelExpenseCategoryInput | null;
   createdAt?: ModelStringInput | null;
   date?: ModelStringInput | null;
+  dueDate?: ModelStringInput | null;
   expenseTypeId?: ModelStringInput | null;
   hasTarget?: ModelBooleanInput | null;
   id?: ModelIDInput | null;
@@ -446,6 +449,7 @@ export type ModelExpenseConditionInput = {
   category?: ModelExpenseCategoryInput | null;
   createdAt?: ModelStringInput | null;
   date?: ModelStringInput | null;
+  dueDate?: ModelStringInput | null;
   expenseTypeId?: ModelStringInput | null;
   hasTarget?: ModelBooleanInput | null;
   name?: ModelStringInput | null;
@@ -466,6 +470,7 @@ export type CreateExpenseInput = {
   assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
+  dueDate?: string | null;
   expenseTypeId?: string | null;
   hasTarget?: boolean | null;
   id?: string | null;
@@ -606,6 +611,7 @@ export type UpdateExpenseInput = {
   assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
+  dueDate?: string | null;
   expenseTypeId?: string | null;
   hasTarget?: boolean | null;
   id: string;
@@ -721,6 +727,7 @@ export type ModelSubscriptionExpenseFilterInput = {
   category?: ModelSubscriptionStringInput | null;
   createdAt?: ModelSubscriptionStringInput | null;
   date?: ModelSubscriptionStringInput | null;
+  dueDate?: ModelSubscriptionStringInput | null;
   expenseTypeId?: ModelSubscriptionStringInput | null;
   hasTarget?: ModelSubscriptionBooleanInput | null;
   id?: ModelSubscriptionIDInput | null;
@@ -839,6 +846,7 @@ export type GetExpenseQuery = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -1085,6 +1093,7 @@ export type ListExpenseByUserIdQuery = {
       category?: ExpenseCategory | null;
       createdAt: string;
       date?: string | null;
+      dueDate?: string | null;
       expenseTypeId?: string | null;
       hasTarget?: boolean | null;
       id: string;
@@ -1168,6 +1177,7 @@ export type ListExpensesQuery = {
       category?: ExpenseCategory | null;
       createdAt: string;
       date?: string | null;
+      dueDate?: string | null;
       expenseTypeId?: string | null;
       hasTarget?: boolean | null;
       id: string;
@@ -1300,6 +1310,7 @@ export type CreateExpenseMutation = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -1523,6 +1534,7 @@ export type DeleteExpenseMutation = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -1746,6 +1758,7 @@ export type UpdateExpenseMutation = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -1969,6 +1982,7 @@ export type OnCreateExpenseSubscription = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -2192,6 +2206,7 @@ export type OnDeleteExpenseSubscription = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;
@@ -2415,6 +2430,7 @@ export type OnUpdateExpenseSubscription = {
     category?: ExpenseCategory | null;
     createdAt: string;
     date?: string | null;
+    dueDate?: string | null;
     expenseType?: {
       __typename: "ExpenseType";
       createdAt: string;

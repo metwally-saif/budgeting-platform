@@ -39,7 +39,7 @@ export function usePreference() {
     } catch (error) {
       setError(error as Error);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
