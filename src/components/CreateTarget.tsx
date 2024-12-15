@@ -1,4 +1,3 @@
-// src/components/ExpenseTarget.tsx
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -22,14 +21,16 @@ import {
   Divider,
   Stack,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useUpdateExpense } from "../hooks";
 import { Expense, ExpenseRecurringFrequency } from "../../amplify/graphql/API";
 import { usePreference } from "../hooks";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import NotesIcon from "@mui/icons-material/Notes";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import { LocalizationProvider, DesktopDatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 interface ExpenseTargetProps {
   expense: Expense;
@@ -47,6 +48,7 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
     recurringFrequency:
       expense.recurringFrequency || ExpenseRecurringFrequency.Monthly,
     nextMonthIWantToSetAside: expense.nextMonthIWantToSetAside || 0,
+    dueDate: expense.dueDate ? new Date(expense.dueDate) : null, // Use Date object
   });
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -56,6 +58,8 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
     severity: "success" | "error";
   }>({ open: false, message: "", severity: "success" });
 
+  const [notes, setNotes] = useState(expense.notes || "");
+
   useEffect(() => {
     setShowForm(false);
     setFormValues({
@@ -64,7 +68,9 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
       recurringFrequency:
         expense.recurringFrequency || ExpenseRecurringFrequency.Monthly,
       nextMonthIWantToSetAside: expense.nextMonthIWantToSetAside || 0,
+      dueDate: expense.dueDate ? new Date(expense.dueDate) : null,
     });
+    setNotes(expense.notes || "");
   }, [expense]);
 
   const handleInputChange = (
@@ -78,8 +84,52 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
     }));
   };
 
+  const handleDueDateChange = (date: Date | null) => {
+    setFormValues((prev) => ({
+      ...prev,
+      dueDate: date,
+    }));
+  };
+
+  const handleNotesChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setNotes(e.target.value);
+  };
+
+  const handleNotesBlur = async () => {
+    try {
+      await updateExpense({
+        id: expense.id,
+        notes: notes,
+      });
+      refresh();
+    } catch (error) {
+      console.error("Failed to update notes:", error);
+    }
+  };
+
   const handleSubmit = async () => {
     try {
+      // Validate due date
+      if (!formValues.dueDate) {
+        setSnackbar({
+          open: true,
+          message: "Due date is required.",
+          severity: "error",
+        });
+        return;
+      }
+
+      // Validate target amount
+      if (formValues.targetAmount < 0) {
+        setSnackbar({
+          open: true,
+          message: "Target amount cannot be negative.",
+          severity: "error",
+        });
+        return;
+      }
       await updateExpense({
         id: expense.id,
         targetAmount: formValues.targetAmount,
@@ -90,6 +140,7 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
           ],
         hasTarget: true,
         nextMonthIWantToSetAside: formValues.nextMonthIWantToSetAside,
+        dueDate: formValues.dueDate.toISOString().split("T")[0],
       });
       refresh();
       setShowForm(false);
@@ -117,6 +168,7 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
         recurring: false,
         recurringFrequency: null,
         nextMonthIWantToSetAside: 0,
+        dueDate: null,
       });
       refresh();
       setDeleteDialogOpen(false);
@@ -145,6 +197,7 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
         <CardContent>
           {expense.hasTarget && !showForm ? (
             <Grid container spacing={2}>
+              {/* Header */}
               <Grid item xs={12}>
                 <Typography variant="h5" gutterBottom>
                   <CurrencyExchangeIcon
@@ -154,7 +207,77 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
                 </Typography>
                 <Divider />
               </Grid>
-              <Grid item xs={12} sm={6}>
+
+              {/* Available Balance Info */}
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    padding: 2,
+                    backgroundColor: "#f9f9f9",
+                    borderRadius: 2,
+                  }}
+                >
+                  <Typography variant="h6" gutterBottom>
+                    <AccountBalanceWalletIcon
+                      sx={{ verticalAlign: "middle", mr: 1 }}
+                    />
+                    Available Funds
+                  </Typography>
+                  <Grid container spacing={1}>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Available Balance
+                      </Typography>
+                      <Typography variant="body1">
+                        {preference?.currency === "USD" ? "$" : "€"}
+                        {expense.assigned || 0}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Cash Left Over From Last Month
+                      </Typography>
+                      <Typography variant="body1">
+                        {preference?.currency === "USD" ? "$" : "€"}
+                        {expense.assigned
+                          ? (
+                              expense.assigned -
+                              (expense.nextMonthIWantToSetAside || 0)
+                            ).toFixed(2)
+                          : "0.00"}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Assigned This Month
+                      </Typography>
+                      <Typography variant="body1">
+                        +{preference?.currency === "USD" ? "$" : "€"}
+                        {expense.nextMonthIWantToSetAside}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Cash Spending
+                      </Typography>
+                      <Typography variant="body1">
+                        {preference?.currency === "USD" ? "$" : "€"}0.00
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2" color="textSecondary">
+                        Credit Spending
+                      </Typography>
+                      <Typography variant="body1">
+                        {preference?.currency === "USD" ? "$" : "€"}0.00
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+
+              {/* Target Details */}
+              <Grid item xs={12}>
                 <Typography variant="subtitle1" color="textSecondary">
                   Target Amount
                 </Typography>
@@ -171,19 +294,26 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
                   {expense.recurring ? "Yes" : "No"}
                 </Typography>
               </Grid>
+              {expense.recurring && (
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Frequency
+                  </Typography>
+                  <Typography variant="h6">
+                    {expense.recurringFrequency}
+                  </Typography>
+                </Grid>
+              )}
               <Grid item xs={12} sm={6}>
-                {expense.recurring && (
-                  <>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      Frequency
-                    </Typography>
-                    <Typography variant="h6">
-                      {expense.recurringFrequency}
-                    </Typography>
-                  </>
-                )}
+                <Typography variant="subtitle1" color="textSecondary">
+                  Due Date
+                </Typography>
+                <Typography variant="h6">
+                  {expense.dueDate
+                    ? new Date(expense.dueDate).toLocaleDateString()
+                    : "-"}
+                </Typography>
               </Grid>
-
               <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle1" color="textSecondary">
                   Next Month Set Aside
@@ -193,13 +323,15 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
                   {expense.nextMonthIWantToSetAside}
                 </Typography>
               </Grid>
+
+              {/* Actions */}
               <Grid item xs={12}>
                 <Stack direction="row" spacing={2}>
                   <Tooltip title="Edit Target Details">
                     <Button
                       variant="outlined"
                       color="primary"
-                      startIcon={<EditIcon />}
+                      startIcon={<SaveIcon />}
                       onClick={() => setShowForm(true)}
                     >
                       Edit
@@ -209,7 +341,7 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
                     <Button
                       variant="outlined"
                       color="error"
-                      startIcon={<DeleteIcon />}
+                      startIcon={<CancelIcon />}
                       onClick={() => setDeleteDialogOpen(true)}
                     >
                       Delete
@@ -219,92 +351,123 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
               </Grid>
             </Grid>
           ) : showForm ? (
-            <Box sx={{ width: "full" }}>
+            <Box sx={{ width: "100%" }}>
               <Typography variant="h5" gutterBottom>
                 {expense.hasTarget
                   ? "Edit Target"
                   : `Set Target for ${expense.name}`}
               </Typography>
               <Divider sx={{ mb: 2 }} />
-              <Stack spacing={2}>
-                <TextField
-                  label="Target Amount"
-                  type="number"
-                  name="targetAmount"
-                  value={formValues.targetAmount}
-                  onChange={handleInputChange}
-                  InputProps={{
-                    startAdornment: <CurrencyExchangeIcon sx={{ mr: 1 }} />,
-                  }}
-                  fullWidth
-                  variant="outlined"
-                />
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={formValues.recurring}
-                      onChange={(e) =>
-                        setFormValues((prev) => ({
-                          ...prev,
-                          recurring: e.target.checked,
-                        }))
-                      }
-                      name="recurring"
-                      color="primary"
-                    />
-                  }
-                  label="Is this recurring?"
-                />
-                {formValues.recurring && (
+              <Grid container spacing={2}>
+                {/* Target Amount */}
+                <Grid item xs={12}>
                   <TextField
-                    select
-                    label="Recurring Frequency"
-                    name="recurringFrequency"
-                    value={formValues.recurringFrequency}
+                    label="Target Amount"
+                    type="number"
+                    name="targetAmount"
+                    value={formValues.targetAmount}
                     onChange={handleInputChange}
+                    InputProps={{
+                      startAdornment: <CurrencyExchangeIcon sx={{ mr: 1 }} />,
+                    }}
                     fullWidth
                     variant="outlined"
-                  >
-                    {Object.values(ExpenseRecurringFrequency).map(
-                      (frequency) => (
-                        <MenuItem key={frequency} value={frequency}>
-                          {frequency}
-                        </MenuItem>
-                      ),
-                    )}
-                  </TextField>
+                  />
+                </Grid>
+
+                {/* Due Date */}
+                <Grid item xs={12}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Due Date"
+                      value={formValues.dueDate}
+                      onChange={handleDueDateChange}
+                      slotProps={{ textField: { fullWidth: true } }}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+
+                {/* Recurring Switch */}
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={formValues.recurring}
+                        onChange={(e) =>
+                          setFormValues((prev) => ({
+                            ...prev,
+                            recurring: e.target.checked,
+                          }))
+                        }
+                        name="recurring"
+                        color="primary"
+                      />
+                    }
+                    label="Is this recurring?"
+                  />
+                </Grid>
+
+                {/* Recurring Frequency */}
+                {formValues.recurring && (
+                  <Grid item xs={12}>
+                    <TextField
+                      select
+                      label="Recurring Frequency"
+                      name="recurringFrequency"
+                      value={formValues.recurringFrequency}
+                      onChange={handleInputChange}
+                      fullWidth
+                      variant="outlined"
+                    >
+                      {Object.values(ExpenseRecurringFrequency).map(
+                        (frequency) => (
+                          <MenuItem key={frequency} value={frequency}>
+                            {frequency}
+                          </MenuItem>
+                        ),
+                      )}
+                    </TextField>
+                  </Grid>
                 )}
-                <TextField
-                  label="Next Month I Want to Set Aside"
-                  type="number"
-                  name="nextMonthIWantToSetAside"
-                  value={formValues.nextMonthIWantToSetAside}
-                  onChange={handleInputChange}
-                  InputProps={{
-                    startAdornment: <CurrencyExchangeIcon sx={{ mr: 1 }} />,
-                  }}
-                  fullWidth
-                  variant="outlined"
-                />
-                <Stack direction="row" spacing={2} justifyContent="flex-end">
-                  <Button
-                    variant="contained"
-                    color="success"
-                    startIcon={<SaveIcon />}
-                    onClick={handleSubmit}
-                  >
-                    Save
-                  </Button>
-                  <Button
+
+                {/* Next Month Set Aside */}
+                <Grid item xs={12}>
+                  <TextField
+                    label="Next Month I Want to Set Aside"
+                    type="number"
+                    name="nextMonthIWantToSetAside"
+                    value={formValues.nextMonthIWantToSetAside}
+                    onChange={handleInputChange}
+                    InputProps={{
+                      startAdornment: <CurrencyExchangeIcon sx={{ mr: 1 }} />,
+                    }}
+                    fullWidth
                     variant="outlined"
-                    color="secondary"
-                    startIcon={<CancelIcon />}
-                    onClick={() => setShowForm(false)}
-                  >
-                    Cancel
-                  </Button>
-                </Stack>
-              </Stack>
+                  />
+                </Grid>
+
+                {/* Save and Cancel Buttons */}
+                <Grid item xs={12}>
+                  <Stack direction="row" spacing={2} justifyContent="flex-end">
+                    <Button
+                      variant="contained"
+                      color="success"
+                      startIcon={<SaveIcon />}
+                      onClick={handleSubmit}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      startIcon={<CancelIcon />}
+                      onClick={() => setShowForm(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </Stack>
+                </Grid>
+              </Grid>
             </Box>
           ) : (
             <Box textAlign="center">
@@ -327,6 +490,34 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
               </Button>
             </Box>
           )}
+
+          {/* Notes Section (Always Visible) */}
+          <Box sx={{ mt: 4 }}>
+            <Divider sx={{ mb: 2 }} />
+            <Box
+              sx={{
+                padding: 2,
+                backgroundColor: "#f9f9f9",
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h6" gutterBottom>
+                <NotesIcon sx={{ verticalAlign: "middle", mr: 1 }} />
+                Notes
+              </Typography>
+              <TextField
+                label="Add Notes"
+                multiline
+                rows={4}
+                value={expense.notes || notes}
+                onChange={handleNotesChange}
+                onBlur={handleNotesBlur}
+                fullWidth
+                variant="outlined"
+                placeholder="Enter any notes related to this expense..."
+              />
+            </Box>
+          </Box>
         </CardContent>
       </Card>
 

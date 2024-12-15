@@ -10,7 +10,7 @@ import {
   Expense,
 } from "../../amplify/graphql/API";
 
-interface ExpenseTypeWithExpenses {
+export interface ExpenseTypeWithExpenses {
   expenseType: ExpenseType;
   expenses: Expense[];
 }
@@ -139,6 +139,7 @@ export function useUpdateExpense() {
         });
         console.log(res);
       } catch (error) {
+        console.error("Failed to update expense:", error);
         setError(error as Error);
       } finally {
         setSaving(false);

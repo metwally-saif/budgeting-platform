@@ -35,6 +35,8 @@ export const Expense = a
     // Expense Notes
     notes: a.string(),
 
+    dueDate: a.date(),
+
     assigned: a.float(),
   })
   .identifier(["id"])

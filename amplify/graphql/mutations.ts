@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -49,6 +50,7 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
     category
     createdAt
     date
+    dueDate
     expenseType {
       createdAt
       id
@@ -277,6 +279,7 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
     category
     createdAt
     date
+    dueDate
     expenseType {
       createdAt
       id
@@ -505,6 +508,7 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
     category
     createdAt
     date
+    dueDate
     expenseType {
       createdAt
       id

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import {
   Modal,
@@ -243,7 +244,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   name="financialStatus"
                   control={control}
                   rules={{ required: "Financial Status is required" }}
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <Select
                       {...field}
                       labelId="financial-status-label"
@@ -273,7 +274,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   name="homeOwnership"
                   control={control}
                   rules={{ required: "Home Ownership is required" }}
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <Select
                       {...field}
                       labelId="home-ownership-label"
@@ -303,7 +304,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   name="transportation"
                   control={control}
                   rules={{ required: "Transportation is required" }}
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <Select
                       {...field}
                       labelId="transportation-label"
@@ -331,7 +332,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   name="mostSpend"
                   control={control}
                   rules={{ required: "Most Spend is required" }}
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <Select
                       {...field}
                       labelId="most-spend-label"
@@ -360,7 +361,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
               <Controller
                 name="subscriptions"
                 control={control}
-                render={({ field }) => (
+                render={({ field }: { field: any }) => (
                   <TextField
                     {...field}
                     label="Subscriptions (comma separated)"
@@ -385,7 +386,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   name="currency"
                   control={control}
                   rules={{ required: "Currency is required" }}
-                  render={({ field }) => (
+                  render={({ field }: { field: any }) => (
                     <Select
                       {...field}
                       labelId="currency-label"
@@ -413,7 +414,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   required: "Monthly Income is required",
                   min: { value: 0, message: "Must be a positive number" },
                 }}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field,
+                  fieldState: { error },
+                }: {
+                  field: any;
+                  fieldState: { error?: any };
+                }) => (
                   <TextField
                     {...field}
                     label="Monthly Income"
@@ -435,7 +442,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   required: "Monthly Expense is required",
                   min: { value: 0, message: "Must be a positive number" },
                 }}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field,
+                  fieldState: { error },
+                }: {
+                  field: any;
+                  fieldState: { error?: any };
+                }) => (
                   <TextField
                     {...field}
                     label="Monthly Expense"
@@ -457,7 +470,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   required: "Savings Goal is required",
                   min: { value: 0, message: "Must be a positive number" },
                 }}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field,
+                  fieldState: { error },
+                }: {
+                  field: any;
+                  fieldState: { error?: any };
+                }) => (
                   <TextField
                     {...field}
                     label="Savings Goal"
@@ -479,7 +498,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   required: "Savings Balance is required",
                   min: { value: 0, message: "Must be a positive number" },
                 }}
-                render={({ field, fieldState: { error } }) => (
+                render={({
+                  field,
+                  fieldState: { error },
+                }: {
+                  field: any;
+                  fieldState: { error?: any };
+                }) => (
                   <TextField
                     {...field}
                     label="Savings Balance"
@@ -505,7 +530,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   <Controller
                     name="hasEmergencyFund"
                     control={control}
-                    render={({ field }) => (
+                    render={({ field }: { field: any }) => (
                       <Checkbox
                         {...field}
                         checked={field.value}
@@ -530,7 +555,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Emergency Fund is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Emergency Fund Amount"
@@ -552,7 +583,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Emergency Fund Goal is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Emergency Fund Goal"
@@ -580,7 +617,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   <Controller
                     name="hasRetirementFund"
                     control={control}
-                    render={({ field }) => (
+                    render={({ field }: { field: any }) => (
                       <Checkbox
                         {...field}
                         checked={field.value}
@@ -605,7 +642,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Retirement Fund is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Retirement Fund Amount"
@@ -627,7 +670,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Retirement Fund Goal is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Retirement Fund Goal"
@@ -655,7 +704,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                   <Controller
                     name="hasDebt"
                     control={control}
-                    render={({ field }) => (
+                    render={({ field }: { field: any }) => (
                       <Checkbox
                         {...field}
                         checked={field.value}
@@ -679,7 +728,7 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       name="deptType"
                       control={control}
                       rules={{ required: "Debt Type is required" }}
-                      render={({ field }) => (
+                      render={({ field }: { field: any }) => (
                         <Select
                           {...field}
                           labelId="dept-type-label"
@@ -713,7 +762,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Debt amount is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Debt Amount"
@@ -735,7 +790,13 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
                       required: "Debt Goal is required",
                       min: { value: 0, message: "Must be a positive number" },
                     }}
-                    render={({ field, fieldState: { error } }) => (
+                    render={({
+                      field,
+                      fieldState: { error },
+                    }: {
+                      field: any;
+                      fieldState: { error?: any };
+                    }) => (
                       <TextField
                         {...field}
                         label="Debt Goal"
