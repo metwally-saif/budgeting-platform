@@ -1,5 +1,5 @@
 /* tslint:disable */
- 
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -62,6 +62,10 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -124,6 +128,25 @@ export const createExpenseType = /* GraphQL */ `mutation CreateExpenseType(
 ` as GeneratedMutation<
   APITypes.CreateExpenseTypeMutationVariables,
   APITypes.CreateExpenseTypeMutation
+>;
+export const createHistoryExpense = /* GraphQL */ `mutation CreateHistoryExpense(
+  $condition: ModelHistoryExpenseConditionInput
+  $input: CreateHistoryExpenseInput!
+) {
+  createHistoryExpense(condition: $condition, input: $input) {
+    amount
+    createdAt
+    date
+    expenseId
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateHistoryExpenseMutationVariables,
+  APITypes.CreateHistoryExpenseMutation
 >;
 export const createPreference = /* GraphQL */ `mutation CreatePreference(
   $condition: ModelPreferenceConditionInput
@@ -195,6 +218,10 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner
@@ -291,6 +318,10 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -353,6 +384,58 @@ export const deleteExpenseType = /* GraphQL */ `mutation DeleteExpenseType(
 ` as GeneratedMutation<
   APITypes.DeleteExpenseTypeMutationVariables,
   APITypes.DeleteExpenseTypeMutation
+>;
+export const deleteHistoryExpense = /* GraphQL */ `mutation DeleteHistoryExpense(
+  $condition: ModelHistoryExpenseConditionInput
+  $input: DeleteHistoryExpenseInput!
+) {
+  deleteHistoryExpense(condition: $condition, input: $input) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteHistoryExpenseMutationVariables,
+  APITypes.DeleteHistoryExpenseMutation
 >;
 export const deletePreference = /* GraphQL */ `mutation DeletePreference(
   $condition: ModelPreferenceConditionInput
@@ -424,6 +507,10 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner
@@ -509,15 +596,6 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
     createdAt
     date
     dueDate
-    expenseType {
-      createdAt
-      id
-      name
-      owner
-      updatedAt
-      userId
-      __typename
-    }
     expenseTypeId
     hasTarget
     id
@@ -529,18 +607,6 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
     recurringFrequency
     targetAmount
     updatedAt
-    user {
-      createdAt
-      email
-      firstName
-      id
-      lastName
-      owner
-      profileOwner
-      role
-      updatedAt
-      __typename
-    }
     userId
     __typename
   }
@@ -582,6 +648,58 @@ export const updateExpenseType = /* GraphQL */ `mutation UpdateExpenseType(
 ` as GeneratedMutation<
   APITypes.UpdateExpenseTypeMutationVariables,
   APITypes.UpdateExpenseTypeMutation
+>;
+export const updateHistoryExpense = /* GraphQL */ `mutation UpdateHistoryExpense(
+  $condition: ModelHistoryExpenseConditionInput
+  $input: UpdateHistoryExpenseInput!
+) {
+  updateHistoryExpense(condition: $condition, input: $input) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateHistoryExpenseMutationVariables,
+  APITypes.UpdateHistoryExpenseMutation
 >;
 export const updatePreference = /* GraphQL */ `mutation UpdatePreference(
   $condition: ModelPreferenceConditionInput
@@ -653,6 +771,10 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner

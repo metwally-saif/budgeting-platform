@@ -1,5 +1,5 @@
 /* tslint:disable */
- 
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -56,6 +56,10 @@ export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -116,8 +120,56 @@ export const getExpenseType = /* GraphQL */ `query GetExpenseType($id: ID!) {
   APITypes.GetExpenseTypeQueryVariables,
   APITypes.GetExpenseTypeQuery
 >;
-export const getPreference =
-  /* GraphQL */ `query GetPreference($userId: String!) {
+export const getHistoryExpense = /* GraphQL */ `query GetHistoryExpense($id: ID!) {
+  getHistoryExpense(id: $id) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetHistoryExpenseQueryVariables,
+  APITypes.GetHistoryExpenseQuery
+>;
+export const getPreference = /* GraphQL */ `query GetPreference($userId: String!) {
   getPreference(userId: $userId) {
     createdAt
     currency
@@ -161,9 +213,9 @@ export const getPreference =
   }
 }
 ` as GeneratedQuery<
-    APITypes.GetPreferenceQueryVariables,
-    APITypes.GetPreferenceQuery
-  >;
+  APITypes.GetPreferenceQueryVariables,
+  APITypes.GetPreferenceQuery
+>;
 export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   getUser(profileOwner: $profileOwner) {
     bankAccounts {
@@ -181,6 +233,10 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner
@@ -220,8 +276,7 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
-export const listBankAccountByUserId =
-  /* GraphQL */ `query ListBankAccountByUserId(
+export const listBankAccountByUserId = /* GraphQL */ `query ListBankAccountByUserId(
   $filter: ModelBankAccountFilterInput
   $limit: Int
   $nextToken: String
@@ -251,9 +306,9 @@ export const listBankAccountByUserId =
   }
 }
 ` as GeneratedQuery<
-    APITypes.ListBankAccountByUserIdQueryVariables,
-    APITypes.ListBankAccountByUserIdQuery
-  >;
+  APITypes.ListBankAccountByUserIdQueryVariables,
+  APITypes.ListBankAccountByUserIdQuery
+>;
 export const listBankAccounts = /* GraphQL */ `query ListBankAccounts(
   $filter: ModelBankAccountFilterInput
   $id: ID
@@ -330,8 +385,7 @@ export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
   APITypes.ListExpenseByUserIdQueryVariables,
   APITypes.ListExpenseByUserIdQuery
 >;
-export const listExpenseTypeByUserId =
-  /* GraphQL */ `query ListExpenseTypeByUserId(
+export const listExpenseTypeByUserId = /* GraphQL */ `query ListExpenseTypeByUserId(
   $filter: ModelExpenseTypeFilterInput
   $limit: Int
   $nextToken: String
@@ -359,9 +413,9 @@ export const listExpenseTypeByUserId =
   }
 }
 ` as GeneratedQuery<
-    APITypes.ListExpenseTypeByUserIdQueryVariables,
-    APITypes.ListExpenseTypeByUserIdQuery
-  >;
+  APITypes.ListExpenseTypeByUserIdQueryVariables,
+  APITypes.ListExpenseTypeByUserIdQuery
+>;
 export const listExpenseTypes = /* GraphQL */ `query ListExpenseTypes(
   $filter: ModelExpenseTypeFilterInput
   $id: ID
@@ -435,6 +489,70 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
 ` as GeneratedQuery<
   APITypes.ListExpensesQueryVariables,
   APITypes.ListExpensesQuery
+>;
+export const listHistoryExpenseByUserId = /* GraphQL */ `query ListHistoryExpenseByUserId(
+  $filter: ModelHistoryExpenseFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listHistoryExpenseByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      amount
+      createdAt
+      date
+      expenseId
+      id
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListHistoryExpenseByUserIdQueryVariables,
+  APITypes.ListHistoryExpenseByUserIdQuery
+>;
+export const listHistoryExpenses = /* GraphQL */ `query ListHistoryExpenses(
+  $filter: ModelHistoryExpenseFilterInput
+  $id: ID
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listHistoryExpenses(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      amount
+      createdAt
+      date
+      expenseId
+      id
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListHistoryExpensesQueryVariables,
+  APITypes.ListHistoryExpensesQuery
 >;
 export const listPreferences = /* GraphQL */ `query ListPreferences(
   $filter: ModelPreferenceFilterInput

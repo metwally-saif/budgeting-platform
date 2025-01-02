@@ -6,7 +6,7 @@ import { env } from "$amplify/env/daily-digest";
 
 // GraphQL queries + mutations
 import { listExpenses } from "graphql/queries";
-import { updateExpense, deleteExpense } from "graphql/mutations";
+import { updateExpense } from "graphql/mutations";
 import {
   Expense,
   ExpenseRecurringFrequency,
@@ -200,28 +200,28 @@ export const handler: Handler = async () => {
             assigned: newAssigned,
             nextMonthIWantToSetAside: newNextMonth,
           };
-          console.log("newExpense", newExpense);
-          //remove user and expenseType from updateExpense
-          delete updateExpense.__generatedMutationOutput.updateExpense?.user;
-          delete updateExpense.__generatedMutationOutput.updateExpense
-            ?.expenseType;
-          console.log("updateExpense", updateExpense);
           operations.push(
             client.graphql({
               query: updateExpense,
               variables: {
                 input: newExpense,
               },
-              selectionSet: "{ id }",
             }),
           );
         } else {
-          // Non-recurring => delete it
+          // Non-recurring => remove targetAmount and dueDate 
+          const newExpense: UpdateExpenseInput = {
+            id,
+            targetAmount: null,
+            hasTarget: false,
+            assigned: 0,
+            dueDate: null,
+          };
           operations.push(
             client.graphql({
-              query: deleteExpense,
+              query: updateExpense,
               variables: {
-                input: { id },
+                input: newExpense,
               },
             }),
           );

@@ -1,18 +1,18 @@
 /* tslint:disable */
- 
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type BankAccount = {
-  __typename: "BankAccount";
-  balance?: number | null;
-  createdAt: string;
-  id: string;
-  name?: string | null;
-  owner?: string | null;
-  type?: BankAccountType | null;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
+  __typename: "BankAccount",
+  balance?: number | null,
+  createdAt: string,
+  id: string,
+  name?: string | null,
+  owner?: string | null,
+  type?: BankAccountType | null,
+  updatedAt: string,
+  user?: User | null,
+  userId: string,
 };
 
 export enum BankAccountType {
@@ -23,75 +23,78 @@ export enum BankAccountType {
   Savings = "Savings",
 }
 
+
 export type User = {
-  __typename: "User";
-  bankAccounts?: ModelBankAccountConnection | null;
-  createdAt: string;
-  email?: string | null;
-  expenseTypes?: ModelExpenseTypeConnection | null;
-  expenses?: ModelExpenseConnection | null;
-  firstName?: string | null;
-  id?: string | null;
-  lastName?: string | null;
-  owner?: string | null;
-  preference?: Preference | null;
-  profileOwner: string;
-  role?: string | null;
-  updatedAt: string;
+  __typename: "User",
+  bankAccounts?: ModelBankAccountConnection | null,
+  createdAt: string,
+  email?: string | null,
+  expenseTypes?: ModelExpenseTypeConnection | null,
+  expenses?: ModelExpenseConnection | null,
+  firstName?: string | null,
+  historyExpense?: ModelHistoryExpenseConnection | null,
+  id?: string | null,
+  lastName?: string | null,
+  owner?: string | null,
+  preference?: Preference | null,
+  profileOwner: string,
+  role?: string | null,
+  updatedAt: string,
 };
 
 export type ModelBankAccountConnection = {
-  __typename: "ModelBankAccountConnection";
-  items: Array<BankAccount | null>;
-  nextToken?: string | null;
+  __typename: "ModelBankAccountConnection",
+  items:  Array<BankAccount | null >,
+  nextToken?: string | null,
 };
 
 export type ModelExpenseTypeConnection = {
-  __typename: "ModelExpenseTypeConnection";
-  items: Array<ExpenseType | null>;
-  nextToken?: string | null;
+  __typename: "ModelExpenseTypeConnection",
+  items:  Array<ExpenseType | null >,
+  nextToken?: string | null,
 };
 
 export type ExpenseType = {
-  __typename: "ExpenseType";
-  createdAt: string;
-  expenses?: ModelExpenseConnection | null;
-  id: string;
-  name: string;
-  owner?: string | null;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
+  __typename: "ExpenseType",
+  createdAt: string,
+  expenses?: ModelExpenseConnection | null,
+  id: string,
+  name: string,
+  owner?: string | null,
+  updatedAt: string,
+  user?: User | null,
+  userId: string,
 };
 
 export type ModelExpenseConnection = {
-  __typename: "ModelExpenseConnection";
-  items: Array<Expense | null>;
-  nextToken?: string | null;
+  __typename: "ModelExpenseConnection",
+  items:  Array<Expense | null >,
+  nextToken?: string | null,
 };
 
 export type Expense = {
-  __typename: "Expense";
-  amount?: number | null;
-  assigned?: number | null;
-  category?: ExpenseCategory | null;
-  createdAt: string;
-  date?: string | null;
-  dueDate?: string | null;
-  expenseType?: ExpenseType | null;
-  expenseTypeId?: string | null;
-  hasTarget?: boolean | null;
-  id: string;
-  name?: string | null;
-  nextMonthIWantToSetAside?: number | null;
-  notes?: string | null;
-  owner?: string | null;
-  recurring?: boolean | null;
-  recurringFrequency?: ExpenseRecurringFrequency | null;
-  targetAmount?: number | null;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
+  __typename: "Expense",
+  amount?: number | null,
+  assigned?: number | null,
+  category?: ExpenseCategory | null,
+  createdAt: string,
+  date?: string | null,
+  dueDate?: string | null,
+  expenseType?: ExpenseType | null,
+  expenseTypeId?: string | null,
+  hasTarget?: boolean | null,
+  history?: ModelHistoryExpenseConnection | null,
+  id: string,
+  name?: string | null,
+  nextMonthIWantToSetAside?: number | null,
+  notes?: string | null,
+  owner?: string | null,
+  recurring?: boolean | null,
+  recurringFrequency?: ExpenseRecurringFrequency | null,
+  targetAmount?: number | null,
+  updatedAt: string,
+  user?: User | null,
+  userId: string,
 };
 
 export enum ExpenseCategory {
@@ -108,6 +111,26 @@ export enum ExpenseCategory {
   Utilities = "Utilities",
 }
 
+
+export type ModelHistoryExpenseConnection = {
+  __typename: "ModelHistoryExpenseConnection",
+  items:  Array<HistoryExpense | null >,
+  nextToken?: string | null,
+};
+
+export type HistoryExpense = {
+  __typename: "HistoryExpense",
+  amount: number,
+  createdAt: string,
+  date: string,
+  expense?: Expense | null,
+  expenseId: string,
+  id: string,
+  updatedAt: string,
+  user?: User | null,
+  userId: string,
+};
+
 export enum ExpenseRecurringFrequency {
   Daily = "Daily",
   Monthly = "Monthly",
@@ -115,41 +138,43 @@ export enum ExpenseRecurringFrequency {
   Yearly = "Yearly",
 }
 
+
 export type Preference = {
-  __typename: "Preference";
-  createdAt: string;
-  currency?: PreferenceCurrency | null;
-  debt?: number | null;
-  debtGoal?: number | null;
-  deptType?: PreferenceDeptType | null;
-  emergencyFund?: number | null;
-  emergencyFundGoal?: number | null;
-  financialStatus?: PreferenceFinancialStatus | null;
-  hasDebt?: boolean | null;
-  hasEmergencyFund?: boolean | null;
-  hasRetirementFund?: boolean | null;
-  homeOwnership?: PreferenceHomeOwnership | null;
-  id?: string | null;
-  lastUpdated?: string | null;
-  monthlyExpense?: number | null;
-  monthlyIncome?: number | null;
-  mostSpend?: PreferenceMostSpend | null;
-  owner?: string | null;
-  retirementFund?: number | null;
-  retirementFundGoal?: number | null;
-  savingsBalance?: number | null;
-  savingsGoal?: number | null;
-  subscriptions?: Array<string | null> | null;
-  transportation?: PreferenceTransportation | null;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
+  __typename: "Preference",
+  createdAt: string,
+  currency?: PreferenceCurrency | null,
+  debt?: number | null,
+  debtGoal?: number | null,
+  deptType?: PreferenceDeptType | null,
+  emergencyFund?: number | null,
+  emergencyFundGoal?: number | null,
+  financialStatus?: PreferenceFinancialStatus | null,
+  hasDebt?: boolean | null,
+  hasEmergencyFund?: boolean | null,
+  hasRetirementFund?: boolean | null,
+  homeOwnership?: PreferenceHomeOwnership | null,
+  id?: string | null,
+  lastUpdated?: string | null,
+  monthlyExpense?: number | null,
+  monthlyIncome?: number | null,
+  mostSpend?: PreferenceMostSpend | null,
+  owner?: string | null,
+  retirementFund?: number | null,
+  retirementFundGoal?: number | null,
+  savingsBalance?: number | null,
+  savingsGoal?: number | null,
+  subscriptions?: Array< string | null > | null,
+  transportation?: PreferenceTransportation | null,
+  updatedAt: string,
+  user?: User | null,
+  userId: string,
 };
 
 export enum PreferenceCurrency {
   EUR = "EUR",
   USD = "USD",
 }
+
 
 export enum PreferenceDeptType {
   AutoLoans = "AutoLoans",
@@ -160,17 +185,20 @@ export enum PreferenceDeptType {
   StudentLoan = "StudentLoan",
 }
 
+
 export enum PreferenceFinancialStatus {
   Average = "Average",
   Good = "Good",
   Poor = "Poor",
 }
 
+
 export enum PreferenceHomeOwnership {
   Other = "Other",
   Own = "Own",
   Rent = "Rent",
 }
+
 
 export enum PreferenceMostSpend {
   Entertainment = "Entertainment",
@@ -182,36 +210,38 @@ export enum PreferenceMostSpend {
   Transportation = "Transportation",
 }
 
+
 export enum PreferenceTransportation {
   Other = "Other",
   Private = "Private",
   Public = "Public",
 }
 
+
 export type ModelBankAccountFilterInput = {
-  and?: Array<ModelBankAccountFilterInput | null> | null;
-  balance?: ModelFloatInput | null;
-  createdAt?: ModelStringInput | null;
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  not?: ModelBankAccountFilterInput | null;
-  or?: Array<ModelBankAccountFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  type?: ModelBankAccountTypeInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  and?: Array< ModelBankAccountFilterInput | null > | null,
+  balance?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  not?: ModelBankAccountFilterInput | null,
+  or?: Array< ModelBankAccountFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  type?: ModelBankAccountTypeInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type ModelFloatInput = {
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  between?: Array<number | null> | null;
-  eq?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ne?: number | null;
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  between?: Array< number | null > | null,
+  eq?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ne?: number | null,
 };
 
 export enum ModelAttributeTypes {
@@ -227,51 +257,52 @@ export enum ModelAttributeTypes {
   stringSet = "stringSet",
 }
 
+
 export type ModelStringInput = {
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  beginsWith?: string | null;
-  between?: Array<string | null> | null;
-  contains?: string | null;
-  eq?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ne?: string | null;
-  notContains?: string | null;
-  size?: ModelSizeInput | null;
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelSizeInput = {
-  between?: Array<number | null> | null;
-  eq?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ne?: number | null;
+  between?: Array< number | null > | null,
+  eq?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ne?: number | null,
 };
 
 export type ModelIDInput = {
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  beginsWith?: string | null;
-  between?: Array<string | null> | null;
-  contains?: string | null;
-  eq?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ne?: string | null;
-  notContains?: string | null;
-  size?: ModelSizeInput | null;
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelBankAccountTypeInput = {
-  eq?: BankAccountType | null;
-  ne?: BankAccountType | null;
+  eq?: BankAccountType | null,
+  ne?: BankAccountType | null,
 };
 
 export enum ModelSortDirection {
@@ -279,2333 +310,2850 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
 export type ModelExpenseFilterInput = {
-  amount?: ModelFloatInput | null;
-  and?: Array<ModelExpenseFilterInput | null> | null;
-  assigned?: ModelFloatInput | null;
-  category?: ModelExpenseCategoryInput | null;
-  createdAt?: ModelStringInput | null;
-  date?: ModelStringInput | null;
-  dueDate?: ModelStringInput | null;
-  expenseTypeId?: ModelStringInput | null;
-  hasTarget?: ModelBooleanInput | null;
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  nextMonthIWantToSetAside?: ModelFloatInput | null;
-  not?: ModelExpenseFilterInput | null;
-  notes?: ModelStringInput | null;
-  or?: Array<ModelExpenseFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  recurring?: ModelBooleanInput | null;
-  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null;
-  targetAmount?: ModelFloatInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  amount?: ModelFloatInput | null,
+  and?: Array< ModelExpenseFilterInput | null > | null,
+  assigned?: ModelFloatInput | null,
+  category?: ModelExpenseCategoryInput | null,
+  createdAt?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  dueDate?: ModelStringInput | null,
+  expenseTypeId?: ModelStringInput | null,
+  hasTarget?: ModelBooleanInput | null,
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  nextMonthIWantToSetAside?: ModelFloatInput | null,
+  not?: ModelExpenseFilterInput | null,
+  notes?: ModelStringInput | null,
+  or?: Array< ModelExpenseFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  recurring?: ModelBooleanInput | null,
+  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null,
+  targetAmount?: ModelFloatInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type ModelExpenseCategoryInput = {
-  eq?: ExpenseCategory | null;
-  ne?: ExpenseCategory | null;
+  eq?: ExpenseCategory | null,
+  ne?: ExpenseCategory | null,
 };
 
 export type ModelBooleanInput = {
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  eq?: boolean | null;
-  ne?: boolean | null;
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type ModelExpenseRecurringFrequencyInput = {
-  eq?: ExpenseRecurringFrequency | null;
-  ne?: ExpenseRecurringFrequency | null;
+  eq?: ExpenseRecurringFrequency | null,
+  ne?: ExpenseRecurringFrequency | null,
 };
 
 export type ModelExpenseTypeFilterInput = {
-  and?: Array<ModelExpenseTypeFilterInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  not?: ModelExpenseTypeFilterInput | null;
-  or?: Array<ModelExpenseTypeFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  and?: Array< ModelExpenseTypeFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  not?: ModelExpenseTypeFilterInput | null,
+  or?: Array< ModelExpenseTypeFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
+};
+
+export type ModelHistoryExpenseFilterInput = {
+  amount?: ModelFloatInput | null,
+  and?: Array< ModelHistoryExpenseFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  expenseId?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  not?: ModelHistoryExpenseFilterInput | null,
+  or?: Array< ModelHistoryExpenseFilterInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type ModelPreferenceFilterInput = {
-  and?: Array<ModelPreferenceFilterInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  currency?: ModelPreferenceCurrencyInput | null;
-  debt?: ModelFloatInput | null;
-  debtGoal?: ModelFloatInput | null;
-  deptType?: ModelPreferenceDeptTypeInput | null;
-  emergencyFund?: ModelFloatInput | null;
-  emergencyFundGoal?: ModelFloatInput | null;
-  financialStatus?: ModelPreferenceFinancialStatusInput | null;
-  hasDebt?: ModelBooleanInput | null;
-  hasEmergencyFund?: ModelBooleanInput | null;
-  hasRetirementFund?: ModelBooleanInput | null;
-  homeOwnership?: ModelPreferenceHomeOwnershipInput | null;
-  id?: ModelIDInput | null;
-  lastUpdated?: ModelStringInput | null;
-  monthlyExpense?: ModelFloatInput | null;
-  monthlyIncome?: ModelFloatInput | null;
-  mostSpend?: ModelPreferenceMostSpendInput | null;
-  not?: ModelPreferenceFilterInput | null;
-  or?: Array<ModelPreferenceFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  retirementFund?: ModelFloatInput | null;
-  retirementFundGoal?: ModelFloatInput | null;
-  savingsBalance?: ModelFloatInput | null;
-  savingsGoal?: ModelFloatInput | null;
-  subscriptions?: ModelStringInput | null;
-  transportation?: ModelPreferenceTransportationInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  and?: Array< ModelPreferenceFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  currency?: ModelPreferenceCurrencyInput | null,
+  debt?: ModelFloatInput | null,
+  debtGoal?: ModelFloatInput | null,
+  deptType?: ModelPreferenceDeptTypeInput | null,
+  emergencyFund?: ModelFloatInput | null,
+  emergencyFundGoal?: ModelFloatInput | null,
+  financialStatus?: ModelPreferenceFinancialStatusInput | null,
+  hasDebt?: ModelBooleanInput | null,
+  hasEmergencyFund?: ModelBooleanInput | null,
+  hasRetirementFund?: ModelBooleanInput | null,
+  homeOwnership?: ModelPreferenceHomeOwnershipInput | null,
+  id?: ModelIDInput | null,
+  lastUpdated?: ModelStringInput | null,
+  monthlyExpense?: ModelFloatInput | null,
+  monthlyIncome?: ModelFloatInput | null,
+  mostSpend?: ModelPreferenceMostSpendInput | null,
+  not?: ModelPreferenceFilterInput | null,
+  or?: Array< ModelPreferenceFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  retirementFund?: ModelFloatInput | null,
+  retirementFundGoal?: ModelFloatInput | null,
+  savingsBalance?: ModelFloatInput | null,
+  savingsGoal?: ModelFloatInput | null,
+  subscriptions?: ModelStringInput | null,
+  transportation?: ModelPreferenceTransportationInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type ModelPreferenceCurrencyInput = {
-  eq?: PreferenceCurrency | null;
-  ne?: PreferenceCurrency | null;
+  eq?: PreferenceCurrency | null,
+  ne?: PreferenceCurrency | null,
 };
 
 export type ModelPreferenceDeptTypeInput = {
-  eq?: PreferenceDeptType | null;
-  ne?: PreferenceDeptType | null;
+  eq?: PreferenceDeptType | null,
+  ne?: PreferenceDeptType | null,
 };
 
 export type ModelPreferenceFinancialStatusInput = {
-  eq?: PreferenceFinancialStatus | null;
-  ne?: PreferenceFinancialStatus | null;
+  eq?: PreferenceFinancialStatus | null,
+  ne?: PreferenceFinancialStatus | null,
 };
 
 export type ModelPreferenceHomeOwnershipInput = {
-  eq?: PreferenceHomeOwnership | null;
-  ne?: PreferenceHomeOwnership | null;
+  eq?: PreferenceHomeOwnership | null,
+  ne?: PreferenceHomeOwnership | null,
 };
 
 export type ModelPreferenceMostSpendInput = {
-  eq?: PreferenceMostSpend | null;
-  ne?: PreferenceMostSpend | null;
+  eq?: PreferenceMostSpend | null,
+  ne?: PreferenceMostSpend | null,
 };
 
 export type ModelPreferenceTransportationInput = {
-  eq?: PreferenceTransportation | null;
-  ne?: PreferenceTransportation | null;
+  eq?: PreferenceTransportation | null,
+  ne?: PreferenceTransportation | null,
 };
 
 export type ModelPreferenceConnection = {
-  __typename: "ModelPreferenceConnection";
-  items: Array<Preference | null>;
-  nextToken?: string | null;
+  __typename: "ModelPreferenceConnection",
+  items:  Array<Preference | null >,
+  nextToken?: string | null,
 };
 
 export type ModelUserFilterInput = {
-  and?: Array<ModelUserFilterInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  firstName?: ModelStringInput | null;
-  id?: ModelIDInput | null;
-  lastName?: ModelStringInput | null;
-  not?: ModelUserFilterInput | null;
-  or?: Array<ModelUserFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  profileOwner?: ModelStringInput | null;
-  role?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  and?: Array< ModelUserFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  lastName?: ModelStringInput | null,
+  not?: ModelUserFilterInput | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  profileOwner?: ModelStringInput | null,
+  role?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelUserConnection = {
-  __typename: "ModelUserConnection";
-  items: Array<User | null>;
-  nextToken?: string | null;
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
 };
 
 export type ModelBankAccountConditionInput = {
-  and?: Array<ModelBankAccountConditionInput | null> | null;
-  balance?: ModelFloatInput | null;
-  createdAt?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  not?: ModelBankAccountConditionInput | null;
-  or?: Array<ModelBankAccountConditionInput | null> | null;
-  owner?: ModelStringInput | null;
-  type?: ModelBankAccountTypeInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  and?: Array< ModelBankAccountConditionInput | null > | null,
+  balance?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  not?: ModelBankAccountConditionInput | null,
+  or?: Array< ModelBankAccountConditionInput | null > | null,
+  owner?: ModelStringInput | null,
+  type?: ModelBankAccountTypeInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type CreateBankAccountInput = {
-  balance?: number | null;
-  id?: string | null;
-  name?: string | null;
-  type?: BankAccountType | null;
-  userId: string;
+  balance?: number | null,
+  id?: string | null,
+  name?: string | null,
+  type?: BankAccountType | null,
+  userId: string,
 };
 
 export type ModelExpenseConditionInput = {
-  amount?: ModelFloatInput | null;
-  and?: Array<ModelExpenseConditionInput | null> | null;
-  assigned?: ModelFloatInput | null;
-  category?: ModelExpenseCategoryInput | null;
-  createdAt?: ModelStringInput | null;
-  date?: ModelStringInput | null;
-  dueDate?: ModelStringInput | null;
-  expenseTypeId?: ModelStringInput | null;
-  hasTarget?: ModelBooleanInput | null;
-  name?: ModelStringInput | null;
-  nextMonthIWantToSetAside?: ModelFloatInput | null;
-  not?: ModelExpenseConditionInput | null;
-  notes?: ModelStringInput | null;
-  or?: Array<ModelExpenseConditionInput | null> | null;
-  owner?: ModelStringInput | null;
-  recurring?: ModelBooleanInput | null;
-  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null;
-  targetAmount?: ModelFloatInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  amount?: ModelFloatInput | null,
+  and?: Array< ModelExpenseConditionInput | null > | null,
+  assigned?: ModelFloatInput | null,
+  category?: ModelExpenseCategoryInput | null,
+  createdAt?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  dueDate?: ModelStringInput | null,
+  expenseTypeId?: ModelStringInput | null,
+  hasTarget?: ModelBooleanInput | null,
+  name?: ModelStringInput | null,
+  nextMonthIWantToSetAside?: ModelFloatInput | null,
+  not?: ModelExpenseConditionInput | null,
+  notes?: ModelStringInput | null,
+  or?: Array< ModelExpenseConditionInput | null > | null,
+  owner?: ModelStringInput | null,
+  recurring?: ModelBooleanInput | null,
+  recurringFrequency?: ModelExpenseRecurringFrequencyInput | null,
+  targetAmount?: ModelFloatInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type CreateExpenseInput = {
-  amount?: number | null;
-  assigned?: number | null;
-  category?: ExpenseCategory | null;
-  date?: string | null;
-  dueDate?: string | null;
-  expenseTypeId?: string | null;
-  hasTarget?: boolean | null;
-  id?: string | null;
-  name?: string | null;
-  nextMonthIWantToSetAside?: number | null;
-  notes?: string | null;
-  recurring?: boolean | null;
-  recurringFrequency?: ExpenseRecurringFrequency | null;
-  targetAmount?: number | null;
-  userId: string;
+  amount?: number | null,
+  assigned?: number | null,
+  category?: ExpenseCategory | null,
+  date?: string | null,
+  dueDate?: string | null,
+  expenseTypeId?: string | null,
+  hasTarget?: boolean | null,
+  id?: string | null,
+  name?: string | null,
+  nextMonthIWantToSetAside?: number | null,
+  notes?: string | null,
+  recurring?: boolean | null,
+  recurringFrequency?: ExpenseRecurringFrequency | null,
+  targetAmount?: number | null,
+  userId: string,
 };
 
 export type ModelExpenseTypeConditionInput = {
-  and?: Array<ModelExpenseTypeConditionInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  not?: ModelExpenseTypeConditionInput | null;
-  or?: Array<ModelExpenseTypeConditionInput | null> | null;
-  owner?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
-  userId?: ModelStringInput | null;
+  and?: Array< ModelExpenseTypeConditionInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  not?: ModelExpenseTypeConditionInput | null,
+  or?: Array< ModelExpenseTypeConditionInput | null > | null,
+  owner?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type CreateExpenseTypeInput = {
-  id?: string | null;
-  name: string;
-  userId: string;
+  id?: string | null,
+  name: string,
+  userId: string,
+};
+
+export type ModelHistoryExpenseConditionInput = {
+  amount?: ModelFloatInput | null,
+  and?: Array< ModelHistoryExpenseConditionInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  expenseId?: ModelStringInput | null,
+  not?: ModelHistoryExpenseConditionInput | null,
+  or?: Array< ModelHistoryExpenseConditionInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
+};
+
+export type CreateHistoryExpenseInput = {
+  amount: number,
+  date: string,
+  expenseId: string,
+  id?: string | null,
+  userId: string,
 };
 
 export type ModelPreferenceConditionInput = {
-  and?: Array<ModelPreferenceConditionInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  currency?: ModelPreferenceCurrencyInput | null;
-  debt?: ModelFloatInput | null;
-  debtGoal?: ModelFloatInput | null;
-  deptType?: ModelPreferenceDeptTypeInput | null;
-  emergencyFund?: ModelFloatInput | null;
-  emergencyFundGoal?: ModelFloatInput | null;
-  financialStatus?: ModelPreferenceFinancialStatusInput | null;
-  hasDebt?: ModelBooleanInput | null;
-  hasEmergencyFund?: ModelBooleanInput | null;
-  hasRetirementFund?: ModelBooleanInput | null;
-  homeOwnership?: ModelPreferenceHomeOwnershipInput | null;
-  lastUpdated?: ModelStringInput | null;
-  monthlyExpense?: ModelFloatInput | null;
-  monthlyIncome?: ModelFloatInput | null;
-  mostSpend?: ModelPreferenceMostSpendInput | null;
-  not?: ModelPreferenceConditionInput | null;
-  or?: Array<ModelPreferenceConditionInput | null> | null;
-  owner?: ModelStringInput | null;
-  retirementFund?: ModelFloatInput | null;
-  retirementFundGoal?: ModelFloatInput | null;
-  savingsBalance?: ModelFloatInput | null;
-  savingsGoal?: ModelFloatInput | null;
-  subscriptions?: ModelStringInput | null;
-  transportation?: ModelPreferenceTransportationInput | null;
-  updatedAt?: ModelStringInput | null;
+  and?: Array< ModelPreferenceConditionInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  currency?: ModelPreferenceCurrencyInput | null,
+  debt?: ModelFloatInput | null,
+  debtGoal?: ModelFloatInput | null,
+  deptType?: ModelPreferenceDeptTypeInput | null,
+  emergencyFund?: ModelFloatInput | null,
+  emergencyFundGoal?: ModelFloatInput | null,
+  financialStatus?: ModelPreferenceFinancialStatusInput | null,
+  hasDebt?: ModelBooleanInput | null,
+  hasEmergencyFund?: ModelBooleanInput | null,
+  hasRetirementFund?: ModelBooleanInput | null,
+  homeOwnership?: ModelPreferenceHomeOwnershipInput | null,
+  lastUpdated?: ModelStringInput | null,
+  monthlyExpense?: ModelFloatInput | null,
+  monthlyIncome?: ModelFloatInput | null,
+  mostSpend?: ModelPreferenceMostSpendInput | null,
+  not?: ModelPreferenceConditionInput | null,
+  or?: Array< ModelPreferenceConditionInput | null > | null,
+  owner?: ModelStringInput | null,
+  retirementFund?: ModelFloatInput | null,
+  retirementFundGoal?: ModelFloatInput | null,
+  savingsBalance?: ModelFloatInput | null,
+  savingsGoal?: ModelFloatInput | null,
+  subscriptions?: ModelStringInput | null,
+  transportation?: ModelPreferenceTransportationInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type CreatePreferenceInput = {
-  currency?: PreferenceCurrency | null;
-  debt?: number | null;
-  debtGoal?: number | null;
-  deptType?: PreferenceDeptType | null;
-  emergencyFund?: number | null;
-  emergencyFundGoal?: number | null;
-  financialStatus?: PreferenceFinancialStatus | null;
-  hasDebt?: boolean | null;
-  hasEmergencyFund?: boolean | null;
-  hasRetirementFund?: boolean | null;
-  homeOwnership?: PreferenceHomeOwnership | null;
-  id?: string | null;
-  lastUpdated?: string | null;
-  monthlyExpense?: number | null;
-  monthlyIncome?: number | null;
-  mostSpend?: PreferenceMostSpend | null;
-  retirementFund?: number | null;
-  retirementFundGoal?: number | null;
-  savingsBalance?: number | null;
-  savingsGoal?: number | null;
-  subscriptions?: Array<string | null> | null;
-  transportation?: PreferenceTransportation | null;
-  userId: string;
+  currency?: PreferenceCurrency | null,
+  debt?: number | null,
+  debtGoal?: number | null,
+  deptType?: PreferenceDeptType | null,
+  emergencyFund?: number | null,
+  emergencyFundGoal?: number | null,
+  financialStatus?: PreferenceFinancialStatus | null,
+  hasDebt?: boolean | null,
+  hasEmergencyFund?: boolean | null,
+  hasRetirementFund?: boolean | null,
+  homeOwnership?: PreferenceHomeOwnership | null,
+  id?: string | null,
+  lastUpdated?: string | null,
+  monthlyExpense?: number | null,
+  monthlyIncome?: number | null,
+  mostSpend?: PreferenceMostSpend | null,
+  retirementFund?: number | null,
+  retirementFundGoal?: number | null,
+  savingsBalance?: number | null,
+  savingsGoal?: number | null,
+  subscriptions?: Array< string | null > | null,
+  transportation?: PreferenceTransportation | null,
+  userId: string,
 };
 
 export type ModelUserConditionInput = {
-  and?: Array<ModelUserConditionInput | null> | null;
-  createdAt?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  firstName?: ModelStringInput | null;
-  lastName?: ModelStringInput | null;
-  not?: ModelUserConditionInput | null;
-  or?: Array<ModelUserConditionInput | null> | null;
-  owner?: ModelStringInput | null;
-  role?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  and?: Array< ModelUserConditionInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  not?: ModelUserConditionInput | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  owner?: ModelStringInput | null,
+  role?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type CreateUserInput = {
-  email?: string | null;
-  firstName?: string | null;
-  id?: string | null;
-  lastName?: string | null;
-  profileOwner: string;
-  role?: string | null;
+  email?: string | null,
+  firstName?: string | null,
+  id?: string | null,
+  lastName?: string | null,
+  profileOwner: string,
+  role?: string | null,
 };
 
 export type DeleteBankAccountInput = {
-  id: string;
+  id: string,
 };
 
 export type DeleteExpenseInput = {
-  id: string;
+  id: string,
 };
 
 export type DeleteExpenseTypeInput = {
-  id: string;
+  id: string,
+};
+
+export type DeleteHistoryExpenseInput = {
+  id: string,
 };
 
 export type DeletePreferenceInput = {
-  userId: string;
+  userId: string,
 };
 
 export type DeleteUserInput = {
-  profileOwner: string;
+  profileOwner: string,
 };
 
 export type UpdateBankAccountInput = {
-  balance?: number | null;
-  id: string;
-  name?: string | null;
-  type?: BankAccountType | null;
-  userId?: string | null;
+  balance?: number | null,
+  id: string,
+  name?: string | null,
+  type?: BankAccountType | null,
+  userId?: string | null,
 };
 
 export type UpdateExpenseInput = {
-  amount?: number | null;
-  assigned?: number | null;
-  category?: ExpenseCategory | null;
-  date?: string | null;
-  dueDate?: string | null;
-  expenseTypeId?: string | null;
-  hasTarget?: boolean | null;
-  id: string;
-  name?: string | null;
-  nextMonthIWantToSetAside?: number | null;
-  notes?: string | null;
-  recurring?: boolean | null;
-  recurringFrequency?: ExpenseRecurringFrequency | null;
-  targetAmount?: number | null;
-  userId?: string | null;
+  amount?: number | null,
+  assigned?: number | null,
+  category?: ExpenseCategory | null,
+  date?: string | null,
+  dueDate?: string | null,
+  expenseTypeId?: string | null,
+  hasTarget?: boolean | null,
+  id: string,
+  name?: string | null,
+  nextMonthIWantToSetAside?: number | null,
+  notes?: string | null,
+  recurring?: boolean | null,
+  recurringFrequency?: ExpenseRecurringFrequency | null,
+  targetAmount?: number | null,
+  userId?: string | null,
 };
 
 export type UpdateExpenseTypeInput = {
-  id: string;
-  name?: string | null;
-  userId?: string | null;
+  id: string,
+  name?: string | null,
+  userId?: string | null,
+};
+
+export type UpdateHistoryExpenseInput = {
+  amount?: number | null,
+  date?: string | null,
+  expenseId?: string | null,
+  id: string,
+  userId?: string | null,
 };
 
 export type UpdatePreferenceInput = {
-  currency?: PreferenceCurrency | null;
-  debt?: number | null;
-  debtGoal?: number | null;
-  deptType?: PreferenceDeptType | null;
-  emergencyFund?: number | null;
-  emergencyFundGoal?: number | null;
-  financialStatus?: PreferenceFinancialStatus | null;
-  hasDebt?: boolean | null;
-  hasEmergencyFund?: boolean | null;
-  hasRetirementFund?: boolean | null;
-  homeOwnership?: PreferenceHomeOwnership | null;
-  id?: string | null;
-  lastUpdated?: string | null;
-  monthlyExpense?: number | null;
-  monthlyIncome?: number | null;
-  mostSpend?: PreferenceMostSpend | null;
-  retirementFund?: number | null;
-  retirementFundGoal?: number | null;
-  savingsBalance?: number | null;
-  savingsGoal?: number | null;
-  subscriptions?: Array<string | null> | null;
-  transportation?: PreferenceTransportation | null;
-  userId: string;
+  currency?: PreferenceCurrency | null,
+  debt?: number | null,
+  debtGoal?: number | null,
+  deptType?: PreferenceDeptType | null,
+  emergencyFund?: number | null,
+  emergencyFundGoal?: number | null,
+  financialStatus?: PreferenceFinancialStatus | null,
+  hasDebt?: boolean | null,
+  hasEmergencyFund?: boolean | null,
+  hasRetirementFund?: boolean | null,
+  homeOwnership?: PreferenceHomeOwnership | null,
+  id?: string | null,
+  lastUpdated?: string | null,
+  monthlyExpense?: number | null,
+  monthlyIncome?: number | null,
+  mostSpend?: PreferenceMostSpend | null,
+  retirementFund?: number | null,
+  retirementFundGoal?: number | null,
+  savingsBalance?: number | null,
+  savingsGoal?: number | null,
+  subscriptions?: Array< string | null > | null,
+  transportation?: PreferenceTransportation | null,
+  userId: string,
 };
 
 export type UpdateUserInput = {
-  email?: string | null;
-  firstName?: string | null;
-  id?: string | null;
-  lastName?: string | null;
-  profileOwner: string;
-  role?: string | null;
+  email?: string | null,
+  firstName?: string | null,
+  id?: string | null,
+  lastName?: string | null,
+  profileOwner: string,
+  role?: string | null,
 };
 
 export type ModelSubscriptionBankAccountFilterInput = {
-  and?: Array<ModelSubscriptionBankAccountFilterInput | null> | null;
-  balance?: ModelSubscriptionFloatInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionBankAccountFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  type?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  userId?: ModelSubscriptionStringInput | null;
+  and?: Array< ModelSubscriptionBankAccountFilterInput | null > | null,
+  balance?: ModelSubscriptionFloatInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  or?: Array< ModelSubscriptionBankAccountFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionFloatInput = {
-  between?: Array<number | null> | null;
-  eq?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  in?: Array<number | null> | null;
-  le?: number | null;
-  lt?: number | null;
-  ne?: number | null;
-  notIn?: Array<number | null> | null;
+  between?: Array< number | null > | null,
+  eq?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  in?: Array< number | null > | null,
+  le?: number | null,
+  lt?: number | null,
+  ne?: number | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type ModelSubscriptionStringInput = {
-  beginsWith?: string | null;
-  between?: Array<string | null> | null;
-  contains?: string | null;
-  eq?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  in?: Array<string | null> | null;
-  le?: string | null;
-  lt?: string | null;
-  ne?: string | null;
-  notContains?: string | null;
-  notIn?: Array<string | null> | null;
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  in?: Array< string | null > | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
-  beginsWith?: string | null;
-  between?: Array<string | null> | null;
-  contains?: string | null;
-  eq?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  in?: Array<string | null> | null;
-  le?: string | null;
-  lt?: string | null;
-  ne?: string | null;
-  notContains?: string | null;
-  notIn?: Array<string | null> | null;
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  in?: Array< string | null > | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionExpenseFilterInput = {
-  amount?: ModelSubscriptionFloatInput | null;
-  and?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
-  assigned?: ModelSubscriptionFloatInput | null;
-  category?: ModelSubscriptionStringInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  date?: ModelSubscriptionStringInput | null;
-  dueDate?: ModelSubscriptionStringInput | null;
-  expenseTypeId?: ModelSubscriptionStringInput | null;
-  hasTarget?: ModelSubscriptionBooleanInput | null;
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  nextMonthIWantToSetAside?: ModelSubscriptionFloatInput | null;
-  notes?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  recurring?: ModelSubscriptionBooleanInput | null;
-  recurringFrequency?: ModelSubscriptionStringInput | null;
-  targetAmount?: ModelSubscriptionFloatInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  userId?: ModelSubscriptionStringInput | null;
+  amount?: ModelSubscriptionFloatInput | null,
+  and?: Array< ModelSubscriptionExpenseFilterInput | null > | null,
+  assigned?: ModelSubscriptionFloatInput | null,
+  category?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  dueDate?: ModelSubscriptionStringInput | null,
+  expenseTypeId?: ModelSubscriptionStringInput | null,
+  hasTarget?: ModelSubscriptionBooleanInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  nextMonthIWantToSetAside?: ModelSubscriptionFloatInput | null,
+  notes?: ModelSubscriptionStringInput | null,
+  or?: Array< ModelSubscriptionExpenseFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  recurring?: ModelSubscriptionBooleanInput | null,
+  recurringFrequency?: ModelSubscriptionStringInput | null,
+  targetAmount?: ModelSubscriptionFloatInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionBooleanInput = {
-  eq?: boolean | null;
-  ne?: boolean | null;
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type ModelSubscriptionExpenseTypeFilterInput = {
-  and?: Array<ModelSubscriptionExpenseTypeFilterInput | null> | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionExpenseTypeFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  userId?: ModelSubscriptionStringInput | null;
+  and?: Array< ModelSubscriptionExpenseTypeFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  or?: Array< ModelSubscriptionExpenseTypeFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
+};
+
+export type ModelSubscriptionHistoryExpenseFilterInput = {
+  amount?: ModelSubscriptionFloatInput | null,
+  and?: Array< ModelSubscriptionHistoryExpenseFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  expenseId?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  or?: Array< ModelSubscriptionHistoryExpenseFilterInput | null > | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionPreferenceFilterInput = {
-  and?: Array<ModelSubscriptionPreferenceFilterInput | null> | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  currency?: ModelSubscriptionStringInput | null;
-  debt?: ModelSubscriptionFloatInput | null;
-  debtGoal?: ModelSubscriptionFloatInput | null;
-  deptType?: ModelSubscriptionStringInput | null;
-  emergencyFund?: ModelSubscriptionFloatInput | null;
-  emergencyFundGoal?: ModelSubscriptionFloatInput | null;
-  financialStatus?: ModelSubscriptionStringInput | null;
-  hasDebt?: ModelSubscriptionBooleanInput | null;
-  hasEmergencyFund?: ModelSubscriptionBooleanInput | null;
-  hasRetirementFund?: ModelSubscriptionBooleanInput | null;
-  homeOwnership?: ModelSubscriptionStringInput | null;
-  id?: ModelSubscriptionIDInput | null;
-  lastUpdated?: ModelSubscriptionStringInput | null;
-  monthlyExpense?: ModelSubscriptionFloatInput | null;
-  monthlyIncome?: ModelSubscriptionFloatInput | null;
-  mostSpend?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionPreferenceFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  retirementFund?: ModelSubscriptionFloatInput | null;
-  retirementFundGoal?: ModelSubscriptionFloatInput | null;
-  savingsBalance?: ModelSubscriptionFloatInput | null;
-  savingsGoal?: ModelSubscriptionFloatInput | null;
-  subscriptions?: ModelSubscriptionStringInput | null;
-  transportation?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
-  userId?: ModelSubscriptionStringInput | null;
+  and?: Array< ModelSubscriptionPreferenceFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  currency?: ModelSubscriptionStringInput | null,
+  debt?: ModelSubscriptionFloatInput | null,
+  debtGoal?: ModelSubscriptionFloatInput | null,
+  deptType?: ModelSubscriptionStringInput | null,
+  emergencyFund?: ModelSubscriptionFloatInput | null,
+  emergencyFundGoal?: ModelSubscriptionFloatInput | null,
+  financialStatus?: ModelSubscriptionStringInput | null,
+  hasDebt?: ModelSubscriptionBooleanInput | null,
+  hasEmergencyFund?: ModelSubscriptionBooleanInput | null,
+  hasRetirementFund?: ModelSubscriptionBooleanInput | null,
+  homeOwnership?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  lastUpdated?: ModelSubscriptionStringInput | null,
+  monthlyExpense?: ModelSubscriptionFloatInput | null,
+  monthlyIncome?: ModelSubscriptionFloatInput | null,
+  mostSpend?: ModelSubscriptionStringInput | null,
+  or?: Array< ModelSubscriptionPreferenceFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  retirementFund?: ModelSubscriptionFloatInput | null,
+  retirementFundGoal?: ModelSubscriptionFloatInput | null,
+  savingsBalance?: ModelSubscriptionFloatInput | null,
+  savingsGoal?: ModelSubscriptionFloatInput | null,
+  subscriptions?: ModelSubscriptionStringInput | null,
+  transportation?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionUserFilterInput = {
-  and?: Array<ModelSubscriptionUserFilterInput | null> | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  email?: ModelSubscriptionStringInput | null;
-  firstName?: ModelSubscriptionStringInput | null;
-  id?: ModelSubscriptionIDInput | null;
-  lastName?: ModelSubscriptionStringInput | null;
-  or?: Array<ModelSubscriptionUserFilterInput | null> | null;
-  owner?: ModelStringInput | null;
-  profileOwner?: ModelSubscriptionStringInput | null;
-  role?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
+  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  firstName?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  lastName?: ModelSubscriptionStringInput | null,
+  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+  profileOwner?: ModelSubscriptionStringInput | null,
+  role?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
 };
 
 export type GetBankAccountQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetBankAccountQuery = {
-  getBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  getBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type GetExpenseQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetExpenseQuery = {
-  getExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  getExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type GetExpenseTypeQueryVariables = {
-  id: string;
+  id: string,
 };
 
 export type GetExpenseTypeQuery = {
-  getExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  getExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type GetHistoryExpenseQueryVariables = {
+  id: string,
+};
+
+export type GetHistoryExpenseQuery = {
+  getHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type GetPreferenceQueryVariables = {
-  userId: string;
+  userId: string,
 };
 
 export type GetPreferenceQuery = {
-  getPreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  getPreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type GetUserQueryVariables = {
-  profileOwner: string;
+  profileOwner: string,
 };
 
 export type GetUserQuery = {
-  getUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  getUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type ListBankAccountByUserIdQueryVariables = {
-  filter?: ModelBankAccountFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
-  userId: string;
+  filter?: ModelBankAccountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
 };
 
 export type ListBankAccountByUserIdQuery = {
-  listBankAccountByUserId?: {
-    __typename: "ModelBankAccountConnection";
-    items: Array<{
-      __typename: "BankAccount";
-      balance?: number | null;
-      createdAt: string;
-      id: string;
-      name?: string | null;
-      owner?: string | null;
-      type?: BankAccountType | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listBankAccountByUserId?:  {
+    __typename: "ModelBankAccountConnection",
+    items:  Array< {
+      __typename: "BankAccount",
+      balance?: number | null,
+      createdAt: string,
+      id: string,
+      name?: string | null,
+      owner?: string | null,
+      type?: BankAccountType | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListBankAccountsQueryVariables = {
-  filter?: ModelBankAccountFilterInput | null;
-  id?: string | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
+  filter?: ModelBankAccountFilterInput | null,
+  id?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListBankAccountsQuery = {
-  listBankAccounts?: {
-    __typename: "ModelBankAccountConnection";
-    items: Array<{
-      __typename: "BankAccount";
-      balance?: number | null;
-      createdAt: string;
-      id: string;
-      name?: string | null;
-      owner?: string | null;
-      type?: BankAccountType | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listBankAccounts?:  {
+    __typename: "ModelBankAccountConnection",
+    items:  Array< {
+      __typename: "BankAccount",
+      balance?: number | null,
+      createdAt: string,
+      id: string,
+      name?: string | null,
+      owner?: string | null,
+      type?: BankAccountType | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListExpenseByUserIdQueryVariables = {
-  filter?: ModelExpenseFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
-  userId: string;
+  filter?: ModelExpenseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
 };
 
 export type ListExpenseByUserIdQuery = {
-  listExpenseByUserId?: {
-    __typename: "ModelExpenseConnection";
-    items: Array<{
-      __typename: "Expense";
-      amount?: number | null;
-      assigned?: number | null;
-      category?: ExpenseCategory | null;
-      createdAt: string;
-      date?: string | null;
-      dueDate?: string | null;
-      expenseTypeId?: string | null;
-      hasTarget?: boolean | null;
-      id: string;
-      name?: string | null;
-      nextMonthIWantToSetAside?: number | null;
-      notes?: string | null;
-      owner?: string | null;
-      recurring?: boolean | null;
-      recurringFrequency?: ExpenseRecurringFrequency | null;
-      targetAmount?: number | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listExpenseByUserId?:  {
+    __typename: "ModelExpenseConnection",
+    items:  Array< {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListExpenseTypeByUserIdQueryVariables = {
-  filter?: ModelExpenseTypeFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
-  userId: string;
+  filter?: ModelExpenseTypeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
 };
 
 export type ListExpenseTypeByUserIdQuery = {
-  listExpenseTypeByUserId?: {
-    __typename: "ModelExpenseTypeConnection";
-    items: Array<{
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listExpenseTypeByUserId?:  {
+    __typename: "ModelExpenseTypeConnection",
+    items:  Array< {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListExpenseTypesQueryVariables = {
-  filter?: ModelExpenseTypeFilterInput | null;
-  id?: string | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
+  filter?: ModelExpenseTypeFilterInput | null,
+  id?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListExpenseTypesQuery = {
-  listExpenseTypes?: {
-    __typename: "ModelExpenseTypeConnection";
-    items: Array<{
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listExpenseTypes?:  {
+    __typename: "ModelExpenseTypeConnection",
+    items:  Array< {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListExpensesQueryVariables = {
-  filter?: ModelExpenseFilterInput | null;
-  id?: string | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
+  filter?: ModelExpenseFilterInput | null,
+  id?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListExpensesQuery = {
-  listExpenses?: {
-    __typename: "ModelExpenseConnection";
-    items: Array<{
-      __typename: "Expense";
-      amount?: number | null;
-      assigned?: number | null;
-      category?: ExpenseCategory | null;
-      createdAt: string;
-      date?: string | null;
-      dueDate?: string | null;
-      expenseTypeId?: string | null;
-      hasTarget?: boolean | null;
-      id: string;
-      name?: string | null;
-      nextMonthIWantToSetAside?: number | null;
-      notes?: string | null;
-      owner?: string | null;
-      recurring?: boolean | null;
-      recurringFrequency?: ExpenseRecurringFrequency | null;
-      targetAmount?: number | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listExpenses?:  {
+    __typename: "ModelExpenseConnection",
+    items:  Array< {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListHistoryExpenseByUserIdQueryVariables = {
+  filter?: ModelHistoryExpenseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
+};
+
+export type ListHistoryExpenseByUserIdQuery = {
+  listHistoryExpenseByUserId?:  {
+    __typename: "ModelHistoryExpenseConnection",
+    items:  Array< {
+      __typename: "HistoryExpense",
+      amount: number,
+      createdAt: string,
+      date: string,
+      expenseId: string,
+      id: string,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListHistoryExpensesQueryVariables = {
+  filter?: ModelHistoryExpenseFilterInput | null,
+  id?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListHistoryExpensesQuery = {
+  listHistoryExpenses?:  {
+    __typename: "ModelHistoryExpenseConnection",
+    items:  Array< {
+      __typename: "HistoryExpense",
+      amount: number,
+      createdAt: string,
+      date: string,
+      expenseId: string,
+      id: string,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListPreferencesQueryVariables = {
-  filter?: ModelPreferenceFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  sortDirection?: ModelSortDirection | null;
-  userId?: string | null;
+  filter?: ModelPreferenceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId?: string | null,
 };
 
 export type ListPreferencesQuery = {
-  listPreferences?: {
-    __typename: "ModelPreferenceConnection";
-    items: Array<{
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listPreferences?:  {
+    __typename: "ModelPreferenceConnection",
+    items:  Array< {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null;
-  limit?: number | null;
-  nextToken?: string | null;
-  profileOwner?: string | null;
-  sortDirection?: ModelSortDirection | null;
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  profileOwner?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListUsersQuery = {
-  listUsers?: {
-    __typename: "ModelUserConnection";
-    items: Array<{
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
 };
 
 export type CreateBankAccountMutationVariables = {
-  condition?: ModelBankAccountConditionInput | null;
-  input: CreateBankAccountInput;
+  condition?: ModelBankAccountConditionInput | null,
+  input: CreateBankAccountInput,
 };
 
 export type CreateBankAccountMutation = {
-  createBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  createBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type CreateExpenseMutationVariables = {
-  condition?: ModelExpenseConditionInput | null;
-  input: CreateExpenseInput;
+  condition?: ModelExpenseConditionInput | null,
+  input: CreateExpenseInput,
 };
 
 export type CreateExpenseMutation = {
-  createExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  createExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type CreateExpenseTypeMutationVariables = {
-  condition?: ModelExpenseTypeConditionInput | null;
-  input: CreateExpenseTypeInput;
+  condition?: ModelExpenseTypeConditionInput | null,
+  input: CreateExpenseTypeInput,
 };
 
 export type CreateExpenseTypeMutation = {
-  createExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  createExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type CreateHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null,
+  input: CreateHistoryExpenseInput,
+};
+
+export type CreateHistoryExpenseMutation = {
+  createHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type CreatePreferenceMutationVariables = {
-  condition?: ModelPreferenceConditionInput | null;
-  input: CreatePreferenceInput;
+  condition?: ModelPreferenceConditionInput | null,
+  input: CreatePreferenceInput,
 };
 
 export type CreatePreferenceMutation = {
-  createPreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  createPreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type CreateUserMutationVariables = {
-  condition?: ModelUserConditionInput | null;
-  input: CreateUserInput;
+  condition?: ModelUserConditionInput | null,
+  input: CreateUserInput,
 };
 
 export type CreateUserMutation = {
-  createUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  createUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type DeleteBankAccountMutationVariables = {
-  condition?: ModelBankAccountConditionInput | null;
-  input: DeleteBankAccountInput;
+  condition?: ModelBankAccountConditionInput | null,
+  input: DeleteBankAccountInput,
 };
 
 export type DeleteBankAccountMutation = {
-  deleteBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  deleteBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type DeleteExpenseMutationVariables = {
-  condition?: ModelExpenseConditionInput | null;
-  input: DeleteExpenseInput;
+  condition?: ModelExpenseConditionInput | null,
+  input: DeleteExpenseInput,
 };
 
 export type DeleteExpenseMutation = {
-  deleteExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  deleteExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type DeleteExpenseTypeMutationVariables = {
-  condition?: ModelExpenseTypeConditionInput | null;
-  input: DeleteExpenseTypeInput;
+  condition?: ModelExpenseTypeConditionInput | null,
+  input: DeleteExpenseTypeInput,
 };
 
 export type DeleteExpenseTypeMutation = {
-  deleteExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  deleteExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type DeleteHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null,
+  input: DeleteHistoryExpenseInput,
+};
+
+export type DeleteHistoryExpenseMutation = {
+  deleteHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type DeletePreferenceMutationVariables = {
-  condition?: ModelPreferenceConditionInput | null;
-  input: DeletePreferenceInput;
+  condition?: ModelPreferenceConditionInput | null,
+  input: DeletePreferenceInput,
 };
 
 export type DeletePreferenceMutation = {
-  deletePreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  deletePreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type DeleteUserMutationVariables = {
-  condition?: ModelUserConditionInput | null;
-  input: DeleteUserInput;
+  condition?: ModelUserConditionInput | null,
+  input: DeleteUserInput,
 };
 
 export type DeleteUserMutation = {
-  deleteUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  deleteUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type UpdateBankAccountMutationVariables = {
-  condition?: ModelBankAccountConditionInput | null;
-  input: UpdateBankAccountInput;
+  condition?: ModelBankAccountConditionInput | null,
+  input: UpdateBankAccountInput,
 };
 
 export type UpdateBankAccountMutation = {
-  updateBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  updateBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type UpdateExpenseMutationVariables = {
-  condition?: ModelExpenseConditionInput | null;
-  input: UpdateExpenseInput;
+  condition?: ModelExpenseConditionInput | null,
+  input: UpdateExpenseInput,
 };
 
 export type UpdateExpenseMutation = {
-  updateExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  updateExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type UpdateExpenseTypeMutationVariables = {
-  condition?: ModelExpenseTypeConditionInput | null;
-  input: UpdateExpenseTypeInput;
+  condition?: ModelExpenseTypeConditionInput | null,
+  input: UpdateExpenseTypeInput,
 };
 
 export type UpdateExpenseTypeMutation = {
-  updateExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  updateExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type UpdateHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null,
+  input: UpdateHistoryExpenseInput,
+};
+
+export type UpdateHistoryExpenseMutation = {
+  updateHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type UpdatePreferenceMutationVariables = {
-  condition?: ModelPreferenceConditionInput | null;
-  input: UpdatePreferenceInput;
+  condition?: ModelPreferenceConditionInput | null,
+  input: UpdatePreferenceInput,
 };
 
 export type UpdatePreferenceMutation = {
-  updatePreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  updatePreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type UpdateUserMutationVariables = {
-  condition?: ModelUserConditionInput | null;
-  input: UpdateUserInput;
+  condition?: ModelUserConditionInput | null,
+  input: UpdateUserInput,
 };
 
 export type UpdateUserMutation = {
-  updateUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  updateUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnCreateBankAccountSubscriptionVariables = {
-  filter?: ModelSubscriptionBankAccountFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionBankAccountFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateBankAccountSubscription = {
-  onCreateBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onCreateBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnCreateExpenseSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateExpenseSubscription = {
-  onCreateExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onCreateExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnCreateExpenseTypeSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseTypeFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseTypeFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateExpenseTypeSubscription = {
-  onCreateExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onCreateExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type OnCreateHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null,
+};
+
+export type OnCreateHistoryExpenseSubscription = {
+  onCreateHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnCreatePreferenceSubscriptionVariables = {
-  filter?: ModelSubscriptionPreferenceFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionPreferenceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreatePreferenceSubscription = {
-  onCreatePreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onCreatePreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnCreateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateUserSubscription = {
-  onCreateUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  onCreateUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnDeleteBankAccountSubscriptionVariables = {
-  filter?: ModelSubscriptionBankAccountFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionBankAccountFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteBankAccountSubscription = {
-  onDeleteBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onDeleteBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnDeleteExpenseSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteExpenseSubscription = {
-  onDeleteExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onDeleteExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnDeleteExpenseTypeSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseTypeFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseTypeFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteExpenseTypeSubscription = {
-  onDeleteExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onDeleteExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type OnDeleteHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null,
+};
+
+export type OnDeleteHistoryExpenseSubscription = {
+  onDeleteHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnDeletePreferenceSubscriptionVariables = {
-  filter?: ModelSubscriptionPreferenceFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionPreferenceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeletePreferenceSubscription = {
-  onDeletePreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onDeletePreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnDeleteUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteUserSubscription = {
-  onDeleteUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  onDeleteUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
 
 export type OnUpdateBankAccountSubscriptionVariables = {
-  filter?: ModelSubscriptionBankAccountFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionBankAccountFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateBankAccountSubscription = {
-  onUpdateBankAccount?: {
-    __typename: "BankAccount";
-    balance?: number | null;
-    createdAt: string;
-    id: string;
-    name?: string | null;
-    owner?: string | null;
-    type?: BankAccountType | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onUpdateBankAccount?:  {
+    __typename: "BankAccount",
+    balance?: number | null,
+    createdAt: string,
+    id: string,
+    name?: string | null,
+    owner?: string | null,
+    type?: BankAccountType | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnUpdateExpenseSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateExpenseSubscription = {
-  onUpdateExpense?: {
-    __typename: "Expense";
-    amount?: number | null;
-    assigned?: number | null;
-    category?: ExpenseCategory | null;
-    createdAt: string;
-    date?: string | null;
-    dueDate?: string | null;
-    expenseType?: {
-      __typename: "ExpenseType";
-      createdAt: string;
-      id: string;
-      name: string;
-      owner?: string | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    expenseTypeId?: string | null;
-    hasTarget?: boolean | null;
-    id: string;
-    name?: string | null;
-    nextMonthIWantToSetAside?: number | null;
-    notes?: string | null;
-    owner?: string | null;
-    recurring?: boolean | null;
-    recurringFrequency?: ExpenseRecurringFrequency | null;
-    targetAmount?: number | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onUpdateExpense?:  {
+    __typename: "Expense",
+    amount?: number | null,
+    assigned?: number | null,
+    category?: ExpenseCategory | null,
+    createdAt: string,
+    date?: string | null,
+    dueDate?: string | null,
+    expenseType?:  {
+      __typename: "ExpenseType",
+      createdAt: string,
+      id: string,
+      name: string,
+      owner?: string | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseTypeId?: string | null,
+    hasTarget?: boolean | null,
+    history?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name?: string | null,
+    nextMonthIWantToSetAside?: number | null,
+    notes?: string | null,
+    owner?: string | null,
+    recurring?: boolean | null,
+    recurringFrequency?: ExpenseRecurringFrequency | null,
+    targetAmount?: number | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnUpdateExpenseTypeSubscriptionVariables = {
-  filter?: ModelSubscriptionExpenseTypeFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionExpenseTypeFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateExpenseTypeSubscription = {
-  onUpdateExpenseType?: {
-    __typename: "ExpenseType";
-    createdAt: string;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    id: string;
-    name: string;
-    owner?: string | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onUpdateExpenseType?:  {
+    __typename: "ExpenseType",
+    createdAt: string,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id: string,
+    name: string,
+    owner?: string | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
+};
+
+export type OnUpdateHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null,
+};
+
+export type OnUpdateHistoryExpenseSubscription = {
+  onUpdateHistoryExpense?:  {
+    __typename: "HistoryExpense",
+    amount: number,
+    createdAt: string,
+    date: string,
+    expense?:  {
+      __typename: "Expense",
+      amount?: number | null,
+      assigned?: number | null,
+      category?: ExpenseCategory | null,
+      createdAt: string,
+      date?: string | null,
+      dueDate?: string | null,
+      expenseTypeId?: string | null,
+      hasTarget?: boolean | null,
+      id: string,
+      name?: string | null,
+      nextMonthIWantToSetAside?: number | null,
+      notes?: string | null,
+      owner?: string | null,
+      recurring?: boolean | null,
+      recurringFrequency?: ExpenseRecurringFrequency | null,
+      targetAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    expenseId: string,
+    id: string,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnUpdatePreferenceSubscriptionVariables = {
-  filter?: ModelSubscriptionPreferenceFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionPreferenceFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdatePreferenceSubscription = {
-  onUpdatePreference?: {
-    __typename: "Preference";
-    createdAt: string;
-    currency?: PreferenceCurrency | null;
-    debt?: number | null;
-    debtGoal?: number | null;
-    deptType?: PreferenceDeptType | null;
-    emergencyFund?: number | null;
-    emergencyFundGoal?: number | null;
-    financialStatus?: PreferenceFinancialStatus | null;
-    hasDebt?: boolean | null;
-    hasEmergencyFund?: boolean | null;
-    hasRetirementFund?: boolean | null;
-    homeOwnership?: PreferenceHomeOwnership | null;
-    id?: string | null;
-    lastUpdated?: string | null;
-    monthlyExpense?: number | null;
-    monthlyIncome?: number | null;
-    mostSpend?: PreferenceMostSpend | null;
-    owner?: string | null;
-    retirementFund?: number | null;
-    retirementFundGoal?: number | null;
-    savingsBalance?: number | null;
-    savingsGoal?: number | null;
-    subscriptions?: Array<string | null> | null;
-    transportation?: PreferenceTransportation | null;
-    updatedAt: string;
-    user?: {
-      __typename: "User";
-      createdAt: string;
-      email?: string | null;
-      firstName?: string | null;
-      id?: string | null;
-      lastName?: string | null;
-      owner?: string | null;
-      profileOwner: string;
-      role?: string | null;
-      updatedAt: string;
-    } | null;
-    userId: string;
-  } | null;
+  onUpdatePreference?:  {
+    __typename: "Preference",
+    createdAt: string,
+    currency?: PreferenceCurrency | null,
+    debt?: number | null,
+    debtGoal?: number | null,
+    deptType?: PreferenceDeptType | null,
+    emergencyFund?: number | null,
+    emergencyFundGoal?: number | null,
+    financialStatus?: PreferenceFinancialStatus | null,
+    hasDebt?: boolean | null,
+    hasEmergencyFund?: boolean | null,
+    hasRetirementFund?: boolean | null,
+    homeOwnership?: PreferenceHomeOwnership | null,
+    id?: string | null,
+    lastUpdated?: string | null,
+    monthlyExpense?: number | null,
+    monthlyIncome?: number | null,
+    mostSpend?: PreferenceMostSpend | null,
+    owner?: string | null,
+    retirementFund?: number | null,
+    retirementFundGoal?: number | null,
+    savingsBalance?: number | null,
+    savingsGoal?: number | null,
+    subscriptions?: Array< string | null > | null,
+    transportation?: PreferenceTransportation | null,
+    updatedAt: string,
+    user?:  {
+      __typename: "User",
+      createdAt: string,
+      email?: string | null,
+      firstName?: string | null,
+      id?: string | null,
+      lastName?: string | null,
+      owner?: string | null,
+      profileOwner: string,
+      role?: string | null,
+      updatedAt: string,
+    } | null,
+    userId: string,
+  } | null,
 };
 
 export type OnUpdateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null;
-  owner?: string | null;
+  filter?: ModelSubscriptionUserFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
-  onUpdateUser?: {
-    __typename: "User";
-    bankAccounts?: {
-      __typename: "ModelBankAccountConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    email?: string | null;
-    expenseTypes?: {
-      __typename: "ModelExpenseTypeConnection";
-      nextToken?: string | null;
-    } | null;
-    expenses?: {
-      __typename: "ModelExpenseConnection";
-      nextToken?: string | null;
-    } | null;
-    firstName?: string | null;
-    id?: string | null;
-    lastName?: string | null;
-    owner?: string | null;
-    preference?: {
-      __typename: "Preference";
-      createdAt: string;
-      currency?: PreferenceCurrency | null;
-      debt?: number | null;
-      debtGoal?: number | null;
-      deptType?: PreferenceDeptType | null;
-      emergencyFund?: number | null;
-      emergencyFundGoal?: number | null;
-      financialStatus?: PreferenceFinancialStatus | null;
-      hasDebt?: boolean | null;
-      hasEmergencyFund?: boolean | null;
-      hasRetirementFund?: boolean | null;
-      homeOwnership?: PreferenceHomeOwnership | null;
-      id?: string | null;
-      lastUpdated?: string | null;
-      monthlyExpense?: number | null;
-      monthlyIncome?: number | null;
-      mostSpend?: PreferenceMostSpend | null;
-      owner?: string | null;
-      retirementFund?: number | null;
-      retirementFundGoal?: number | null;
-      savingsBalance?: number | null;
-      savingsGoal?: number | null;
-      subscriptions?: Array<string | null> | null;
-      transportation?: PreferenceTransportation | null;
-      updatedAt: string;
-      userId: string;
-    } | null;
-    profileOwner: string;
-    role?: string | null;
-    updatedAt: string;
-  } | null;
+  onUpdateUser?:  {
+    __typename: "User",
+    bankAccounts?:  {
+      __typename: "ModelBankAccountConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    email?: string | null,
+    expenseTypes?:  {
+      __typename: "ModelExpenseTypeConnection",
+      nextToken?: string | null,
+    } | null,
+    expenses?:  {
+      __typename: "ModelExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    firstName?: string | null,
+    historyExpense?:  {
+      __typename: "ModelHistoryExpenseConnection",
+      nextToken?: string | null,
+    } | null,
+    id?: string | null,
+    lastName?: string | null,
+    owner?: string | null,
+    preference?:  {
+      __typename: "Preference",
+      createdAt: string,
+      currency?: PreferenceCurrency | null,
+      debt?: number | null,
+      debtGoal?: number | null,
+      deptType?: PreferenceDeptType | null,
+      emergencyFund?: number | null,
+      emergencyFundGoal?: number | null,
+      financialStatus?: PreferenceFinancialStatus | null,
+      hasDebt?: boolean | null,
+      hasEmergencyFund?: boolean | null,
+      hasRetirementFund?: boolean | null,
+      homeOwnership?: PreferenceHomeOwnership | null,
+      id?: string | null,
+      lastUpdated?: string | null,
+      monthlyExpense?: number | null,
+      monthlyIncome?: number | null,
+      mostSpend?: PreferenceMostSpend | null,
+      owner?: string | null,
+      retirementFund?: number | null,
+      retirementFundGoal?: number | null,
+      savingsBalance?: number | null,
+      savingsGoal?: number | null,
+      subscriptions?: Array< string | null > | null,
+      transportation?: PreferenceTransportation | null,
+      updatedAt: string,
+      userId: string,
+    } | null,
+    profileOwner: string,
+    role?: string | null,
+    updatedAt: string,
+  } | null,
 };
