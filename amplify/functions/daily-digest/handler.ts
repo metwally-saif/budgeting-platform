@@ -209,7 +209,7 @@ export const handler: Handler = async () => {
             }),
           );
         } else {
-          // Non-recurring => remove targetAmount and dueDate 
+          // Non-recurring => remove targetAmount and dueDate
           const newExpense: UpdateExpenseInput = {
             id,
             targetAmount: null,

@@ -10,7 +10,6 @@ export const HistoryExpense = a
     date: a.date().required(), // The date this record applies to
     amount: a.float().required(), // The assigned amount
   })
-    .identifier(["id"])
-    .secondaryIndexes((index) => [index("userId")])
-    .authorization((allow) => [allow.authenticated().to(['read'])]);
-    
+  .identifier(["id"])
+  .secondaryIndexes((index) => [index("userId")])
+  .authorization((allow) => [allow.authenticated().to(["read"])]);

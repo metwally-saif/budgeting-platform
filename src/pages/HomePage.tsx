@@ -6,6 +6,7 @@ import { useListExpenseByUserId, useUpdateExpense } from "../hooks";
 import { Expense, UpdateExpenseInput } from "../../amplify/graphql/API";
 import SideBar from "../components/SideBar";
 import BudgetRows from "../components/BudgetRows";
+import BankAccountFragment from "../components/BankAccountFragment";
 
 const HomePage: React.FC = () => {
   const { updateExpense } = useUpdateExpense();
@@ -73,6 +74,14 @@ const HomePage: React.FC = () => {
         }}
       >
         <PreferenceModal refresh={refresh} />
+
+        {/* Bank Account Fragment */}
+        <BankAccountFragment
+          expenses={expenseTypesWithExpenses
+            .map((category) => category.expenses)
+            .flat()}
+        />
+
         <BudgetRows
           categories={categories}
           handleSelectExpense={handleSelectExpense}

@@ -1,5 +1,5 @@
 /* tslint:disable */
-/* eslint-disable */
+ 
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -8,7 +8,8 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateBankAccount = /* GraphQL */ `subscription OnCreateBankAccount(
+export const onCreateBankAccount =
+  /* GraphQL */ `subscription OnCreateBankAccount(
   $filter: ModelSubscriptionBankAccountFilterInput
   $owner: String
 ) {
@@ -37,9 +38,9 @@ export const onCreateBankAccount = /* GraphQL */ `subscription OnCreateBankAccou
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateBankAccountSubscriptionVariables,
-  APITypes.OnCreateBankAccountSubscription
->;
+    APITypes.OnCreateBankAccountSubscriptionVariables,
+    APITypes.OnCreateBankAccountSubscription
+  >;
 export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
@@ -95,7 +96,8 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   APITypes.OnCreateExpenseSubscriptionVariables,
   APITypes.OnCreateExpenseSubscription
 >;
-export const onCreateExpenseType = /* GraphQL */ `subscription OnCreateExpenseType(
+export const onCreateExpenseType =
+  /* GraphQL */ `subscription OnCreateExpenseType(
   $filter: ModelSubscriptionExpenseTypeFilterInput
   $owner: String
 ) {
@@ -126,10 +128,11 @@ export const onCreateExpenseType = /* GraphQL */ `subscription OnCreateExpenseTy
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateExpenseTypeSubscriptionVariables,
-  APITypes.OnCreateExpenseTypeSubscription
->;
-export const onCreateHistoryExpense = /* GraphQL */ `subscription OnCreateHistoryExpense(
+    APITypes.OnCreateExpenseTypeSubscriptionVariables,
+    APITypes.OnCreateExpenseTypeSubscription
+  >;
+export const onCreateHistoryExpense =
+  /* GraphQL */ `subscription OnCreateHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onCreateHistoryExpense(filter: $filter) {
@@ -177,10 +180,11 @@ export const onCreateHistoryExpense = /* GraphQL */ `subscription OnCreateHistor
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateHistoryExpenseSubscriptionVariables,
-  APITypes.OnCreateHistoryExpenseSubscription
->;
-export const onCreatePreference = /* GraphQL */ `subscription OnCreatePreference(
+    APITypes.OnCreateHistoryExpenseSubscriptionVariables,
+    APITypes.OnCreateHistoryExpenseSubscription
+  >;
+export const onCreatePreference =
+  /* GraphQL */ `subscription OnCreatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -227,9 +231,9 @@ export const onCreatePreference = /* GraphQL */ `subscription OnCreatePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreatePreferenceSubscriptionVariables,
-  APITypes.OnCreatePreferenceSubscription
->;
+    APITypes.OnCreatePreferenceSubscriptionVariables,
+    APITypes.OnCreatePreferenceSubscription
+  >;
 export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String
@@ -296,7 +300,8 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
   APITypes.OnCreateUserSubscriptionVariables,
   APITypes.OnCreateUserSubscription
 >;
-export const onDeleteBankAccount = /* GraphQL */ `subscription OnDeleteBankAccount(
+export const onDeleteBankAccount =
+  /* GraphQL */ `subscription OnDeleteBankAccount(
   $filter: ModelSubscriptionBankAccountFilterInput
   $owner: String
 ) {
@@ -325,9 +330,9 @@ export const onDeleteBankAccount = /* GraphQL */ `subscription OnDeleteBankAccou
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteBankAccountSubscriptionVariables,
-  APITypes.OnDeleteBankAccountSubscription
->;
+    APITypes.OnDeleteBankAccountSubscriptionVariables,
+    APITypes.OnDeleteBankAccountSubscription
+  >;
 export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
@@ -383,7 +388,8 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   APITypes.OnDeleteExpenseSubscriptionVariables,
   APITypes.OnDeleteExpenseSubscription
 >;
-export const onDeleteExpenseType = /* GraphQL */ `subscription OnDeleteExpenseType(
+export const onDeleteExpenseType =
+  /* GraphQL */ `subscription OnDeleteExpenseType(
   $filter: ModelSubscriptionExpenseTypeFilterInput
   $owner: String
 ) {
@@ -414,10 +420,11 @@ export const onDeleteExpenseType = /* GraphQL */ `subscription OnDeleteExpenseTy
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteExpenseTypeSubscriptionVariables,
-  APITypes.OnDeleteExpenseTypeSubscription
->;
-export const onDeleteHistoryExpense = /* GraphQL */ `subscription OnDeleteHistoryExpense(
+    APITypes.OnDeleteExpenseTypeSubscriptionVariables,
+    APITypes.OnDeleteExpenseTypeSubscription
+  >;
+export const onDeleteHistoryExpense =
+  /* GraphQL */ `subscription OnDeleteHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onDeleteHistoryExpense(filter: $filter) {
@@ -465,10 +472,11 @@ export const onDeleteHistoryExpense = /* GraphQL */ `subscription OnDeleteHistor
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteHistoryExpenseSubscriptionVariables,
-  APITypes.OnDeleteHistoryExpenseSubscription
->;
-export const onDeletePreference = /* GraphQL */ `subscription OnDeletePreference(
+    APITypes.OnDeleteHistoryExpenseSubscriptionVariables,
+    APITypes.OnDeleteHistoryExpenseSubscription
+  >;
+export const onDeletePreference =
+  /* GraphQL */ `subscription OnDeletePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -515,9 +523,9 @@ export const onDeletePreference = /* GraphQL */ `subscription OnDeletePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeletePreferenceSubscriptionVariables,
-  APITypes.OnDeletePreferenceSubscription
->;
+    APITypes.OnDeletePreferenceSubscriptionVariables,
+    APITypes.OnDeletePreferenceSubscription
+  >;
 export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String
@@ -584,7 +592,8 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
   APITypes.OnDeleteUserSubscriptionVariables,
   APITypes.OnDeleteUserSubscription
 >;
-export const onUpdateBankAccount = /* GraphQL */ `subscription OnUpdateBankAccount(
+export const onUpdateBankAccount =
+  /* GraphQL */ `subscription OnUpdateBankAccount(
   $filter: ModelSubscriptionBankAccountFilterInput
   $owner: String
 ) {
@@ -613,9 +622,9 @@ export const onUpdateBankAccount = /* GraphQL */ `subscription OnUpdateBankAccou
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateBankAccountSubscriptionVariables,
-  APITypes.OnUpdateBankAccountSubscription
->;
+    APITypes.OnUpdateBankAccountSubscriptionVariables,
+    APITypes.OnUpdateBankAccountSubscription
+  >;
 export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   $filter: ModelSubscriptionExpenseFilterInput
   $owner: String
@@ -671,7 +680,8 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   APITypes.OnUpdateExpenseSubscriptionVariables,
   APITypes.OnUpdateExpenseSubscription
 >;
-export const onUpdateExpenseType = /* GraphQL */ `subscription OnUpdateExpenseType(
+export const onUpdateExpenseType =
+  /* GraphQL */ `subscription OnUpdateExpenseType(
   $filter: ModelSubscriptionExpenseTypeFilterInput
   $owner: String
 ) {
@@ -702,10 +712,11 @@ export const onUpdateExpenseType = /* GraphQL */ `subscription OnUpdateExpenseTy
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateExpenseTypeSubscriptionVariables,
-  APITypes.OnUpdateExpenseTypeSubscription
->;
-export const onUpdateHistoryExpense = /* GraphQL */ `subscription OnUpdateHistoryExpense(
+    APITypes.OnUpdateExpenseTypeSubscriptionVariables,
+    APITypes.OnUpdateExpenseTypeSubscription
+  >;
+export const onUpdateHistoryExpense =
+  /* GraphQL */ `subscription OnUpdateHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onUpdateHistoryExpense(filter: $filter) {
@@ -753,10 +764,11 @@ export const onUpdateHistoryExpense = /* GraphQL */ `subscription OnUpdateHistor
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateHistoryExpenseSubscriptionVariables,
-  APITypes.OnUpdateHistoryExpenseSubscription
->;
-export const onUpdatePreference = /* GraphQL */ `subscription OnUpdatePreference(
+    APITypes.OnUpdateHistoryExpenseSubscriptionVariables,
+    APITypes.OnUpdateHistoryExpenseSubscription
+  >;
+export const onUpdatePreference =
+  /* GraphQL */ `subscription OnUpdatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
   $owner: String
 ) {
@@ -803,9 +815,9 @@ export const onUpdatePreference = /* GraphQL */ `subscription OnUpdatePreference
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdatePreferenceSubscriptionVariables,
-  APITypes.OnUpdatePreferenceSubscription
->;
+    APITypes.OnUpdatePreferenceSubscriptionVariables,
+    APITypes.OnUpdatePreferenceSubscription
+  >;
 export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
   $filter: ModelSubscriptionUserFilterInput
   $owner: String

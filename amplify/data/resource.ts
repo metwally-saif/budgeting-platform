@@ -1,5 +1,12 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { User, Preference, Expense, ExpenseType, BankAccount, HistoryExpense } from "../models";
+import {
+  User,
+  Preference,
+  Expense,
+  ExpenseType,
+  BankAccount,
+  HistoryExpense,
+} from "../models";
 import { postConfirmation } from "../auth/postConfirmation/resource";
 import { dailyDigest, monthlyDigest } from "../functions";
 
