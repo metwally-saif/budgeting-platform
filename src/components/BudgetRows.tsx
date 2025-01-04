@@ -25,7 +25,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import EditIcon from "@mui/icons-material/Edit";
 import { ExpenseTypeWithExpenses } from "../hooks";
-import { usePreference } from "../hooks";
+import { useCurrency } from "../utils/get-currency";
 import { Expense, UpdateExpenseInput } from "../../amplify/graphql/API";
 
 interface BudgetRowsProps {
@@ -39,7 +39,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
   handleSelectExpense,
   handleUpdateExpense,
 }) => {
-  const { preference } = usePreference();
+  const currency = useCurrency();
   // State to manage which expenses are being edited
   const [editingExpenseId, setEditingExpenseId] = useState<string | null>(null);
   const [editedAssignedAmount, setEditedAssignedAmount] = useState<number>(0);
@@ -55,13 +55,6 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
   const handleEditInitiate = (expense: Expense) => {
     setEditingExpenseId(expense.id);
     setEditedAssignedAmount(expense.assigned || 0);
-  };
-
-  const getCurrencySymbol = () => {
-    if (preference) {
-      return preference.currency === "USD" ? "$" : "€";
-    }
-    return "$";
   };
 
   // Handle saving the edited expense
@@ -199,7 +192,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
                                 >
                                   {expense.targetAmount &&
                                   expense.assigned !== undefined
-                                    ? `${expense.targetAmount - (expense.assigned ?? 0) > 0 ? `${getCurrencySymbol()}${expense.targetAmount - (expense.assigned ?? 0)} remaining by ${expense.dueDate ? expense.dueDate : ""}` : "Fully Allocated"} `
+                                    ? `${expense.targetAmount - (expense.assigned ?? 0) > 0 ? `${currency}${expense.targetAmount - (expense.assigned ?? 0)} remaining by ${expense.dueDate ? expense.dueDate : ""}` : "Fully Allocated"} `
                                     : ""}
                                 </Typography>
                               </Box>
@@ -246,7 +239,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
                             >
                               <Typography variant="body1">
                                 {expense.assigned
-                                  ? `${getCurrencySymbol()}${expense.assigned.toFixed(2)}`
+                                  ? `${currency}${expense.assigned.toFixed(2)}`
                                   : "-"}
                               </Typography>
                               <Tooltip title="Edit Assigned Amount">
@@ -273,7 +266,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
                         <TableCell align="right">
                           <Typography variant="body1">
                             {availableAmount
-                              ? `${getCurrencySymbol()}${availableAmount.toFixed(2)}`
+                              ? `${currency}${availableAmount.toFixed(2)}`
                               : "-"}
                           </Typography>
                         </TableCell>

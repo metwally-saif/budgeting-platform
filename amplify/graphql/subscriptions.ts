@@ -63,6 +63,10 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -126,6 +130,58 @@ export const onCreateExpenseType =
 ` as GeneratedSubscription<
     APITypes.OnCreateExpenseTypeSubscriptionVariables,
     APITypes.OnCreateExpenseTypeSubscription
+  >;
+export const onCreateHistoryExpense =
+  /* GraphQL */ `subscription OnCreateHistoryExpense(
+  $filter: ModelSubscriptionHistoryExpenseFilterInput
+) {
+  onCreateHistoryExpense(filter: $filter) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateHistoryExpenseSubscriptionVariables,
+    APITypes.OnCreateHistoryExpenseSubscription
   >;
 export const onCreatePreference =
   /* GraphQL */ `subscription OnCreatePreference(
@@ -198,6 +254,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner
@@ -295,6 +355,10 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -358,6 +422,58 @@ export const onDeleteExpenseType =
 ` as GeneratedSubscription<
     APITypes.OnDeleteExpenseTypeSubscriptionVariables,
     APITypes.OnDeleteExpenseTypeSubscription
+  >;
+export const onDeleteHistoryExpense =
+  /* GraphQL */ `subscription OnDeleteHistoryExpense(
+  $filter: ModelSubscriptionHistoryExpenseFilterInput
+) {
+  onDeleteHistoryExpense(filter: $filter) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnDeleteHistoryExpenseSubscriptionVariables,
+    APITypes.OnDeleteHistoryExpenseSubscription
   >;
 export const onDeletePreference =
   /* GraphQL */ `subscription OnDeletePreference(
@@ -430,6 +546,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner
@@ -527,6 +647,10 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
     }
     expenseTypeId
     hasTarget
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     nextMonthIWantToSetAside
@@ -590,6 +714,58 @@ export const onUpdateExpenseType =
 ` as GeneratedSubscription<
     APITypes.OnUpdateExpenseTypeSubscriptionVariables,
     APITypes.OnUpdateExpenseTypeSubscription
+  >;
+export const onUpdateHistoryExpense =
+  /* GraphQL */ `subscription OnUpdateHistoryExpense(
+  $filter: ModelSubscriptionHistoryExpenseFilterInput
+) {
+  onUpdateHistoryExpense(filter: $filter) {
+    amount
+    createdAt
+    date
+    expense {
+      amount
+      assigned
+      category
+      createdAt
+      date
+      dueDate
+      expenseTypeId
+      hasTarget
+      id
+      name
+      nextMonthIWantToSetAside
+      notes
+      owner
+      recurring
+      recurringFrequency
+      targetAmount
+      updatedAt
+      userId
+      __typename
+    }
+    expenseId
+    id
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnUpdateHistoryExpenseSubscriptionVariables,
+    APITypes.OnUpdateHistoryExpenseSubscription
   >;
 export const onUpdatePreference =
   /* GraphQL */ `subscription OnUpdatePreference(
@@ -662,6 +838,10 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
       __typename
     }
     firstName
+    historyExpense {
+      nextToken
+      __typename
+    }
     id
     lastName
     owner

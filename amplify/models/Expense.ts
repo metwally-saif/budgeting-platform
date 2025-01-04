@@ -38,6 +38,9 @@ export const Expense = a
     dueDate: a.date(),
 
     assigned: a.float(),
+
+    // Expense History
+    history: a.hasMany("HistoryExpense", "expenseId"),
   })
   .identifier(["id"])
   .secondaryIndexes((index) => [index("userId")])

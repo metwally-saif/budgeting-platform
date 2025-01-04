@@ -31,6 +31,7 @@ export type User = {
   expenseTypes?: ModelExpenseTypeConnection | null;
   expenses?: ModelExpenseConnection | null;
   firstName?: string | null;
+  historyExpense?: ModelHistoryExpenseConnection | null;
   id?: string | null;
   lastName?: string | null;
   owner?: string | null;
@@ -81,6 +82,7 @@ export type Expense = {
   expenseType?: ExpenseType | null;
   expenseTypeId?: string | null;
   hasTarget?: boolean | null;
+  history?: ModelHistoryExpenseConnection | null;
   id: string;
   name?: string | null;
   nextMonthIWantToSetAside?: number | null;
@@ -107,6 +109,25 @@ export enum ExpenseCategory {
   Transportation = "Transportation",
   Utilities = "Utilities",
 }
+
+export type ModelHistoryExpenseConnection = {
+  __typename: "ModelHistoryExpenseConnection";
+  items: Array<HistoryExpense | null>;
+  nextToken?: string | null;
+};
+
+export type HistoryExpense = {
+  __typename: "HistoryExpense";
+  amount: number;
+  createdAt: string;
+  date: string;
+  expense?: Expense | null;
+  expenseId: string;
+  id: string;
+  updatedAt: string;
+  user?: User | null;
+  userId: string;
+};
 
 export enum ExpenseRecurringFrequency {
   Daily = "Daily",
@@ -332,6 +353,19 @@ export type ModelExpenseTypeFilterInput = {
   userId?: ModelStringInput | null;
 };
 
+export type ModelHistoryExpenseFilterInput = {
+  amount?: ModelFloatInput | null;
+  and?: Array<ModelHistoryExpenseFilterInput | null> | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  expenseId?: ModelStringInput | null;
+  id?: ModelIDInput | null;
+  not?: ModelHistoryExpenseFilterInput | null;
+  or?: Array<ModelHistoryExpenseFilterInput | null> | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
 export type ModelPreferenceFilterInput = {
   and?: Array<ModelPreferenceFilterInput | null> | null;
   createdAt?: ModelStringInput | null;
@@ -500,6 +534,26 @@ export type CreateExpenseTypeInput = {
   userId: string;
 };
 
+export type ModelHistoryExpenseConditionInput = {
+  amount?: ModelFloatInput | null;
+  and?: Array<ModelHistoryExpenseConditionInput | null> | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  expenseId?: ModelStringInput | null;
+  not?: ModelHistoryExpenseConditionInput | null;
+  or?: Array<ModelHistoryExpenseConditionInput | null> | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
+export type CreateHistoryExpenseInput = {
+  amount: number;
+  date: string;
+  expenseId: string;
+  id?: string | null;
+  userId: string;
+};
+
 export type ModelPreferenceConditionInput = {
   and?: Array<ModelPreferenceConditionInput | null> | null;
   createdAt?: ModelStringInput | null;
@@ -590,6 +644,10 @@ export type DeleteExpenseTypeInput = {
   id: string;
 };
 
+export type DeleteHistoryExpenseInput = {
+  id: string;
+};
+
 export type DeletePreferenceInput = {
   userId: string;
 };
@@ -627,6 +685,14 @@ export type UpdateExpenseInput = {
 export type UpdateExpenseTypeInput = {
   id: string;
   name?: string | null;
+  userId?: string | null;
+};
+
+export type UpdateHistoryExpenseInput = {
+  amount?: number | null;
+  date?: string | null;
+  expenseId?: string | null;
+  id: string;
   userId?: string | null;
 };
 
@@ -759,6 +825,18 @@ export type ModelSubscriptionExpenseTypeFilterInput = {
   userId?: ModelSubscriptionStringInput | null;
 };
 
+export type ModelSubscriptionHistoryExpenseFilterInput = {
+  amount?: ModelSubscriptionFloatInput | null;
+  and?: Array<ModelSubscriptionHistoryExpenseFilterInput | null> | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  date?: ModelSubscriptionStringInput | null;
+  expenseId?: ModelSubscriptionStringInput | null;
+  id?: ModelSubscriptionIDInput | null;
+  or?: Array<ModelSubscriptionHistoryExpenseFilterInput | null> | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
+  userId?: ModelSubscriptionStringInput | null;
+};
+
 export type ModelSubscriptionPreferenceFilterInput = {
   and?: Array<ModelSubscriptionPreferenceFilterInput | null> | null;
   createdAt?: ModelSubscriptionStringInput | null;
@@ -858,6 +936,10 @@ export type GetExpenseQuery = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -898,6 +980,56 @@ export type GetExpenseTypeQuery = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type GetHistoryExpenseQueryVariables = {
+  id: string;
+};
+
+export type GetHistoryExpenseQuery = {
+  getHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -985,6 +1117,10 @@ export type GetUserQuery = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -1195,6 +1331,56 @@ export type ListExpensesQuery = {
   } | null;
 };
 
+export type ListHistoryExpenseByUserIdQueryVariables = {
+  filter?: ModelHistoryExpenseFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+  userId: string;
+};
+
+export type ListHistoryExpenseByUserIdQuery = {
+  listHistoryExpenseByUserId?: {
+    __typename: "ModelHistoryExpenseConnection";
+    items: Array<{
+      __typename: "HistoryExpense";
+      amount: number;
+      createdAt: string;
+      date: string;
+      expenseId: string;
+      id: string;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListHistoryExpensesQueryVariables = {
+  filter?: ModelHistoryExpenseFilterInput | null;
+  id?: string | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+};
+
+export type ListHistoryExpensesQuery = {
+  listHistoryExpenses?: {
+    __typename: "ModelHistoryExpenseConnection";
+    items: Array<{
+      __typename: "HistoryExpense";
+      amount: number;
+      createdAt: string;
+      date: string;
+      expenseId: string;
+      id: string;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
 export type ListPreferencesQueryVariables = {
   filter?: ModelPreferenceFilterInput | null;
   limit?: number | null;
@@ -1322,6 +1508,10 @@ export type CreateExpenseMutation = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -1363,6 +1553,57 @@ export type CreateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type CreateHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null;
+  input: CreateHistoryExpenseInput;
+};
+
+export type CreateHistoryExpenseMutation = {
+  createHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1452,6 +1693,10 @@ export type CreateUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -1546,6 +1791,10 @@ export type DeleteExpenseMutation = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -1587,6 +1836,57 @@ export type DeleteExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type DeleteHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null;
+  input: DeleteHistoryExpenseInput;
+};
+
+export type DeleteHistoryExpenseMutation = {
+  deleteHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1676,6 +1976,10 @@ export type DeleteUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -1770,6 +2074,10 @@ export type UpdateExpenseMutation = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -1811,6 +2119,57 @@ export type UpdateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type UpdateHistoryExpenseMutationVariables = {
+  condition?: ModelHistoryExpenseConditionInput | null;
+  input: UpdateHistoryExpenseInput;
+};
+
+export type UpdateHistoryExpenseMutation = {
+  updateHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1900,6 +2259,10 @@ export type UpdateUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -1994,6 +2357,10 @@ export type OnCreateExpenseSubscription = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -2035,6 +2402,56 @@ export type OnCreateExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type OnCreateHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
+};
+
+export type OnCreateHistoryExpenseSubscription = {
+  onCreateHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2124,6 +2541,10 @@ export type OnCreateUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -2218,6 +2639,10 @@ export type OnDeleteExpenseSubscription = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -2259,6 +2684,56 @@ export type OnDeleteExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type OnDeleteHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
+};
+
+export type OnDeleteHistoryExpenseSubscription = {
+  onDeleteHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2348,6 +2823,10 @@ export type OnDeleteUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
@@ -2442,6 +2921,10 @@ export type OnUpdateExpenseSubscription = {
     } | null;
     expenseTypeId?: string | null;
     hasTarget?: boolean | null;
+    history?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     nextMonthIWantToSetAside?: number | null;
@@ -2483,6 +2966,56 @@ export type OnUpdateExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type OnUpdateHistoryExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
+};
+
+export type OnUpdateHistoryExpenseSubscription = {
+  onUpdateHistoryExpense?: {
+    __typename: "HistoryExpense";
+    amount: number;
+    createdAt: string;
+    date: string;
+    expense?: {
+      __typename: "Expense";
+      amount?: number | null;
+      assigned?: number | null;
+      category?: ExpenseCategory | null;
+      createdAt: string;
+      date?: string | null;
+      dueDate?: string | null;
+      expenseTypeId?: string | null;
+      hasTarget?: boolean | null;
+      id: string;
+      name?: string | null;
+      nextMonthIWantToSetAside?: number | null;
+      notes?: string | null;
+      owner?: string | null;
+      recurring?: boolean | null;
+      recurringFrequency?: ExpenseRecurringFrequency | null;
+      targetAmount?: number | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseId: string;
+    id: string;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2572,6 +3105,10 @@ export type OnUpdateUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyExpense?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
