@@ -25,7 +25,6 @@ export const Expense = a
       "Miscellaneous",
     ]),
     hasTarget: a.boolean().default(false),
-    amount: a.float(),
     targetAmount: a.float(),
     date: a.date(),
     recurring: a.boolean().default(false),
@@ -37,7 +36,7 @@ export const Expense = a
 
     dueDate: a.date(),
 
-    assigned: a.float(),
+    assigned: a.float().default(0),
 
     // Expense History
     history: a.hasMany("HistoryExpense", "expenseId"),

@@ -1,5 +1,5 @@
 /* tslint:disable */
- 
+
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -12,6 +12,10 @@ export const getBankAccount = /* GraphQL */ `query GetBankAccount($id: ID!) {
   getBankAccount(id: $id) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -39,7 +43,6 @@ export const getBankAccount = /* GraphQL */ `query GetBankAccount($id: ID!) {
 >;
 export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
   getExpense(id: $id) {
-    amount
     assigned
     category
     createdAt
@@ -92,6 +95,10 @@ export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
 export const getExpenseType = /* GraphQL */ `query GetExpenseType($id: ID!) {
   getExpenseType(id: $id) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -120,14 +127,57 @@ export const getExpenseType = /* GraphQL */ `query GetExpenseType($id: ID!) {
   APITypes.GetExpenseTypeQueryVariables,
   APITypes.GetExpenseTypeQuery
 >;
+export const getHistoryBankAccount =
+  /* GraphQL */ `query GetHistoryBankAccount($id: ID!) {
+  getHistoryBankAccount(id: $id) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.GetHistoryBankAccountQueryVariables,
+    APITypes.GetHistoryBankAccountQuery
+  >;
 export const getHistoryExpense =
   /* GraphQL */ `query GetHistoryExpense($id: ID!) {
   getHistoryExpense(id: $id) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -148,6 +198,16 @@ export const getHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -235,6 +295,10 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename
@@ -360,7 +424,6 @@ export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
     userId: $userId
   ) {
     items {
-      amount
       assigned
       category
       createdAt
@@ -466,7 +529,6 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
     sortDirection: $sortDirection
   ) {
     items {
-      amount
       assigned
       category
       createdAt
@@ -494,6 +556,78 @@ export const listExpenses = /* GraphQL */ `query ListExpenses(
   APITypes.ListExpensesQueryVariables,
   APITypes.ListExpensesQuery
 >;
+export const listHistoryBankAccountByUserId =
+  /* GraphQL */ `query ListHistoryBankAccountByUserId(
+  $filter: ModelHistoryBankAccountFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listHistoryBankAccountByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      balance
+      bankAccountId
+      createdAt
+      date
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListHistoryBankAccountByUserIdQueryVariables,
+    APITypes.ListHistoryBankAccountByUserIdQuery
+  >;
+export const listHistoryBankAccounts =
+  /* GraphQL */ `query ListHistoryBankAccounts(
+  $filter: ModelHistoryBankAccountFilterInput
+  $id: ID
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listHistoryBankAccounts(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      balance
+      bankAccountId
+      createdAt
+      date
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListHistoryBankAccountsQueryVariables,
+    APITypes.ListHistoryBankAccountsQuery
+  >;
 export const listHistoryExpenseByUserId =
   /* GraphQL */ `query ListHistoryExpenseByUserId(
   $filter: ModelHistoryExpenseFilterInput
@@ -510,10 +644,12 @@ export const listHistoryExpenseByUserId =
     userId: $userId
   ) {
     items {
-      amount
+      assigned
+      category
       createdAt
       date
       expenseId
+      expenseTypeId
       id
       updatedAt
       userId
@@ -542,10 +678,12 @@ export const listHistoryExpenses = /* GraphQL */ `query ListHistoryExpenses(
     sortDirection: $sortDirection
   ) {
     items {
-      amount
+      assigned
+      category
       createdAt
       date
       expenseId
+      expenseTypeId
       id
       updatedAt
       userId

@@ -88,7 +88,6 @@ export function useAddPreference() {
         for (const expense of initialExpenses) {
           await client.models.Expense.create(expense);
         }
-        console.log(res);
       } catch (error) {
         setError(error as Error);
       } finally {
@@ -116,8 +115,7 @@ export function useUpdatePreference() {
       }
       try {
         setSaving(true);
-        const res = await client.models.Preference.update({ ...input });
-        console.log(res);
+        await client.models.Preference.update({ ...input });
       } catch (error) {
         setError(error as Error);
       } finally {

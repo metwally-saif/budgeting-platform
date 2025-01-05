@@ -1,5 +1,5 @@
 /* tslint:disable */
- 
+
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -15,6 +15,10 @@ export const createBankAccount = /* GraphQL */ `mutation CreateBankAccount(
   createBankAccount(condition: $condition, input: $input) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -45,7 +49,6 @@ export const createExpense = /* GraphQL */ `mutation CreateExpense(
   $input: CreateExpenseInput!
 ) {
   createExpense(condition: $condition, input: $input) {
-    amount
     assigned
     category
     createdAt
@@ -101,6 +104,10 @@ export const createExpenseType = /* GraphQL */ `mutation CreateExpenseType(
 ) {
   createExpenseType(condition: $condition, input: $input) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -129,16 +136,64 @@ export const createExpenseType = /* GraphQL */ `mutation CreateExpenseType(
   APITypes.CreateExpenseTypeMutationVariables,
   APITypes.CreateExpenseTypeMutation
 >;
+export const createHistoryBankAccount =
+  /* GraphQL */ `mutation CreateHistoryBankAccount(
+  $condition: ModelHistoryBankAccountConditionInput
+  $input: CreateHistoryBankAccountInput!
+) {
+  createHistoryBankAccount(condition: $condition, input: $input) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreateHistoryBankAccountMutationVariables,
+    APITypes.CreateHistoryBankAccountMutation
+  >;
 export const createHistoryExpense =
   /* GraphQL */ `mutation CreateHistoryExpense(
   $condition: ModelHistoryExpenseConditionInput
   $input: CreateHistoryExpenseInput!
 ) {
   createHistoryExpense(condition: $condition, input: $input) {
-    amount
+    assigned
+    category
     createdAt
     date
     expenseId
+    expenseTypeId
     id
     updatedAt
     userId
@@ -219,6 +274,10 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename
@@ -272,6 +331,10 @@ export const deleteBankAccount = /* GraphQL */ `mutation DeleteBankAccount(
   deleteBankAccount(condition: $condition, input: $input) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -302,7 +365,6 @@ export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
   $input: DeleteExpenseInput!
 ) {
   deleteExpense(condition: $condition, input: $input) {
-    amount
     assigned
     category
     createdAt
@@ -358,6 +420,10 @@ export const deleteExpenseType = /* GraphQL */ `mutation DeleteExpenseType(
 ) {
   deleteExpenseType(condition: $condition, input: $input) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -386,17 +452,63 @@ export const deleteExpenseType = /* GraphQL */ `mutation DeleteExpenseType(
   APITypes.DeleteExpenseTypeMutationVariables,
   APITypes.DeleteExpenseTypeMutation
 >;
+export const deleteHistoryBankAccount =
+  /* GraphQL */ `mutation DeleteHistoryBankAccount(
+  $condition: ModelHistoryBankAccountConditionInput
+  $input: DeleteHistoryBankAccountInput!
+) {
+  deleteHistoryBankAccount(condition: $condition, input: $input) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.DeleteHistoryBankAccountMutationVariables,
+    APITypes.DeleteHistoryBankAccountMutation
+  >;
 export const deleteHistoryExpense =
   /* GraphQL */ `mutation DeleteHistoryExpense(
   $condition: ModelHistoryExpenseConditionInput
   $input: DeleteHistoryExpenseInput!
 ) {
   deleteHistoryExpense(condition: $condition, input: $input) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -417,6 +529,16 @@ export const deleteHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -509,6 +631,10 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename
@@ -562,6 +688,10 @@ export const updateBankAccount = /* GraphQL */ `mutation UpdateBankAccount(
   updateBankAccount(condition: $condition, input: $input) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -592,7 +722,6 @@ export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
   $input: UpdateExpenseInput!
 ) {
   updateExpense(condition: $condition, input: $input) {
-    amount
     assigned
     category
     createdAt
@@ -623,6 +752,10 @@ export const updateExpenseType = /* GraphQL */ `mutation UpdateExpenseType(
 ) {
   updateExpenseType(condition: $condition, input: $input) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -651,17 +784,63 @@ export const updateExpenseType = /* GraphQL */ `mutation UpdateExpenseType(
   APITypes.UpdateExpenseTypeMutationVariables,
   APITypes.UpdateExpenseTypeMutation
 >;
+export const updateHistoryBankAccount =
+  /* GraphQL */ `mutation UpdateHistoryBankAccount(
+  $condition: ModelHistoryBankAccountConditionInput
+  $input: UpdateHistoryBankAccountInput!
+) {
+  updateHistoryBankAccount(condition: $condition, input: $input) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.UpdateHistoryBankAccountMutationVariables,
+    APITypes.UpdateHistoryBankAccountMutation
+  >;
 export const updateHistoryExpense =
   /* GraphQL */ `mutation UpdateHistoryExpense(
   $condition: ModelHistoryExpenseConditionInput
   $input: UpdateHistoryExpenseInput!
 ) {
   updateHistoryExpense(condition: $condition, input: $input) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -682,6 +861,16 @@ export const updateHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -774,6 +963,10 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename

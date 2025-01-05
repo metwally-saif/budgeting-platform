@@ -31,7 +31,7 @@ export function getUserFinancialStatus(
 
   // 3. Calculate the sum of all past history expenses apart from the current month
   const sumPastHistoryExpenses = pastHistoryExpenses.reduce(
-    (acc, exp) => acc + (exp.amount || 0),
+    (acc, exp) => acc + (exp.assigned || 0),
     0,
   );
 

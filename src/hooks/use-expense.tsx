@@ -104,8 +104,7 @@ export function useAddExpense() {
       }
       try {
         setSaving(true);
-        const res = await client.models.Expense.create({ ...input });
-        console.log(res);
+        await client.models.Expense.create({ ...input });
       } catch (error) {
         setError(error as Error);
       } finally {
@@ -133,11 +132,10 @@ export function useUpdateExpense() {
       }
       try {
         setSaving(true);
-        const res = await client.models.Expense.update({
+        await client.models.Expense.update({
           ...input,
           userId: user.sub,
         });
-        console.log(res);
       } catch (error) {
         console.error("Failed to update expense:", error);
         setError(error as Error);
@@ -166,8 +164,7 @@ export function useDeleteExpense() {
       }
       try {
         setDeleting(true);
-        const res = await client.models.Expense.delete({ ...input });
-        console.log(res);
+        await client.models.Expense.delete({ ...input });
       } catch (error) {
         setError(error as Error);
       } finally {

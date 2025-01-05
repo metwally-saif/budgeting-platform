@@ -1,11 +1,12 @@
 /* tslint:disable */
- 
+
 //  This file was automatically generated and should not be edited.
 
 export type BankAccount = {
   __typename: "BankAccount";
   balance?: number | null;
   createdAt: string;
+  history?: ModelHistoryBankAccountConnection | null;
   id: string;
   name?: string | null;
   owner?: string | null;
@@ -15,7 +16,29 @@ export type BankAccount = {
   userId: string;
 };
 
-export enum BankAccountType {
+export type ModelHistoryBankAccountConnection = {
+  __typename: "ModelHistoryBankAccountConnection";
+  items: Array<HistoryBankAccount | null>;
+  nextToken?: string | null;
+};
+
+export type HistoryBankAccount = {
+  __typename: "HistoryBankAccount";
+  balance?: number | null;
+  bankAccount?: BankAccount | null;
+  bankAccountId: string;
+  createdAt: string;
+  date?: string | null;
+  id: string;
+  name?: string | null;
+  owner?: string | null;
+  type?: HistoryBankAccountType | null;
+  updatedAt: string;
+  user?: User | null;
+  userId: string;
+};
+
+export enum HistoryBankAccountType {
   Cash = "Cash",
   Checking = "Checking",
   Credit_Card = "Credit_Card",
@@ -31,6 +54,7 @@ export type User = {
   expenseTypes?: ModelExpenseTypeConnection | null;
   expenses?: ModelExpenseConnection | null;
   firstName?: string | null;
+  historyBankAccount?: ModelHistoryBankAccountConnection | null;
   historyExpense?: ModelHistoryExpenseConnection | null;
   id?: string | null;
   lastName?: string | null;
@@ -56,6 +80,7 @@ export type ModelExpenseTypeConnection = {
 export type ExpenseType = {
   __typename: "ExpenseType";
   createdAt: string;
+  expenseHistory?: ModelHistoryExpenseConnection | null;
   expenses?: ModelExpenseConnection | null;
   id: string;
   name: string;
@@ -65,15 +90,44 @@ export type ExpenseType = {
   userId: string;
 };
 
-export type ModelExpenseConnection = {
-  __typename: "ModelExpenseConnection";
-  items: Array<Expense | null>;
+export type ModelHistoryExpenseConnection = {
+  __typename: "ModelHistoryExpenseConnection";
+  items: Array<HistoryExpense | null>;
   nextToken?: string | null;
 };
 
+export type HistoryExpense = {
+  __typename: "HistoryExpense";
+  assigned: number;
+  category?: HistoryExpenseCategory | null;
+  createdAt: string;
+  date: string;
+  expense?: Expense | null;
+  expenseId: string;
+  expenseType?: ExpenseType | null;
+  expenseTypeId: string;
+  id: string;
+  updatedAt: string;
+  user?: User | null;
+  userId: string;
+};
+
+export enum HistoryExpenseCategory {
+  Debt = "Debt",
+  Food = "Food",
+  Healthcare = "Healthcare",
+  Housing = "Housing",
+  Insurance = "Insurance",
+  Miscellaneous = "Miscellaneous",
+  Personal = "Personal",
+  Recreation = "Recreation",
+  Savings = "Savings",
+  Transportation = "Transportation",
+  Utilities = "Utilities",
+}
+
 export type Expense = {
   __typename: "Expense";
-  amount?: number | null;
   assigned?: number | null;
   category?: ExpenseCategory | null;
   createdAt: string;
@@ -110,31 +164,18 @@ export enum ExpenseCategory {
   Utilities = "Utilities",
 }
 
-export type ModelHistoryExpenseConnection = {
-  __typename: "ModelHistoryExpenseConnection";
-  items: Array<HistoryExpense | null>;
-  nextToken?: string | null;
-};
-
-export type HistoryExpense = {
-  __typename: "HistoryExpense";
-  amount: number;
-  createdAt: string;
-  date: string;
-  expense?: Expense | null;
-  expenseId: string;
-  id: string;
-  updatedAt: string;
-  user?: User | null;
-  userId: string;
-};
-
 export enum ExpenseRecurringFrequency {
   Daily = "Daily",
   Monthly = "Monthly",
   Weekly = "Weekly",
   Yearly = "Yearly",
 }
+
+export type ModelExpenseConnection = {
+  __typename: "ModelExpenseConnection";
+  items: Array<Expense | null>;
+  nextToken?: string | null;
+};
 
 export type Preference = {
   __typename: "Preference";
@@ -207,6 +248,14 @@ export enum PreferenceTransportation {
   Other = "Other",
   Private = "Private",
   Public = "Public",
+}
+
+export enum BankAccountType {
+  Cash = "Cash",
+  Checking = "Checking",
+  Credit_Card = "Credit_Card",
+  Line_of_Credit = "Line_of_Credit",
+  Savings = "Savings",
 }
 
 export type ModelBankAccountFilterInput = {
@@ -301,7 +350,6 @@ export enum ModelSortDirection {
 }
 
 export type ModelExpenseFilterInput = {
-  amount?: ModelFloatInput | null;
   and?: Array<ModelExpenseFilterInput | null> | null;
   assigned?: ModelFloatInput | null;
   category?: ModelExpenseCategoryInput | null;
@@ -353,17 +401,45 @@ export type ModelExpenseTypeFilterInput = {
   userId?: ModelStringInput | null;
 };
 
+export type ModelHistoryBankAccountFilterInput = {
+  and?: Array<ModelHistoryBankAccountFilterInput | null> | null;
+  balance?: ModelFloatInput | null;
+  bankAccountId?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  not?: ModelHistoryBankAccountFilterInput | null;
+  or?: Array<ModelHistoryBankAccountFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  type?: ModelHistoryBankAccountTypeInput | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
+export type ModelHistoryBankAccountTypeInput = {
+  eq?: HistoryBankAccountType | null;
+  ne?: HistoryBankAccountType | null;
+};
+
 export type ModelHistoryExpenseFilterInput = {
-  amount?: ModelFloatInput | null;
   and?: Array<ModelHistoryExpenseFilterInput | null> | null;
+  assigned?: ModelFloatInput | null;
+  category?: ModelHistoryExpenseCategoryInput | null;
   createdAt?: ModelStringInput | null;
   date?: ModelStringInput | null;
   expenseId?: ModelStringInput | null;
+  expenseTypeId?: ModelStringInput | null;
   id?: ModelIDInput | null;
   not?: ModelHistoryExpenseFilterInput | null;
   or?: Array<ModelHistoryExpenseFilterInput | null> | null;
   updatedAt?: ModelStringInput | null;
   userId?: ModelStringInput | null;
+};
+
+export type ModelHistoryExpenseCategoryInput = {
+  eq?: HistoryExpenseCategory | null;
+  ne?: HistoryExpenseCategory | null;
 };
 
 export type ModelPreferenceFilterInput = {
@@ -477,7 +553,6 @@ export type CreateBankAccountInput = {
 };
 
 export type ModelExpenseConditionInput = {
-  amount?: ModelFloatInput | null;
   and?: Array<ModelExpenseConditionInput | null> | null;
   assigned?: ModelFloatInput | null;
   category?: ModelExpenseCategoryInput | null;
@@ -500,7 +575,6 @@ export type ModelExpenseConditionInput = {
 };
 
 export type CreateExpenseInput = {
-  amount?: number | null;
   assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
@@ -534,12 +608,39 @@ export type CreateExpenseTypeInput = {
   userId: string;
 };
 
+export type ModelHistoryBankAccountConditionInput = {
+  and?: Array<ModelHistoryBankAccountConditionInput | null> | null;
+  balance?: ModelFloatInput | null;
+  bankAccountId?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  not?: ModelHistoryBankAccountConditionInput | null;
+  or?: Array<ModelHistoryBankAccountConditionInput | null> | null;
+  owner?: ModelStringInput | null;
+  type?: ModelHistoryBankAccountTypeInput | null;
+  updatedAt?: ModelStringInput | null;
+  userId?: ModelStringInput | null;
+};
+
+export type CreateHistoryBankAccountInput = {
+  balance?: number | null;
+  bankAccountId: string;
+  date?: string | null;
+  id?: string | null;
+  name?: string | null;
+  type?: HistoryBankAccountType | null;
+  userId: string;
+};
+
 export type ModelHistoryExpenseConditionInput = {
-  amount?: ModelFloatInput | null;
   and?: Array<ModelHistoryExpenseConditionInput | null> | null;
+  assigned?: ModelFloatInput | null;
+  category?: ModelHistoryExpenseCategoryInput | null;
   createdAt?: ModelStringInput | null;
   date?: ModelStringInput | null;
   expenseId?: ModelStringInput | null;
+  expenseTypeId?: ModelStringInput | null;
   not?: ModelHistoryExpenseConditionInput | null;
   or?: Array<ModelHistoryExpenseConditionInput | null> | null;
   updatedAt?: ModelStringInput | null;
@@ -547,9 +648,11 @@ export type ModelHistoryExpenseConditionInput = {
 };
 
 export type CreateHistoryExpenseInput = {
-  amount: number;
+  assigned: number;
+  category?: HistoryExpenseCategory | null;
   date: string;
   expenseId: string;
+  expenseTypeId: string;
   id?: string | null;
   userId: string;
 };
@@ -644,6 +747,10 @@ export type DeleteExpenseTypeInput = {
   id: string;
 };
 
+export type DeleteHistoryBankAccountInput = {
+  id: string;
+};
+
 export type DeleteHistoryExpenseInput = {
   id: string;
 };
@@ -665,7 +772,6 @@ export type UpdateBankAccountInput = {
 };
 
 export type UpdateExpenseInput = {
-  amount?: number | null;
   assigned?: number | null;
   category?: ExpenseCategory | null;
   date?: string | null;
@@ -688,10 +794,22 @@ export type UpdateExpenseTypeInput = {
   userId?: string | null;
 };
 
+export type UpdateHistoryBankAccountInput = {
+  balance?: number | null;
+  bankAccountId?: string | null;
+  date?: string | null;
+  id: string;
+  name?: string | null;
+  type?: HistoryBankAccountType | null;
+  userId?: string | null;
+};
+
 export type UpdateHistoryExpenseInput = {
-  amount?: number | null;
+  assigned?: number | null;
+  category?: HistoryExpenseCategory | null;
   date?: string | null;
   expenseId?: string | null;
+  expenseTypeId?: string | null;
   id: string;
   userId?: string | null;
 };
@@ -787,7 +905,6 @@ export type ModelSubscriptionIDInput = {
 };
 
 export type ModelSubscriptionExpenseFilterInput = {
-  amount?: ModelSubscriptionFloatInput | null;
   and?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
   assigned?: ModelSubscriptionFloatInput | null;
   category?: ModelSubscriptionStringInput | null;
@@ -825,12 +942,29 @@ export type ModelSubscriptionExpenseTypeFilterInput = {
   userId?: ModelSubscriptionStringInput | null;
 };
 
+export type ModelSubscriptionHistoryBankAccountFilterInput = {
+  and?: Array<ModelSubscriptionHistoryBankAccountFilterInput | null> | null;
+  balance?: ModelSubscriptionFloatInput | null;
+  bankAccountId?: ModelSubscriptionStringInput | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  date?: ModelSubscriptionStringInput | null;
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  or?: Array<ModelSubscriptionHistoryBankAccountFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  type?: ModelSubscriptionStringInput | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
+  userId?: ModelSubscriptionStringInput | null;
+};
+
 export type ModelSubscriptionHistoryExpenseFilterInput = {
-  amount?: ModelSubscriptionFloatInput | null;
   and?: Array<ModelSubscriptionHistoryExpenseFilterInput | null> | null;
+  assigned?: ModelSubscriptionFloatInput | null;
+  category?: ModelSubscriptionStringInput | null;
   createdAt?: ModelSubscriptionStringInput | null;
   date?: ModelSubscriptionStringInput | null;
   expenseId?: ModelSubscriptionStringInput | null;
+  expenseTypeId?: ModelSubscriptionStringInput | null;
   id?: ModelSubscriptionIDInput | null;
   or?: Array<ModelSubscriptionHistoryExpenseFilterInput | null> | null;
   updatedAt?: ModelSubscriptionStringInput | null;
@@ -891,6 +1025,10 @@ export type GetBankAccountQuery = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -919,7 +1057,6 @@ export type GetExpenseQueryVariables = {
 export type GetExpenseQuery = {
   getExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -973,6 +1110,10 @@ export type GetExpenseTypeQuery = {
   getExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -997,6 +1138,49 @@ export type GetExpenseTypeQuery = {
   } | null;
 };
 
+export type GetHistoryBankAccountQueryVariables = {
+  id: string;
+};
+
+export type GetHistoryBankAccountQuery = {
+  getHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type GetHistoryExpenseQueryVariables = {
   id: string;
 };
@@ -1004,12 +1188,12 @@ export type GetHistoryExpenseQueryVariables = {
 export type GetHistoryExpenseQuery = {
   getHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -1029,6 +1213,16 @@ export type GetHistoryExpenseQuery = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -1117,6 +1311,10 @@ export type GetUserQuery = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -1224,7 +1422,6 @@ export type ListExpenseByUserIdQuery = {
     __typename: "ModelExpenseConnection";
     items: Array<{
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -1308,7 +1505,6 @@ export type ListExpensesQuery = {
     __typename: "ModelExpenseConnection";
     items: Array<{
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -1331,6 +1527,62 @@ export type ListExpensesQuery = {
   } | null;
 };
 
+export type ListHistoryBankAccountByUserIdQueryVariables = {
+  filter?: ModelHistoryBankAccountFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+  userId: string;
+};
+
+export type ListHistoryBankAccountByUserIdQuery = {
+  listHistoryBankAccountByUserId?: {
+    __typename: "ModelHistoryBankAccountConnection";
+    items: Array<{
+      __typename: "HistoryBankAccount";
+      balance?: number | null;
+      bankAccountId: string;
+      createdAt: string;
+      date?: string | null;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: HistoryBankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListHistoryBankAccountsQueryVariables = {
+  filter?: ModelHistoryBankAccountFilterInput | null;
+  id?: string | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+};
+
+export type ListHistoryBankAccountsQuery = {
+  listHistoryBankAccounts?: {
+    __typename: "ModelHistoryBankAccountConnection";
+    items: Array<{
+      __typename: "HistoryBankAccount";
+      balance?: number | null;
+      bankAccountId: string;
+      createdAt: string;
+      date?: string | null;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: HistoryBankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
 export type ListHistoryExpenseByUserIdQueryVariables = {
   filter?: ModelHistoryExpenseFilterInput | null;
   limit?: number | null;
@@ -1344,10 +1596,12 @@ export type ListHistoryExpenseByUserIdQuery = {
     __typename: "ModelHistoryExpenseConnection";
     items: Array<{
       __typename: "HistoryExpense";
-      amount: number;
+      assigned: number;
+      category?: HistoryExpenseCategory | null;
       createdAt: string;
       date: string;
       expenseId: string;
+      expenseTypeId: string;
       id: string;
       updatedAt: string;
       userId: string;
@@ -1369,10 +1623,12 @@ export type ListHistoryExpensesQuery = {
     __typename: "ModelHistoryExpenseConnection";
     items: Array<{
       __typename: "HistoryExpense";
-      amount: number;
+      assigned: number;
+      category?: HistoryExpenseCategory | null;
       createdAt: string;
       date: string;
       expenseId: string;
+      expenseTypeId: string;
       id: string;
       updatedAt: string;
       userId: string;
@@ -1462,6 +1718,10 @@ export type CreateBankAccountMutation = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -1491,7 +1751,6 @@ export type CreateExpenseMutationVariables = {
 export type CreateExpenseMutation = {
   createExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -1546,6 +1805,10 @@ export type CreateExpenseTypeMutation = {
   createExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -1553,6 +1816,50 @@ export type CreateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type CreateHistoryBankAccountMutationVariables = {
+  condition?: ModelHistoryBankAccountConditionInput | null;
+  input: CreateHistoryBankAccountInput;
+};
+
+export type CreateHistoryBankAccountMutation = {
+  createHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1578,12 +1885,12 @@ export type CreateHistoryExpenseMutationVariables = {
 export type CreateHistoryExpenseMutation = {
   createHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -1603,6 +1910,16 @@ export type CreateHistoryExpenseMutation = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -1693,6 +2010,10 @@ export type CreateUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -1745,6 +2066,10 @@ export type DeleteBankAccountMutation = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -1774,7 +2099,6 @@ export type DeleteExpenseMutationVariables = {
 export type DeleteExpenseMutation = {
   deleteExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -1829,6 +2153,10 @@ export type DeleteExpenseTypeMutation = {
   deleteExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -1836,6 +2164,50 @@ export type DeleteExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type DeleteHistoryBankAccountMutationVariables = {
+  condition?: ModelHistoryBankAccountConditionInput | null;
+  input: DeleteHistoryBankAccountInput;
+};
+
+export type DeleteHistoryBankAccountMutation = {
+  deleteHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1861,12 +2233,12 @@ export type DeleteHistoryExpenseMutationVariables = {
 export type DeleteHistoryExpenseMutation = {
   deleteHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -1886,6 +2258,16 @@ export type DeleteHistoryExpenseMutation = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -1976,6 +2358,10 @@ export type DeleteUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -2028,6 +2414,10 @@ export type UpdateBankAccountMutation = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -2057,7 +2447,6 @@ export type UpdateExpenseMutationVariables = {
 export type UpdateExpenseMutation = {
   updateExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -2112,6 +2501,10 @@ export type UpdateExpenseTypeMutation = {
   updateExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -2119,6 +2512,50 @@ export type UpdateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
+export type UpdateHistoryBankAccountMutationVariables = {
+  condition?: ModelHistoryBankAccountConditionInput | null;
+  input: UpdateHistoryBankAccountInput;
+};
+
+export type UpdateHistoryBankAccountMutation = {
+  updateHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2144,12 +2581,12 @@ export type UpdateHistoryExpenseMutationVariables = {
 export type UpdateHistoryExpenseMutation = {
   updateHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -2169,6 +2606,16 @@ export type UpdateHistoryExpenseMutation = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -2259,6 +2706,10 @@ export type UpdateUserMutation = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -2311,6 +2762,10 @@ export type OnCreateBankAccountSubscription = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -2340,7 +2795,6 @@ export type OnCreateExpenseSubscriptionVariables = {
 export type OnCreateExpenseSubscription = {
   onCreateExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -2395,6 +2849,10 @@ export type OnCreateExpenseTypeSubscription = {
   onCreateExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -2419,6 +2877,50 @@ export type OnCreateExpenseTypeSubscription = {
   } | null;
 };
 
+export type OnCreateHistoryBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnCreateHistoryBankAccountSubscription = {
+  onCreateHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnCreateHistoryExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
 };
@@ -2426,12 +2928,12 @@ export type OnCreateHistoryExpenseSubscriptionVariables = {
 export type OnCreateHistoryExpenseSubscription = {
   onCreateHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -2451,6 +2953,16 @@ export type OnCreateHistoryExpenseSubscription = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -2541,6 +3053,10 @@ export type OnCreateUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -2593,6 +3109,10 @@ export type OnDeleteBankAccountSubscription = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -2622,7 +3142,6 @@ export type OnDeleteExpenseSubscriptionVariables = {
 export type OnDeleteExpenseSubscription = {
   onDeleteExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -2677,6 +3196,10 @@ export type OnDeleteExpenseTypeSubscription = {
   onDeleteExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -2701,6 +3224,50 @@ export type OnDeleteExpenseTypeSubscription = {
   } | null;
 };
 
+export type OnDeleteHistoryBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnDeleteHistoryBankAccountSubscription = {
+  onDeleteHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnDeleteHistoryExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
 };
@@ -2708,12 +3275,12 @@ export type OnDeleteHistoryExpenseSubscriptionVariables = {
 export type OnDeleteHistoryExpenseSubscription = {
   onDeleteHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -2733,6 +3300,16 @@ export type OnDeleteHistoryExpenseSubscription = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -2823,6 +3400,10 @@ export type OnDeleteUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;
@@ -2875,6 +3456,10 @@ export type OnUpdateBankAccountSubscription = {
     __typename: "BankAccount";
     balance?: number | null;
     createdAt: string;
+    history?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     id: string;
     name?: string | null;
     owner?: string | null;
@@ -2904,7 +3489,6 @@ export type OnUpdateExpenseSubscriptionVariables = {
 export type OnUpdateExpenseSubscription = {
   onUpdateExpense?: {
     __typename: "Expense";
-    amount?: number | null;
     assigned?: number | null;
     category?: ExpenseCategory | null;
     createdAt: string;
@@ -2959,6 +3543,10 @@ export type OnUpdateExpenseTypeSubscription = {
   onUpdateExpenseType?: {
     __typename: "ExpenseType";
     createdAt: string;
+    expenseHistory?: {
+      __typename: "ModelHistoryExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     expenses?: {
       __typename: "ModelExpenseConnection";
       nextToken?: string | null;
@@ -2983,6 +3571,50 @@ export type OnUpdateExpenseTypeSubscription = {
   } | null;
 };
 
+export type OnUpdateHistoryBankAccountSubscriptionVariables = {
+  filter?: ModelSubscriptionHistoryBankAccountFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnUpdateHistoryBankAccountSubscription = {
+  onUpdateHistoryBankAccount?: {
+    __typename: "HistoryBankAccount";
+    balance?: number | null;
+    bankAccount?: {
+      __typename: "BankAccount";
+      balance?: number | null;
+      createdAt: string;
+      id: string;
+      name?: string | null;
+      owner?: string | null;
+      type?: BankAccountType | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    bankAccountId: string;
+    createdAt: string;
+    date?: string | null;
+    id: string;
+    name?: string | null;
+    owner?: string | null;
+    type?: HistoryBankAccountType | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+    userId: string;
+  } | null;
+};
+
 export type OnUpdateHistoryExpenseSubscriptionVariables = {
   filter?: ModelSubscriptionHistoryExpenseFilterInput | null;
 };
@@ -2990,12 +3622,12 @@ export type OnUpdateHistoryExpenseSubscriptionVariables = {
 export type OnUpdateHistoryExpenseSubscription = {
   onUpdateHistoryExpense?: {
     __typename: "HistoryExpense";
-    amount: number;
+    assigned: number;
+    category?: HistoryExpenseCategory | null;
     createdAt: string;
     date: string;
     expense?: {
       __typename: "Expense";
-      amount?: number | null;
       assigned?: number | null;
       category?: ExpenseCategory | null;
       createdAt: string;
@@ -3015,6 +3647,16 @@ export type OnUpdateHistoryExpenseSubscription = {
       userId: string;
     } | null;
     expenseId: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId: string;
     id: string;
     updatedAt: string;
     user?: {
@@ -3105,6 +3747,10 @@ export type OnUpdateUserSubscription = {
       nextToken?: string | null;
     } | null;
     firstName?: string | null;
+    historyBankAccount?: {
+      __typename: "ModelHistoryBankAccountConnection";
+      nextToken?: string | null;
+    } | null;
     historyExpense?: {
       __typename: "ModelHistoryExpenseConnection";
       nextToken?: string | null;

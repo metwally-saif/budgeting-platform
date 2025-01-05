@@ -20,6 +20,8 @@ import { BankAccount } from "../../amplify/graphql/API";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { signOut } from "aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import HomeIcon from "@mui/icons-material/Home";
 
 const drawerWidth = 240;
 
@@ -108,6 +110,103 @@ export default function SideBar() {
             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+        <Divider />
+        <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={() => navigate("/")}
+            sx={[
+              {
+                minHeight: 48,
+                px: 2.5,
+              },
+              open
+                ? {
+                    justifyContent: "initial",
+                  }
+                : {
+                    justifyContent: "center",
+                  },
+            ]}
+          >
+            <ListItemIcon
+              sx={[
+                {
+                  minWidth: 0,
+                  justifyContent: "center",
+                },
+                open
+                  ? {
+                      mr: 3,
+                    }
+                  : {
+                      mr: "auto",
+                    },
+              ]}
+            >
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Home"
+              sx={[
+                open
+                  ? {
+                      opacity: 1,
+                    }
+                  : {
+                      opacity: 0,
+                    },
+              ]}
+            />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={() => navigate("/reflect")}
+            sx={[
+              {
+                minHeight: 48,
+                px: 2.5,
+              },
+              open
+                ? {
+                    justifyContent: "initial",
+                  }
+                : {
+                    justifyContent: "center",
+                  },
+            ]}
+          >
+            <ListItemIcon
+              sx={[
+                {
+                  minWidth: 0,
+                  justifyContent: "center",
+                },
+                open
+                  ? {
+                      mr: 3,
+                    }
+                  : {
+                      mr: "auto",
+                    },
+              ]}
+            >
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Reflect"
+              sx={[
+                open
+                  ? {
+                      opacity: 1,
+                    }
+                  : {
+                      opacity: 0,
+                    },
+              ]}
+            />
+          </ListItemButton>
+        </ListItem>
         <Divider />
         <List>
           {bankAccounts?.map((account) => (
@@ -202,7 +301,7 @@ export default function SideBar() {
                 <AddIcon />
               </ListItemIcon>
               <ListItemText
-                primary="Add Account"
+                primary="Add Bank Account"
                 sx={[
                   open
                     ? {

@@ -8,7 +8,22 @@ export const HistoryExpense = a
     expenseId: a.string().required(), // Reference to the main Expense
     expense: a.belongsTo("Expense", "expenseId"), // The main Expense
     date: a.date().required(), // The date this record applies to
-    amount: a.float().required(), // The assigned amount
+    assigned: a.float().required(), // The assigned amount
+    expenseTypeId: a.string().required(), // Reference to the Expense Type
+    expenseType: a.belongsTo("ExpenseType", "expenseTypeId"),
+    category: a.enum([
+      "Housing",
+      "Transportation",
+      "Food",
+      "Utilities",
+      "Insurance",
+      "Healthcare",
+      "Savings",
+      "Personal",
+      "Recreation",
+      "Debt",
+      "Miscellaneous",
+    ]),
   })
   .identifier(["id"])
   .secondaryIndexes((index) => [index("userId")])
