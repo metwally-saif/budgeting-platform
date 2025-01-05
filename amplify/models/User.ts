@@ -13,6 +13,7 @@ export const User = a
     expenseTypes: a.hasMany("ExpenseType", "userId"),
     bankAccounts: a.hasMany("BankAccount", "userId"),
     historyExpense: a.hasMany("HistoryExpense", "userId"),
+    historyBankAccount: a.hasMany("HistoryBankAccount", "userId"),
   })
   .identifier(["profileOwner"])
   .authorization((allow) => [allow.owner(), allow.groups(["Admin"])]);

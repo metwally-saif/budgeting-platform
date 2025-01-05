@@ -6,6 +6,7 @@ import {
   ExpenseType,
   BankAccount,
   HistoryExpense,
+  HistoryBankAccount,
 } from "../models";
 import { postConfirmation } from "../auth/postConfirmation/resource";
 import { dailyDigest, monthlyDigest } from "../functions";
@@ -18,6 +19,7 @@ const schema = a
     ExpenseType,
     BankAccount,
     HistoryExpense,
+    HistoryBankAccount,
   })
   .authorization((allow) => [
     allow.resource(postConfirmation),

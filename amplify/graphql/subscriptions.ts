@@ -1,5 +1,5 @@
 /* tslint:disable */
- 
+
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -16,6 +16,10 @@ export const onCreateBankAccount =
   onCreateBankAccount(filter: $filter, owner: $owner) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -46,7 +50,6 @@ export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   $owner: String
 ) {
   onCreateExpense(filter: $filter, owner: $owner) {
-    amount
     assigned
     category
     createdAt
@@ -103,6 +106,10 @@ export const onCreateExpenseType =
 ) {
   onCreateExpenseType(filter: $filter, owner: $owner) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -131,16 +138,62 @@ export const onCreateExpenseType =
     APITypes.OnCreateExpenseTypeSubscriptionVariables,
     APITypes.OnCreateExpenseTypeSubscription
   >;
+export const onCreateHistoryBankAccount =
+  /* GraphQL */ `subscription OnCreateHistoryBankAccount(
+  $filter: ModelSubscriptionHistoryBankAccountFilterInput
+  $owner: String
+) {
+  onCreateHistoryBankAccount(filter: $filter, owner: $owner) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateHistoryBankAccountSubscriptionVariables,
+    APITypes.OnCreateHistoryBankAccountSubscription
+  >;
 export const onCreateHistoryExpense =
   /* GraphQL */ `subscription OnCreateHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onCreateHistoryExpense(filter: $filter) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -161,6 +214,16 @@ export const onCreateHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -254,6 +317,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename
@@ -308,6 +375,10 @@ export const onDeleteBankAccount =
   onDeleteBankAccount(filter: $filter, owner: $owner) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -338,7 +409,6 @@ export const onDeleteExpense = /* GraphQL */ `subscription OnDeleteExpense(
   $owner: String
 ) {
   onDeleteExpense(filter: $filter, owner: $owner) {
-    amount
     assigned
     category
     createdAt
@@ -395,6 +465,10 @@ export const onDeleteExpenseType =
 ) {
   onDeleteExpenseType(filter: $filter, owner: $owner) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -423,16 +497,62 @@ export const onDeleteExpenseType =
     APITypes.OnDeleteExpenseTypeSubscriptionVariables,
     APITypes.OnDeleteExpenseTypeSubscription
   >;
+export const onDeleteHistoryBankAccount =
+  /* GraphQL */ `subscription OnDeleteHistoryBankAccount(
+  $filter: ModelSubscriptionHistoryBankAccountFilterInput
+  $owner: String
+) {
+  onDeleteHistoryBankAccount(filter: $filter, owner: $owner) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnDeleteHistoryBankAccountSubscriptionVariables,
+    APITypes.OnDeleteHistoryBankAccountSubscription
+  >;
 export const onDeleteHistoryExpense =
   /* GraphQL */ `subscription OnDeleteHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onDeleteHistoryExpense(filter: $filter) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -453,6 +573,16 @@ export const onDeleteHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -546,6 +676,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename
@@ -600,6 +734,10 @@ export const onUpdateBankAccount =
   onUpdateBankAccount(filter: $filter, owner: $owner) {
     balance
     createdAt
+    history {
+      nextToken
+      __typename
+    }
     id
     name
     owner
@@ -630,7 +768,6 @@ export const onUpdateExpense = /* GraphQL */ `subscription OnUpdateExpense(
   $owner: String
 ) {
   onUpdateExpense(filter: $filter, owner: $owner) {
-    amount
     assigned
     category
     createdAt
@@ -687,6 +824,10 @@ export const onUpdateExpenseType =
 ) {
   onUpdateExpenseType(filter: $filter, owner: $owner) {
     createdAt
+    expenseHistory {
+      nextToken
+      __typename
+    }
     expenses {
       nextToken
       __typename
@@ -715,16 +856,62 @@ export const onUpdateExpenseType =
     APITypes.OnUpdateExpenseTypeSubscriptionVariables,
     APITypes.OnUpdateExpenseTypeSubscription
   >;
+export const onUpdateHistoryBankAccount =
+  /* GraphQL */ `subscription OnUpdateHistoryBankAccount(
+  $filter: ModelSubscriptionHistoryBankAccountFilterInput
+  $owner: String
+) {
+  onUpdateHistoryBankAccount(filter: $filter, owner: $owner) {
+    balance
+    bankAccount {
+      balance
+      createdAt
+      id
+      name
+      owner
+      type
+      updatedAt
+      userId
+      __typename
+    }
+    bankAccountId
+    createdAt
+    date
+    id
+    name
+    owner
+    type
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnUpdateHistoryBankAccountSubscriptionVariables,
+    APITypes.OnUpdateHistoryBankAccountSubscription
+  >;
 export const onUpdateHistoryExpense =
   /* GraphQL */ `subscription OnUpdateHistoryExpense(
   $filter: ModelSubscriptionHistoryExpenseFilterInput
 ) {
   onUpdateHistoryExpense(filter: $filter) {
-    amount
+    assigned
+    category
     createdAt
     date
     expense {
-      amount
       assigned
       category
       createdAt
@@ -745,6 +932,16 @@ export const onUpdateHistoryExpense =
       __typename
     }
     expenseId
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
     id
     updatedAt
     user {
@@ -838,6 +1035,10 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
       __typename
     }
     firstName
+    historyBankAccount {
+      nextToken
+      __typename
+    }
     historyExpense {
       nextToken
       __typename

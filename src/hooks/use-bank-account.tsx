@@ -9,6 +9,7 @@ import {
   BankAccountType,
   BankAccount,
 } from "../../amplify/graphql/API";
+import { useAddHistoryBankAccount } from ".";
 
 export function useBankAccount() {
   const [bankAccount, setBankAccount] = useState<BankAccountType | null>(null);
@@ -85,6 +86,8 @@ export function useAddBankAccount() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useUser();
+  const { fetchBankAccounts } = useListBankAccountsByUserId();
+  const { createHistoryBankAccount } = useAddHistoryBankAccount();
   const client = generateClient<Schema>({
     authMode: "userPool",
   });
@@ -96,18 +99,30 @@ export function useAddBankAccount() {
       }
       try {
         setSaving(true);
-        const res = await client.models.BankAccount.create({
+        await client.models.BankAccount.create({
           ...input,
           userId: user.sub,
         });
-        console.log(res);
+        fetchBankAccounts();
+        if (input.id) {
+          createHistoryBankAccount({
+            userId: user.sub,
+            bankAccountId: input.id,
+            balance: input.balance,
+          });
+        }
       } catch (error) {
         setError(error as Error);
       } finally {
         setSaving(false);
       }
     },
-    [client, user],
+    [
+      client.models.BankAccount,
+      createHistoryBankAccount,
+      fetchBankAccounts,
+      user,
+    ],
   );
 
   return { saving, createBankAccount, error };
@@ -117,6 +132,8 @@ export function useUpdateBankAccount() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useUser();
+  const { fetchBankAccounts } = useListBankAccountsByUserId();
+  const { createHistoryBankAccount } = useAddHistoryBankAccount();
   const client = generateClient<Schema>({
     authMode: "userPool",
   });
@@ -132,13 +149,24 @@ export function useUpdateBankAccount() {
           ...input,
           userId: user.sub,
         });
+        fetchBankAccounts();
+        createHistoryBankAccount({
+          userId: user.sub,
+          bankAccountId: input.id,
+          balance: input.balance,
+        });
       } catch (error) {
         setError(error as Error);
       } finally {
         setSaving(false);
       }
     },
-    [client, user],
+    [
+      client.models.BankAccount,
+      createHistoryBankAccount,
+      fetchBankAccounts,
+      user,
+    ],
   );
 
   return { saving, updateBankAccount, error };
@@ -148,6 +176,7 @@ export function useDeleteBankAccount() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useUser();
+  const { fetchBankAccounts } = useListBankAccountsByUserId();
   const client = generateClient<Schema>({
     authMode: "userPool",
   });
@@ -159,15 +188,15 @@ export function useDeleteBankAccount() {
       }
       try {
         setSaving(true);
-        const res = await client.models.BankAccount.delete({ ...input });
-        console.log(res);
+        await client.models.BankAccount.delete({ ...input });
+        fetchBankAccounts();
       } catch (error) {
         setError(error as Error);
       } finally {
         setSaving(false);
       }
     },
-    [client, user],
+    [client.models.BankAccount, fetchBankAccounts, user],
   );
 
   return { saving, deleteBankAccount, error };

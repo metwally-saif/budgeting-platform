@@ -15,6 +15,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
+    "@ant-design/plots": "^2.3.3",
     "@aws-amplify/ui-react": "^6.7.1",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
@@ -23,9 +25,12 @@
     "@mui/lab": "6.0.0-beta.19",
     "@mui/material": "^6.1.10",
     "@mui/x-date-pickers": "^7.23.2",
+    "antd": "^5.22.7",
     "aws-amplify": "^6.10.0",
+    "chart.js": "^4.4.7",
     "date-fns": "2.28.0",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.1"

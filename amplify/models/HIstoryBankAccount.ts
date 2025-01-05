@@ -1,10 +1,12 @@
 import { a } from "@aws-amplify/backend";
 
-export const BankAccount = a
+export const HistoryBankAccount = a
   .model({
     id: a.id(),
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
+    bankAccountId: a.string().required(),
+    bankAccount: a.belongsTo("BankAccount", "bankAccountId"),
     type: a.enum([
       "Checking",
       "Savings",
@@ -14,7 +16,7 @@ export const BankAccount = a
     ]),
     name: a.string(),
     balance: a.float(),
-    history: a.hasMany("HistoryBankAccount", "bankAccountId"),
+    date: a.date(),
   })
   .identifier(["id"])
   .secondaryIndexes((index) => [index("userId")])

@@ -7,7 +7,11 @@ import { env } from "$amplify/env/monthly-digest";
 // GraphQL queries + mutations
 import { listExpenses } from "graphql/queries";
 import { createHistoryExpense } from "graphql/mutations";
-import { Expense, CreateHistoryExpenseInput } from "graphql/API";
+import {
+  Expense,
+  CreateHistoryExpenseInput,
+  HistoryExpenseCategory,
+} from "graphql/API";
 
 Amplify.configure(
   {
@@ -88,7 +92,9 @@ async function createHistoryExpenses(expense: Expense): Promise<unknown> {
     userId: expense.userId ?? "",
     expenseId: expense.id,
     date: formatToAWSDate(new Date()),
-    amount: expense.assigned ? expense.assigned : 0,
+    assigned: expense.assigned ? expense.assigned : 0,
+    expenseTypeId: expense.expenseTypeId ?? "",
+    category: expense.category as unknown as HistoryExpenseCategory,
   };
 
   return await client.graphql({

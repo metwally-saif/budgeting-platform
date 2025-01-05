@@ -95,8 +95,7 @@ export function useAddExpenseType() {
       }
       try {
         setSaving(true);
-        const res = await client.models.ExpenseType.create({ ...input });
-        console.log(res);
+        await client.models.ExpenseType.create({ ...input });
       } catch (error) {
         setError(error as Error);
       } finally {
@@ -124,12 +123,11 @@ export function useUpdateExpenseType() {
       }
       try {
         setSaving(true);
-        const res = await client.models.ExpenseType.update({
+        await client.models.ExpenseType.update({
           ...input,
           userId: user.sub,
           name: input.name ?? undefined,
         });
-        console.log(res);
       } catch (error) {
         setError(error as Error);
       } finally {
@@ -157,8 +155,7 @@ export function useDeleteExpenseType() {
       }
       try {
         setSaving(true);
-        const res = await client.models.ExpenseType.delete({ ...input });
-        console.log(res);
+        await client.models.ExpenseType.delete({ ...input });
       } catch (error) {
         setError(error as Error);
       } finally {
