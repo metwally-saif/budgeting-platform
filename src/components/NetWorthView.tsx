@@ -359,7 +359,7 @@ function NetWorthView() {
 
       {/* Chart Section */}
       <Box sx={{ mt: 3, backgroundColor: "#fff", p: 2, borderRadius: 2 }}>
-        <DualAxes {...config} style={{ height: 5000 }} />
+        <DualAxes {...config} />
       </Box>
 
       {/* Table: monthly net worth + monthly changes */}
