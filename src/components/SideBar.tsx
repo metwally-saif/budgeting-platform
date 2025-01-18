@@ -113,7 +113,7 @@ export default function SideBar() {
         <Divider />
         <ListItem disablePadding sx={{ display: "block" }}>
           <ListItemButton
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/budget")}
             sx={[
               {
                 minHeight: 48,

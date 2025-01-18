@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useUpdateExpense } from "../hooks";
+import { useUpdateExpense, useDeleteExpense } from "../hooks";
 import { Expense, ExpenseRecurringFrequency } from "../../amplify/graphql/API";
 import { usePreference } from "../hooks";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
@@ -40,6 +40,7 @@ interface ExpenseTargetProps {
 const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
   const { preference } = usePreference();
   const { updateExpense } = useUpdateExpense();
+  const { deleteExpense } = useDeleteExpense();
 
   const [showForm, setShowForm] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -106,6 +107,26 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
       refresh();
     } catch (error) {
       console.error("Failed to update notes:", error);
+    }
+  };
+
+  const handleDeleteExpense = async () => {
+    try {
+      await deleteExpense({ id: expense.id });
+      refresh();
+      setDeleteDialogOpen(false);
+      setSnackbar({
+        open: true,
+        message: "Target deleted successfully.",
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Failed to delete expense target:", error);
+      setSnackbar({
+        open: true,
+        message: "Failed to delete target.",
+        severity: "error",
+      });
     }
   };
 
@@ -565,6 +586,15 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
           {snackbar.message}
         </Alert>
       </Snackbar>
+      <Button
+        variant="outlined"
+        color="error"
+        startIcon={<CancelIcon />}
+        onClick={handleDeleteExpense}
+        sx={{ mt: 2 }}
+      >
+        Delete Expense
+      </Button>
     </Box>
   );
 };

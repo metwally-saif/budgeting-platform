@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Box, Typography, Paper } from "@mui/material";
 import ExpenseTarget from "../components/CreateTarget";
 import PreferenceModal from "../components/PreferencesModal";
@@ -15,20 +15,20 @@ const HomePage: React.FC = () => {
   const [categories, setCategories] = useState(expenseTypesWithExpenses);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
 
-  useEffect(() => {
-    setCategories(expenseTypesWithExpenses);
-  }, [expenseTypesWithExpenses, listExpenses]);
+  const refresh = useCallback(() => {
+    listExpenses();
+  }, [listExpenses]);
 
   const handleSelectExpense = (expense: Expense) => {
     setSelectedExpense(expense);
   };
+  useEffect(() => {
+    setCategories(expenseTypesWithExpenses);
+  }, [expenseTypesWithExpenses, listExpenses, refresh]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  const refresh = () => {
-    listExpenses();
-  };
 
   const handleUpdateExpense = async (expense: UpdateExpenseInput) => {
     await updateExpense(expense);
@@ -84,6 +84,8 @@ const HomePage: React.FC = () => {
 
         <BudgetRows
           categories={categories}
+          setCategories={setCategories}
+          refresh={refresh}
           handleSelectExpense={handleSelectExpense}
           handleUpdateExpense={handleUpdateExpense}
         />

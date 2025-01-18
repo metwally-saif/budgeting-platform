@@ -7,6 +7,7 @@ import {
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ReflectPage from "./pages/ReflectPage";
+import LandingPage from "./pages/LandingPage";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,8 +17,9 @@ Amplify.configure(outputs);
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route path="/" element={<LandingPage />} />
       <Route
-        path="/"
+        path="/budget"
         element={
           <ProtectedRoute>
             <HomePage />
@@ -25,6 +27,7 @@ const router = createBrowserRouter(
         }
       />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<LoginPage />} />
       <Route path="/reflect/*" element={<ReflectPage />} />
       <Route path="*" element={<div>Not Found</div>} />
     </Route>,
