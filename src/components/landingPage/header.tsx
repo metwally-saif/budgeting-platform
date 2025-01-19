@@ -3,7 +3,7 @@ import Logo from "./logo";
 import { useUser } from "../../hooks";
 
 export default function Header() {
-    const { user } = useUser();
+  const { user } = useUser();
   return (
     <header className="fixed top-2 z-30 w-full md:top-6">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -19,36 +19,34 @@ export default function Header() {
           {/* Desktop sign in as */}
           <ul className="flex flex-1 items-center justify-end gap-3">
             {user ? (
-                           <li>
-                           <a
-                             href="/budget"
-                             className="btn-sm bg-white text-gray-800 shadow hover:bg-gray-50"
-                           >
-                             Go To Dashboard
-                           </a>
-                         </li>
-            ) : (
-                <>
-                <li>
-                <a
-                  href="/login"
-                  className="btn-sm bg-white text-gray-800 shadow hover:bg-gray-50"
-                >
-                  Login
-                </a>
-              </li>
               <li>
                 <a
-                  href="/signup"
-                  className="btn-sm bg-gray-800 text-gray-200 shadow hover:bg-gray-900"
+                  href="/budget"
+                  className="btn-sm bg-white text-gray-800 shadow hover:bg-gray-50"
                 >
-                  Register
+                  Go To Dashboard
                 </a>
               </li>
+            ) : (
+              <>
+                <li>
+                  <a
+                    href="/login"
+                    className="btn-sm bg-white text-gray-800 shadow hover:bg-gray-50"
+                  >
+                    Login
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/signup"
+                    className="btn-sm bg-gray-800 text-gray-200 shadow hover:bg-gray-900"
+                  >
+                    Register
+                  </a>
+                </li>
               </>
-            )
-                }
-
+            )}
           </ul>
         </div>
       </div>

@@ -8,7 +8,9 @@ function LoginPage() {
   return (
     <div className=" h-screen w-screen flex justify-center items-center bg-slate-100 flex-col gap-5">
       <h1 className="text-black">Budget AI</h1>
-      <Authenticator initialState={location.pathname === "/login" ? "signIn" : "signUp"}>
+      <Authenticator
+        initialState={location.pathname === "/login" ? "signIn" : "signUp"}
+      >
         {({ user }) => {
           if (user) {
             navigate("/budget");
