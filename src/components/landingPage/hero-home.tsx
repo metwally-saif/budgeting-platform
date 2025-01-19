@@ -37,7 +37,7 @@ export default function HeroHome() {
                 />
                 <img
                   className="box-content rounded-full border-2 border-gray-50"
-                  src="/public/avatar-04.jpg"
+                  src="/avatar-03.jpg"
                   width={32}
                   height={32}
                   alt="Avatar 03"
@@ -63,8 +63,8 @@ export default function HeroHome() {
               data-aos="zoom-y-out"
               data-aos-delay={150}
             >
-              The website builder you're <br className="max-lg:hidden" />
-              looking for
+              Budget Ai <br className="max-lg:hidden" />
+              The Way to Manage Your Finances
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
@@ -72,8 +72,8 @@ export default function HeroHome() {
                 data-aos="zoom-y-out"
                 data-aos-delay={300}
               >
-                Simple is a modern website builder powered by AI that changes
-                how companies create user interfaces together.
+                Harness the power of AI to track expenses, plan budgets, and
+                achieve your financial goals effortlessly.
               </p>
               <div className="relative before:absolute before:inset-0 before:border-y before:[border-image:linear-gradient(to_right,transparent,theme(colors.slate.300/.8),transparent)1]">
                 <div
@@ -83,10 +83,10 @@ export default function HeroHome() {
                 >
                   <a
                     className="btn group mb-4 w-full bg-gradient-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto"
-                    href="#0"
+                    href="/signup"
                   >
                     <span className="relative inline-flex items-center">
-                      Start Free Trial{" "}
+                      Sign Up{" "}
                       <span className="ml-1 tracking-normal text-blue-300 transition-transform group-hover:translate-x-0.5">
                         -&gt;
                       </span>
