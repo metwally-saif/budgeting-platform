@@ -141,8 +141,8 @@ const PreferenceModal = ({ refresh }: { refresh(): void }) => {
     lastUpdated: Date;
   }
 
-  const handleFormSubmit = (data: PreferenceFormData) => {
-    createPreference({
+  const handleFormSubmit = async (data: PreferenceFormData) => {
+    await createPreference({
       userId: user.sub,
       hasDebt: data.hasDebt,
       debt: data.debt ? parseFloat(data.debt) : 0,

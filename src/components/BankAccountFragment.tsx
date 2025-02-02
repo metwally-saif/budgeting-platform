@@ -1,24 +1,12 @@
 import { useEffect, useState } from "react";
-import { Expense } from "../../amplify/graphql/API";
 import { Card, CardContent, Typography, Box, useTheme } from "@mui/material";
-
-import { getUserFinancialStatus } from "../utils/get-user-financial-status";
 import { useCurrency } from "../utils/get-currency";
-import {
-  useListBankAccountsByUserId,
-  useListHistoryExpenseByUserId,
-} from "../hooks";
+import { BankAccount } from "../../amplify/graphql/API";
 
-interface BankAccountFragmentProps {
-  expenses: Expense[];
-}
-
-const BankAccountFragment: React.FC<BankAccountFragmentProps> = ({
-  expenses,
+const BankAccountFragment: React.FC<{ bankAccounts: BankAccount[] }> = ({
+  bankAccounts,
 }) => {
   const currency = useCurrency();
-  const { bankAccounts } = useListBankAccountsByUserId();
-  const { historyExpenses } = useListHistoryExpenseByUserId();
   const [userFinancialStatus, setUserFinancialStatus] = useState<number | null>(
     null,
   );
@@ -27,16 +15,12 @@ const BankAccountFragment: React.FC<BankAccountFragmentProps> = ({
   const theme = useTheme();
 
   useEffect(() => {
-    if (!bankAccounts || !historyExpenses || !expenses) {
-      return;
-    }
-    const { userHasNow } = getUserFinancialStatus(
-      bankAccounts,
-      expenses,
-      historyExpenses,
-    );
+    if (!bankAccounts) return;
+    const userHasNow = bankAccounts
+      .map((ba) => ba.balance || 0)
+      .reduce((a, b) => a + b, 0);
     setUserFinancialStatus(userHasNow);
-  }, [bankAccounts, historyExpenses, expenses]);
+  }, [bankAccounts]);
 
   // Determine the background color based on userFinancialStatus
   const getStatusColor = () => {

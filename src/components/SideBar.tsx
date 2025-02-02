@@ -80,9 +80,9 @@ const Drawer = styled(MuiDrawer, {
   ],
 }));
 
-export default function SideBar() {
+export default function SideBar({ refresh }: { refresh: () => void }) {
   const navigate = useNavigate();
-  const { bankAccounts, fetchBankAccounts } = useListBankAccountsByUserId();
+  const { bankAccounts } = useListBankAccountsByUserId();
   const [bankAccountModalOpen, setBankAccountModalOpen] = React.useState(false);
   const [editBankAccountModalOpen, setEditBankAccountModalOpen] =
     React.useState(false);
@@ -96,10 +96,6 @@ export default function SideBar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
-
-  const refresh = () => {
-    fetchBankAccounts();
   };
 
   return (
@@ -370,13 +366,13 @@ export default function SideBar() {
       </Drawer>
       <AddBankAccountModal
         open={bankAccountModalOpen}
-        setOpen={setBankAccountModalOpen}
         refresh={refresh}
+        setOpen={setBankAccountModalOpen}
       />
       <UpdateBankAccountModal
         open={editBankAccountModalOpen}
-        setOpen={setEditBankAccountModalOpen}
         refresh={refresh}
+        setOpen={setEditBankAccountModalOpen}
         bankAccount={selectedBankAccount}
       />
     </Box>

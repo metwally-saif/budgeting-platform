@@ -225,7 +225,6 @@ function SpendingBreakdownView(): JSX.Element {
         }
       });
     }
-    console.log(newCategorySpending);
     setCategorySpending(newCategorySpending);
 
     // Calculate group spending

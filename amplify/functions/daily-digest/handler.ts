@@ -5,11 +5,13 @@ import { generateClient } from "aws-amplify/data";
 import { env } from "$amplify/env/daily-digest";
 
 // GraphQL queries + mutations
-import { listExpenses } from "graphql/queries";
-import { updateExpense } from "graphql/mutations";
+import { listExpenses, listBankAccountByUserId } from "graphql/queries";
+import { updateExpense, updateBankAccount } from "graphql/mutations";
 import {
+  BankAccount,
   Expense,
   ExpenseRecurringFrequency,
+  UpdateBankAccountInput,
   UpdateExpenseInput,
 } from "graphql/API";
 
@@ -153,6 +155,66 @@ async function fetchAllExpenses(): Promise<Expense[]> {
   return allExpenses;
 }
 
+async function fetchAllUserBankAccounts(sub: string): Promise<BankAccount[]> {
+  const allBankAccounts: BankAccount[] = [];
+  let nextToken: string | null | undefined = null;
+  let res;
+  do {
+    res = await client.graphql({
+      query: listBankAccountByUserId,
+      variables: {
+        userId: sub,
+        limit: 100,
+        nextToken,
+      },
+    });
+
+    const items = res?.data?.listBankAccountByUserId?.items ?? [];
+
+    nextToken = res?.data?.listBankAccountByUserId?.nextToken;
+
+    for (const item of items) {
+      if (item) allBankAccounts.push(item);
+    }
+  } while (nextToken);
+
+  return allBankAccounts;
+}
+
+async function deductFromBankAccount(
+  sub: string,
+  amount: number,
+): Promise<unknown> {
+  // Fetch all bank accounts for the user
+  const bankAccounts = await fetchAllUserBankAccounts(sub);
+  if (!bankAccounts || bankAccounts.length === 0) {
+    console.error("No bank accounts found for user:", sub);
+    return;
+  }
+
+  // Find the first bank account with a positive balance
+  const bankAccount = bankAccounts.find((ba) => ba.balance && ba.balance > 0);
+  if (!bankAccount) {
+    console.error(
+      "No bank accounts with positive balance found for user:",
+      sub,
+    );
+    return;
+  }
+
+  // Deduct the amount from the bank account
+  const newBalance = bankAccount.balance && bankAccount.balance - amount;
+  const input: UpdateBankAccountInput = {
+    id: bankAccount.id,
+    balance: newBalance,
+  };
+
+  return await client.graphql({
+    query: updateBankAccount,
+    variables: { input },
+  });
+}
+
 export const handler: Handler = async () => {
   try {
     // 1. Fetch all expenses (handling pagination).
@@ -185,6 +247,13 @@ export const handler: Handler = async () => {
               `Skipping expense ${id}: invalid freq or missing dueDate.`,
             );
             continue;
+          }
+
+          // if nextMonthIWantToSetAside > 0, deduct from bank account
+          if (nextMonthIWantToSetAside && nextMonthIWantToSetAside > 0) {
+            operations.push(
+              deductFromBankAccount(exp.userId, nextMonthIWantToSetAside),
+            );
           }
 
           // Move nextMonthIWantToSetAside -> assigned, reset nextMonthIWantToSetAside

@@ -268,31 +268,6 @@ const ExpenseTarget: React.FC<ExpenseTargetProps> = ({ expense, refresh }) => {
                           : "0.00"}
                       </Typography>
                     </Grid>
-                    <Grid item xs={6}>
-                      <Typography variant="body2" color="textSecondary">
-                        Assigned This Month
-                      </Typography>
-                      <Typography variant="body1">
-                        +{preference?.currency === "USD" ? "$" : "€"}
-                        {expense.nextMonthIWantToSetAside}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography variant="body2" color="textSecondary">
-                        Cash Spending
-                      </Typography>
-                      <Typography variant="body1">
-                        {preference?.currency === "USD" ? "$" : "€"}0.00
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography variant="body2" color="textSecondary">
-                        Credit Spending
-                      </Typography>
-                      <Typography variant="body1">
-                        {preference?.currency === "USD" ? "$" : "€"}0.00
-                      </Typography>
-                    </Grid>
                   </Grid>
                 </Box>
               </Grid>

@@ -39,7 +39,7 @@ function ReflectPage(): JSX.Element {
       }}
     >
       <Box>
-        <SideBar />
+        <SideBar refresh={() => {}} />
       </Box>
       <Box
         sx={{

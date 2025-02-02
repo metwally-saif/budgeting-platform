@@ -697,18 +697,6 @@ export const updateBankAccount = /* GraphQL */ `mutation UpdateBankAccount(
     owner
     type
     updatedAt
-    user {
-      createdAt
-      email
-      firstName
-      id
-      lastName
-      owner
-      profileOwner
-      role
-      updatedAt
-      __typename
-    }
     userId
     __typename
   }

@@ -112,7 +112,6 @@
 [data-rehype-pretty-code-figure] code {
   @apply grid min-w-full break-words rounded-none border-none bg-transparent p-0 text-sm text-gray-900;
   counter-reset: line;
-  box-decoration-break: clone;
 }
 
 [data-rehype-pretty-code-title] {
