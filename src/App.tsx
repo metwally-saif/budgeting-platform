@@ -28,7 +28,14 @@ const router = createBrowserRouter(
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<LoginPage />} />
-      <Route path="/reflect/*" element={<ReflectPage />} />
+      <Route
+        path="/reflect/*"
+        element={
+          <ProtectedRoute>
+            <ReflectPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<div>Not Found</div>} />
     </Route>,
   ),

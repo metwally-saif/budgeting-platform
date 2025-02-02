@@ -53,43 +53,44 @@ export function useAddPreference() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const { user } = useUser();
-  const client = generateClient<Schema>({
-    authMode: "userPool",
-  });
+  const client = generateClient<Schema>({ authMode: "userPool" });
 
   const createPreference = useCallback(
     async (input: CreatePreferenceInput) => {
-      if (!user) {
-        return;
-      }
+      if (!user) return;
       try {
         setSaving(true);
-        // create three expense types for the user: Bills, Needs, Wants
+
+        // Create expense types concurrently for "Bills", "Needs", and "Wants"
         const expenseTypes = ["Bills", "Needs", "Wants"];
-        const addedTypes = [];
-        for (const expenseType of expenseTypes) {
-          addedTypes.push(
-            await client.models.ExpenseType.create({
-              name: expenseType,
-              userId: user.sub,
-            }).then((res) => res.data as unknown as ExpenseType),
-          );
+        const expenseTypePromises = expenseTypes.map((expenseType) =>
+          client.models.ExpenseType.create({
+            name: expenseType,
+            userId: user.sub,
+          }).then((res) => res.data as unknown as ExpenseType),
+        );
+        const addedTypes = await Promise.all(expenseTypePromises);
+
+        // Create the user preference
+        const prefRes = await client.models.Preference.create({ ...input });
+        if (!prefRes?.data) {
+          throw new Error("Failed to create preference");
         }
-        const res = await client.models.Preference.create({ ...input });
-        if (!res?.data) {
-          setError(new Error("Failed to create preference"));
-          return;
-        }
+
+        // Get initial expenses (ensure this function is synchronous or properly awaited)
         const initialExpenses = getInitialExpenses(
-          res.data as unknown as Preference,
+          prefRes.data as unknown as Preference,
           user.sub,
           addedTypes,
         );
-        for (const expense of initialExpenses) {
-          await client.models.Expense.create(expense);
-        }
-      } catch (error) {
-        setError(error as Error);
+
+        // Create initial expenses concurrently
+        const expensePromises = initialExpenses.map((expense) =>
+          client.models.Expense.create(expense),
+        );
+        await Promise.all(expensePromises);
+      } catch (err) {
+        setError(err as Error);
       } finally {
         setSaving(false);
       }

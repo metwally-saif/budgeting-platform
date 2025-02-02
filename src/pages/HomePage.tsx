@@ -2,29 +2,56 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Box, Typography, Paper } from "@mui/material";
 import ExpenseTarget from "../components/CreateTarget";
 import PreferenceModal from "../components/PreferencesModal";
-import { useListExpenseByUserId, useUpdateExpense } from "../hooks";
+import {
+  useListExpenseByUserId,
+  useUpdateExpense,
+  useListBankAccountsByUserId,
+  useListExpenseTypeByUserId,
+} from "../hooks";
 import { Expense, UpdateExpenseInput } from "../../amplify/graphql/API";
 import SideBar from "../components/SideBar";
 import BudgetRows from "../components/BudgetRows";
 import BankAccountFragment from "../components/BankAccountFragment";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HomePage: React.FC = () => {
   const { updateExpense } = useUpdateExpense();
+  const { bankAccounts, fetchBankAccounts } = useListBankAccountsByUserId();
+  const { fetchExpenseTypes } = useListExpenseTypeByUserId();
   const { expenseTypesWithExpenses, error, listExpenses } =
     useListExpenseByUserId();
   const [categories, setCategories] = useState(expenseTypesWithExpenses);
   const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
 
-  const refresh = useCallback(() => {
-    listExpenses();
-  }, [listExpenses]);
-
   const handleSelectExpense = (expense: Expense) => {
+    refresh();
     setSelectedExpense(expense);
   };
+  const refresh = useCallback(async () => {
+    try {
+      await Promise.all([
+        listExpenses(),
+        fetchBankAccounts(),
+        fetchExpenseTypes(),
+      ]);
+    } catch (error) {
+      console.error("Failed to refresh data:", error);
+    }
+  }, [listExpenses, fetchExpenseTypes, fetchBankAccounts]);
+
   useEffect(() => {
     setCategories(expenseTypesWithExpenses);
-  }, [expenseTypesWithExpenses, listExpenses, refresh]);
+  }, [bankAccounts, expenseTypesWithExpenses, refresh]);
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: "phone",
+      duration: 700,
+      easing: "ease-out-cubic",
+    });
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -32,7 +59,7 @@ const HomePage: React.FC = () => {
 
   const handleUpdateExpense = async (expense: UpdateExpenseInput) => {
     await updateExpense(expense);
-    refresh();
+    await refresh();
   };
 
   return (
@@ -46,7 +73,7 @@ const HomePage: React.FC = () => {
     >
       {/* Sidebar */}
       <Box>
-        <SideBar />
+        <SideBar refresh={refresh} />
       </Box>
 
       {/* Main Content */}
@@ -76,11 +103,7 @@ const HomePage: React.FC = () => {
         <PreferenceModal refresh={refresh} />
 
         {/* Bank Account Fragment */}
-        <BankAccountFragment
-          expenses={expenseTypesWithExpenses
-            .map((category) => category.expenses)
-            .flat()}
-        />
+        <BankAccountFragment bankAccounts={bankAccounts || []} />
 
         <BudgetRows
           categories={categories}

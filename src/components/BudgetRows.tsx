@@ -36,35 +36,42 @@ import {
   useUser,
   useDeleteExpenseType,
   useUpdateExpenseType,
+  useListBankAccountsByUserId,
+  useUpdateBankAccount,
 } from "../hooks";
 import AddIcon from "@mui/icons-material/Add";
 import { useCurrency } from "../utils/get-currency";
-import { Expense, UpdateExpenseInput } from "../../amplify/graphql/API";
+import {
+  Expense,
+  UpdateBankAccountInput,
+  UpdateExpenseInput,
+} from "../../amplify/graphql/API";
 
 interface BudgetRowsProps {
   categories: ExpenseTypeWithExpenses[];
   setCategories: React.Dispatch<
     React.SetStateAction<ExpenseTypeWithExpenses[]>
   >;
+  refresh: () => void;
   handleSelectExpense: (expense: Expense) => void;
   handleUpdateExpense: (expense: UpdateExpenseInput) => Promise<void>;
-  refresh: () => void;
 }
 
 const BudgetRows: React.FC<BudgetRowsProps> = ({
   categories,
   setCategories,
+  refresh,
   handleSelectExpense,
   handleUpdateExpense,
-  refresh,
 }) => {
   const currency = useCurrency();
   const { createExpense } = useAddExpense();
   const { deleteExpenseType } = useDeleteExpenseType();
   const { updateExpenseType } = useUpdateExpenseType();
   const { createExpenseType } = useAddExpenseType();
+  const { bankAccounts } = useListBankAccountsByUserId();
+  const { updateBankAccount } = useUpdateBankAccount();
   const { user } = useUser();
-  // State to manage which expenses are being edited
   const [editingExpenseId, setEditingExpenseId] = useState<string | null>(null);
   const [editedAssignedAmount, setEditedAssignedAmount] = useState<number>(0);
   const [newExpenseTypeName, setNewExpenseTypeName] = useState("");
@@ -92,6 +99,41 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
     setEditedAssignedAmount(expense.assigned || 0);
   };
 
+  const adjustBankAccountBalance = async (
+    expense: Expense,
+    newAssigned: number,
+  ) => {
+    if (!bankAccounts || !user) {
+      console.error("No bank accounts found for user:", user?.sub);
+      return;
+    }
+
+    // Find the first bank account with a positive balance
+    const bankAccount = bankAccounts.find((ba) => ba.balance && ba.balance > 0);
+    if (!bankAccount) {
+      console.error(
+        "No bank accounts with positive balance found for user:",
+        user?.given_name,
+      );
+      return;
+    }
+
+    // Deduct the amount from the bank account
+    const oldAssigned = expense.assigned || 0;
+    const newBalance =
+      newAssigned > oldAssigned
+        ? bankAccount.balance &&
+          bankAccount.balance - (newAssigned - oldAssigned)
+        : bankAccount.balance &&
+          bankAccount.balance + (oldAssigned - newAssigned);
+    const input: UpdateBankAccountInput = {
+      id: bankAccount.id,
+      balance: newBalance,
+    };
+
+    return await updateBankAccount(input);
+  };
+
   // Handle saving the edited expense
   const handleSave = async (expense: Expense) => {
     try {
@@ -100,6 +142,9 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
         assigned: editedAssignedAmount,
       });
 
+      // Adjust bank account balance
+      await adjustBankAccountBalance(expense, editedAssignedAmount);
+
       setSnackbar({
         open: true,
         message: `${expense.name} updated successfully!`,
@@ -107,6 +152,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
       });
 
       // Exit edit mode
+      refresh();
       setEditingExpenseId(null);
     } catch (error) {
       console.error("Failed to update expense:", error);
@@ -188,6 +234,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
         ),
       );
     });
+    refresh();
     handleCloseModal();
   };
 
@@ -212,6 +259,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
         ),
       );
     });
+    refresh();
     handleCloseModal();
   };
 
