@@ -6,8 +6,8 @@ import {
   useListExpenseByUserId,
   useUpdateExpense,
   useListBankAccountsByUserId,
-  useListExpenseTypeByUserId,
 } from "../hooks";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import { Expense, UpdateExpenseInput } from "../../amplify/graphql/API";
 import SideBar from "../components/SideBar";
 import BudgetRows from "../components/BudgetRows";
@@ -16,9 +16,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const HomePage: React.FC = () => {
+  const { user } = useAuthenticator((context) => [context.user]);
   const { updateExpense } = useUpdateExpense();
   const { bankAccounts, fetchBankAccounts } = useListBankAccountsByUserId();
-  const { fetchExpenseTypes } = useListExpenseTypeByUserId();
   const { expenseTypesWithExpenses, error, listExpenses } =
     useListExpenseByUserId();
   const [categories, setCategories] = useState(expenseTypesWithExpenses);
@@ -30,15 +30,12 @@ const HomePage: React.FC = () => {
   };
   const refresh = useCallback(async () => {
     try {
-      await Promise.all([
-        listExpenses(),
-        fetchBankAccounts(),
-        fetchExpenseTypes(),
-      ]);
+      await Promise.all([listExpenses(), fetchBankAccounts()]);
     } catch (error) {
       console.error("Failed to refresh data:", error);
     }
-  }, [listExpenses, fetchExpenseTypes, fetchBankAccounts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listExpenses, fetchBankAccounts, user]);
 
   useEffect(() => {
     setCategories(expenseTypesWithExpenses);

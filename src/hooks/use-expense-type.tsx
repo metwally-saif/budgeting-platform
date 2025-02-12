@@ -46,12 +46,9 @@ export function useListExpenseTypeByUserId() {
   const [expenseTypes, setExpenseTypes] = useState<ExpenseType[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  // Memoize the client to prevent recreation on every render
+  // Memoize the client to avoid re-creating it on every render
   const client = useMemo(
-    () =>
-      generateClient<Schema>({
-        authMode: "userPool",
-      }),
+    () => generateClient<Schema>({ authMode: "userPool" }),
     [],
   );
 
@@ -60,18 +57,20 @@ export function useListExpenseTypeByUserId() {
       return;
     }
     try {
-      const { data } = await client.models.ExpenseType.list({
+      const response = await client.models.ExpenseType.list({
         filter: { userId: { eq: user.sub } },
       });
+      const data = response.data;
       if (!data) {
         setError(new Error("ExpenseType not found"));
         return;
       }
       setExpenseTypes(data as unknown as ExpenseType[]);
-    } catch (error) {
-      setError(error as Error);
+      return data as unknown as ExpenseType[];
+    } catch (err) {
+      setError(err as Error);
     }
-  }, [client, user]);
+  }, [user, client]);
 
   useEffect(() => {
     fetchExpenseTypes();

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, PropsWithChildren } from "react";
-import { fetchUserAttributes, getCurrentUser } from "aws-amplify/auth";
+import { fetchUserAttributes } from "aws-amplify/auth";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 // Define the shape of your user (you may want to define this in a separate TypeScript file)
 // eslint-disable-next-line react-refresh/only-export-components
@@ -14,27 +15,27 @@ interface User {
 }
 export const UserProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
+  const { user: userObj } = useAuthenticator((context) => [context.user]);
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const userAttr = await fetchUserAttributes();
-        const { username } = await getCurrentUser();
 
         setUser({
-          email: userAttr.email || "",
+          email: userObj.signInDetails?.loginId || "",
           email_verified: Boolean(userAttr.email_verified) || false,
-          sub: userAttr.sub || "",
+          sub: userObj.userId || "",
           family_name: userAttr.family_name || "",
           given_name: userAttr.given_name || "",
-          username,
+          username: userObj?.username || "",
         });
       } catch (error) {
         console.error("Error fetching user:", error);
       }
     }
     fetchUser();
-  }, []);
+  }, [userObj]);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
