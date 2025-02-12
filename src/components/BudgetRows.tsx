@@ -38,6 +38,7 @@ import {
   useUpdateExpenseType,
   useListBankAccountsByUserId,
   useUpdateBankAccount,
+  useSubscribeToExpense,
 } from "../hooks";
 import AddIcon from "@mui/icons-material/Add";
 import { useCurrency } from "../utils/get-currency";
@@ -66,6 +67,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
 }) => {
   const currency = useCurrency();
   const { createExpense } = useAddExpense();
+  useSubscribeToExpense();
   const { deleteExpenseType } = useDeleteExpenseType();
   const { updateExpenseType } = useUpdateExpenseType();
   const { createExpenseType } = useAddExpenseType();
@@ -291,6 +293,7 @@ const BudgetRows: React.FC<BudgetRowsProps> = ({
       });
     }
   };
+
   return (
     <Box
       sx={{ padding: 4, width: "100%", maxWidth: "1200px", margin: "0 auto" }}

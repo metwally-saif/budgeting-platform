@@ -53,9 +53,10 @@ export function useListExpenseByUserId() {
     ExpenseTypeWithExpenses[]
   >([]);
   const [error, setError] = useState<Error | null>(null);
-  const { expenseTypes } = useListExpenseTypeByUserId();
+  const { fetchExpenseTypes } = useListExpenseTypeByUserId();
 
   const listExpenses = useCallback(async () => {
+    const expenseTypes = await fetchExpenseTypes();
     if (!user || !expenseTypes) {
       return;
     }
@@ -80,13 +81,44 @@ export function useListExpenseByUserId() {
     } catch (err) {
       setError(err as Error);
     }
-  }, [expenseTypes, user]); // Removed 'expenses' from dependencies to prevent re-renders
+  }, [fetchExpenseTypes, user]); // Removed 'expenses' from dependencies to prevent re-renders
 
   useEffect(() => {
     listExpenses();
   }, [listExpenses]);
 
   return { expenseTypesWithExpenses, listExpenses, error };
+}
+
+export function useSubscribeToExpense() {
+  const { user } = useUser();
+  const { listExpenses } = useListExpenseByUserId();
+  const client = generateClient<Schema>({
+    authMode: "userPool",
+  });
+
+  useEffect(() => {
+    if (!user?.sub) return;
+
+    const subscription = client.models.Expense.onCreate({
+      filter: {
+        userId: { eq: user.sub },
+      },
+    }).subscribe({
+      next: () => {
+        listExpenses();
+      },
+      error(err) {
+        console.error("Failed to subscribe to expense creation:", err);
+      },
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [client, listExpenses, user?.sub]);
+
+  return null;
 }
 
 export function useAddExpense() {
