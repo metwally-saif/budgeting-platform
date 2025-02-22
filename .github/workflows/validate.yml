@@ -19,9 +19,12 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
+      - run: |
+          corepack enable
+          yarn set version 4.5.1
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Yarn format check
         run: yarn format:check
