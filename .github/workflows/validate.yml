@@ -1,7 +1,11 @@
 name: Validate
 
 on:
-  workflow_call:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: read
 
 jobs:
   format:
