@@ -2,10 +2,13 @@ name: Validate
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "temp"]
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   format:
@@ -18,10 +21,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: "yarn"
+      - run: |
+          corepack enable
+          yarn set version 4.5.1
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Yarn format check
         run: yarn format:check
@@ -36,10 +42,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: "yarn"
+      - run: |
+          corepack enable
+          yarn set version 4.5.1
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Yarn lint
         run: yarn lint
@@ -54,10 +63,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: "yarn"
+      - run: |
+          corepack enable
+          yarn set version 4.5.1
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Yarn typecheck
         run: yarn typecheck
