@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import ReflectPage from "./pages/ReflectPage";
 import LandingPage from "./pages/LandingPage";
 import { Amplify } from "aws-amplify";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore generated on build
 import outputs from "../amplify_outputs.json";
 import ProtectedRoute from "./components/ProtectedRoute";
 
