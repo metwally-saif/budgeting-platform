@@ -22,5 +22,4 @@
   },
   "include": ["vite.config.ts"],
   "exclude": ["node_modules", "amplify_outputs.json"]
-
 }
