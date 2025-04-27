@@ -1,5 +1,5 @@
 /* tslint:disable */
-
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -41,6 +41,60 @@ export const getBankAccount = /* GraphQL */ `query GetBankAccount($id: ID!) {
   APITypes.GetBankAccountQueryVariables,
   APITypes.GetBankAccountQuery
 >;
+export const getConversationChat =
+  /* GraphQL */ `query GetConversationChat($id: ID!) {
+  getConversationChat(id: $id) {
+    createdAt
+    id
+    messages {
+      nextToken
+      __typename
+    }
+    metadata
+    name
+    owner
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.GetConversationChatQueryVariables,
+    APITypes.GetConversationChatQuery
+  >;
+export const getConversationMessageChat =
+  /* GraphQL */ `query GetConversationMessageChat($id: ID!) {
+  getConversationMessageChat(id: $id) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversation {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.GetConversationMessageChatQueryVariables,
+    APITypes.GetConversationMessageChatQuery
+  >;
 export const getExpense = /* GraphQL */ `query GetExpense($id: ID!) {
   getExpense(id: $id) {
     assigned
@@ -106,6 +160,10 @@ export const getExpenseType = /* GraphQL */ `query GetExpenseType($id: ID!) {
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -230,6 +288,45 @@ export const getHistoryExpense =
     APITypes.GetHistoryExpenseQueryVariables,
     APITypes.GetHistoryExpenseQuery
   >;
+export const getPredictedExpense =
+  /* GraphQL */ `query GetPredictedExpense($id: ID!) {
+  getPredictedExpense(id: $id) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.GetPredictedExpenseQueryVariables,
+    APITypes.GetPredictedExpenseQuery
+  >;
 export const getPreference =
   /* GraphQL */ `query GetPreference($userId: String!) {
   getPreference(userId: $userId) {
@@ -306,6 +403,10 @@ export const getUser = /* GraphQL */ `query GetUser($profileOwner: String!) {
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency
@@ -409,6 +510,59 @@ export const listBankAccounts = /* GraphQL */ `query ListBankAccounts(
   APITypes.ListBankAccountsQueryVariables,
   APITypes.ListBankAccountsQuery
 >;
+export const listConversationChats = /* GraphQL */ `query ListConversationChats(
+  $filter: ModelConversationChatFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listConversationChats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListConversationChatsQueryVariables,
+  APITypes.ListConversationChatsQuery
+>;
+export const listConversationMessageChats =
+  /* GraphQL */ `query ListConversationMessageChats(
+  $filter: ModelConversationMessageChatFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listConversationMessageChats(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      aiContext
+      associatedUserMessageId
+      conversationId
+      createdAt
+      id
+      owner
+      role
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListConversationMessageChatsQueryVariables,
+    APITypes.ListConversationMessageChatsQuery
+  >;
 export const listExpenseByUserId = /* GraphQL */ `query ListExpenseByUserId(
   $filter: ModelExpenseFilterInput
   $limit: Int
@@ -696,6 +850,73 @@ export const listHistoryExpenses = /* GraphQL */ `query ListHistoryExpenses(
 ` as GeneratedQuery<
   APITypes.ListHistoryExpensesQueryVariables,
   APITypes.ListHistoryExpensesQuery
+>;
+export const listPredictedExpenseByOwner =
+  /* GraphQL */ `query ListPredictedExpenseByOwner(
+  $filter: ModelPredictedExpenseFilterInput
+  $limit: Int
+  $nextToken: String
+  $owner: String!
+  $sortDirection: ModelSortDirection
+) {
+  listPredictedExpenseByOwner(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    owner: $owner
+    sortDirection: $sortDirection
+  ) {
+    items {
+      category
+      createdAt
+      date
+      expenseTypeId
+      id
+      owner
+      predictedAmount
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListPredictedExpenseByOwnerQueryVariables,
+    APITypes.ListPredictedExpenseByOwnerQuery
+  >;
+export const listPredictedExpenses = /* GraphQL */ `query ListPredictedExpenses(
+  $filter: ModelPredictedExpenseFilterInput
+  $id: ID
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listPredictedExpenses(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      category
+      createdAt
+      date
+      expenseTypeId
+      id
+      owner
+      predictedAmount
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListPredictedExpensesQueryVariables,
+  APITypes.ListPredictedExpensesQuery
 >;
 export const listPreferences = /* GraphQL */ `query ListPreferences(
   $filter: ModelPreferenceFilterInput

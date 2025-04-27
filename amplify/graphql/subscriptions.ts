@@ -1,5 +1,5 @@
 /* tslint:disable */
-
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -8,6 +8,37 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
+export const onCreateAssistantResponseChat =
+  /* GraphQL */ `subscription OnCreateAssistantResponseChat($conversationId: ID) {
+  onCreateAssistantResponseChat(conversationId: $conversationId) {
+    associatedUserMessageId
+    contentBlockDeltaIndex
+    contentBlockDoneAtIndex
+    contentBlockIndex
+    contentBlockText
+    contentBlockToolUse {
+      input
+      name
+      toolUseId
+      __typename
+    }
+    conversationId
+    errors {
+      errorType
+      message
+      __typename
+    }
+    id
+    owner
+    p
+    stopReason
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateAssistantResponseChatSubscriptionVariables,
+    APITypes.OnCreateAssistantResponseChatSubscription
+  >;
 export const onCreateBankAccount =
   /* GraphQL */ `subscription OnCreateBankAccount(
   $filter: ModelSubscriptionBankAccountFilterInput
@@ -44,6 +75,43 @@ export const onCreateBankAccount =
 ` as GeneratedSubscription<
     APITypes.OnCreateBankAccountSubscriptionVariables,
     APITypes.OnCreateBankAccountSubscription
+  >;
+export const onCreateConversationMessageChat =
+  /* GraphQL */ `subscription OnCreateConversationMessageChat(
+  $filter: ModelSubscriptionConversationMessageChatFilterInput
+  $owner: String
+) {
+  onCreateConversationMessageChat(filter: $filter, owner: $owner) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversation {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateConversationMessageChatSubscriptionVariables,
+    APITypes.OnCreateConversationMessageChatSubscription
   >;
 export const onCreateExpense = /* GraphQL */ `subscription OnCreateExpense(
   $filter: ModelSubscriptionExpenseFilterInput
@@ -117,6 +185,10 @@ export const onCreateExpenseType =
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -246,6 +318,48 @@ export const onCreateHistoryExpense =
     APITypes.OnCreateHistoryExpenseSubscriptionVariables,
     APITypes.OnCreateHistoryExpenseSubscription
   >;
+export const onCreatePredictedExpense =
+  /* GraphQL */ `subscription OnCreatePredictedExpense(
+  $filter: ModelSubscriptionPredictedExpenseFilterInput
+  $owner: String
+) {
+  onCreatePredictedExpense(filter: $filter, owner: $owner) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreatePredictedExpenseSubscriptionVariables,
+    APITypes.OnCreatePredictedExpenseSubscription
+  >;
 export const onCreatePreference =
   /* GraphQL */ `subscription OnCreatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
@@ -328,6 +442,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency
@@ -476,6 +594,10 @@ export const onDeleteExpenseType =
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -605,6 +727,48 @@ export const onDeleteHistoryExpense =
     APITypes.OnDeleteHistoryExpenseSubscriptionVariables,
     APITypes.OnDeleteHistoryExpenseSubscription
   >;
+export const onDeletePredictedExpense =
+  /* GraphQL */ `subscription OnDeletePredictedExpense(
+  $filter: ModelSubscriptionPredictedExpenseFilterInput
+  $owner: String
+) {
+  onDeletePredictedExpense(filter: $filter, owner: $owner) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnDeletePredictedExpenseSubscriptionVariables,
+    APITypes.OnDeletePredictedExpenseSubscription
+  >;
 export const onDeletePreference =
   /* GraphQL */ `subscription OnDeletePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
@@ -687,6 +851,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency
@@ -835,6 +1003,10 @@ export const onUpdateExpenseType =
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -964,6 +1136,48 @@ export const onUpdateHistoryExpense =
     APITypes.OnUpdateHistoryExpenseSubscriptionVariables,
     APITypes.OnUpdateHistoryExpenseSubscription
   >;
+export const onUpdatePredictedExpense =
+  /* GraphQL */ `subscription OnUpdatePredictedExpense(
+  $filter: ModelSubscriptionPredictedExpenseFilterInput
+  $owner: String
+) {
+  onUpdatePredictedExpense(filter: $filter, owner: $owner) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnUpdatePredictedExpenseSubscriptionVariables,
+    APITypes.OnUpdatePredictedExpenseSubscription
+  >;
 export const onUpdatePreference =
   /* GraphQL */ `subscription OnUpdatePreference(
   $filter: ModelSubscriptionPreferenceFilterInput
@@ -1046,6 +1260,10 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency

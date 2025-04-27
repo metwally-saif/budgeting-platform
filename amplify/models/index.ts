@@ -5,3 +5,4 @@ export * from "./ExpenseType";
 export * from "./BankAccount";
 export * from "./HistoryExpense";
 export * from "./HIstoryBankAccount";
+export * from "./PredictedExpense";
