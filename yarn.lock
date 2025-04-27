@@ -1798,7 +1798,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react-core@npm:3.4.2":
+"@aws-amplify/ui-react-ai@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@aws-amplify/ui-react-ai@npm:1.4.1"
+  dependencies:
+    "@aws-amplify/ui": "npm:^6.10.2"
+    "@aws-amplify/ui-react": "npm:^6.11.1"
+    "@aws-amplify/ui-react-core": "npm:^3.4.2"
+  peerDependencies:
+    "@aws-amplify/data-schema": ^1.19.0
+    aws-amplify: ^6.14.3
+    react: ^16.14 || ^17 || ^18 || ^19
+    react-dom: ^16.14 || ^17 || ^18 || ^19
+  checksum: 10/917a26a6c2ce6292313210190c80de5bc31f5c0ed6444711971c495790b4df9e49ceabd5dd9490b5ca03d31dba47f04e16f7bd00305fa8923527735f87c91cd3
+  languageName: node
+  linkType: hard
+
+"@aws-amplify/ui-react-core@npm:3.4.2, @aws-amplify/ui-react-core@npm:^3.4.2":
   version: 3.4.2
   resolution: "@aws-amplify/ui-react-core@npm:3.4.2"
   dependencies:
@@ -1839,7 +1855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui@npm:6.10.2":
+"@aws-amplify/ui@npm:6.10.2, @aws-amplify/ui@npm:^6.10.2":
   version: 6.10.2
   resolution: "@aws-amplify/ui@npm:6.10.2"
   dependencies:
@@ -19268,6 +19284,7 @@ __metadata:
     "@aws-amplify/backend": "npm:^1.16.0"
     "@aws-amplify/backend-cli": "npm:^1.7.0"
     "@aws-amplify/ui-react": "npm:^6.11.1"
+    "@aws-amplify/ui-react-ai": "npm:^1.4.1"
     "@aws-sdk/crc64-nvme-crt": "npm:^3.796.0"
     "@aws-sdk/signature-v4-crt": "npm:^3.796.0"
     "@emotion/react": "npm:^11.13.5"
