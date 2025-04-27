@@ -18,6 +18,7 @@
     "@ant-design/icons": "^5.5.2",
     "@ant-design/plots": "^2.3.3",
     "@aws-amplify/ui-react": "^6.7.1",
+    "@aws-sdk/signature-v4-crt": "^3.796.0",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@mui/base": "5.0.0-beta.64",
