@@ -14,6 +14,7 @@ import { dailyDigest, monthlyDigest } from "../functions";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import "@aws-sdk/crc64-nvme-crt";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
