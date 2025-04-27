@@ -48,4 +48,3 @@ targetMonth: string  // format YYYY-MM
 
 Analyze historical and recurring patterns to predict next month’s total spending per category.
 
-Respond with exactly one JSON object matching the NextMonthExpensePrediction interface. Do not include any extra keys, comments, or formatting.

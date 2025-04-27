@@ -13,6 +13,7 @@ import SideBar from "../components/SideBar";
 import BudgetRows from "../components/BudgetRows";
 import BankAccountFragment from "../components/BankAccountFragment";
 import AOS from "aos";
+import ChatModal from "../components/ChatModal";
 import "aos/dist/aos.css";
 
 const HomePage: React.FC = () => {
@@ -154,6 +155,9 @@ const HomePage: React.FC = () => {
           </Typography>
         )}
       </Paper>
+
+      {/* Chat Modal */}
+      <ChatModal />
     </Box>
   );
 };
