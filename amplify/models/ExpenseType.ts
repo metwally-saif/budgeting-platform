@@ -6,6 +6,7 @@ export const ExpenseType = a
     name: a.string().required(),
     expenses: a.hasMany("Expense", "expenseTypeId"),
     expenseHistory: a.hasMany("HistoryExpense", "expenseTypeId"),
+    predictedExpenses: a.hasMany("PredictedExpense", "expenseTypeId"),
     userId: a.string().required(),
     user: a.belongsTo("User", "userId"),
   })

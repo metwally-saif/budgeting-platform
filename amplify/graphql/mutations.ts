@@ -1,5 +1,5 @@
 /* tslint:disable */
-
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 import * as APITypes from "./API";
@@ -8,6 +8,117 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const chat = /* GraphQL */ `mutation Chat(
+  $aiContext: AWSJSON
+  $content: [AmplifyAIContentBlockInput]
+  $conversationId: ID!
+  $toolConfiguration: AmplifyAIToolConfigurationInput
+) {
+  chat(
+    aiContext: $aiContext
+    content: $content
+    conversationId: $conversationId
+    toolConfiguration: $toolConfiguration
+  ) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+
+    ... on ConversationMessageChat {
+      conversation {
+        createdAt
+        id
+        metadata
+        name
+        owner
+        updatedAt
+        __typename
+      }
+    }
+  }
+}
+` as GeneratedMutation<APITypes.ChatMutationVariables, APITypes.ChatMutation>;
+export const createAssistantResponseChat =
+  /* GraphQL */ `mutation CreateAssistantResponseChat(
+  $input: CreateConversationMessageChatAssistantInput!
+) {
+  createAssistantResponseChat(input: $input) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversation {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreateAssistantResponseChatMutationVariables,
+    APITypes.CreateAssistantResponseChatMutation
+  >;
+export const createAssistantResponseStreamChat =
+  /* GraphQL */ `mutation CreateAssistantResponseStreamChat(
+  $input: CreateConversationMessageChatAssistantStreamingInput!
+) {
+  createAssistantResponseStreamChat(input: $input) {
+    associatedUserMessageId
+    contentBlockDeltaIndex
+    contentBlockDoneAtIndex
+    contentBlockIndex
+    contentBlockText
+    contentBlockToolUse {
+      input
+      name
+      toolUseId
+      __typename
+    }
+    conversationId
+    errors {
+      errorType
+      message
+      __typename
+    }
+    id
+    owner
+    p
+    stopReason
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreateAssistantResponseStreamChatMutationVariables,
+    APITypes.CreateAssistantResponseStreamChatMutation
+  >;
 export const createBankAccount = /* GraphQL */ `mutation CreateBankAccount(
   $condition: ModelBankAccountConditionInput
   $input: CreateBankAccountInput!
@@ -44,6 +155,66 @@ export const createBankAccount = /* GraphQL */ `mutation CreateBankAccount(
   APITypes.CreateBankAccountMutationVariables,
   APITypes.CreateBankAccountMutation
 >;
+export const createConversationChat =
+  /* GraphQL */ `mutation CreateConversationChat(
+  $condition: ModelConversationChatConditionInput
+  $input: CreateConversationChatInput!
+) {
+  createConversationChat(condition: $condition, input: $input) {
+    createdAt
+    id
+    messages {
+      nextToken
+      __typename
+    }
+    metadata
+    name
+    owner
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreateConversationChatMutationVariables,
+    APITypes.CreateConversationChatMutation
+  >;
+export const createConversationMessageChat =
+  /* GraphQL */ `mutation CreateConversationMessageChat(
+  $condition: ModelConversationMessageChatConditionInput
+  $input: CreateConversationMessageChatInput!
+) {
+  createConversationMessageChat(condition: $condition, input: $input) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversation {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreateConversationMessageChatMutationVariables,
+    APITypes.CreateConversationMessageChatMutation
+  >;
 export const createExpense = /* GraphQL */ `mutation CreateExpense(
   $condition: ModelExpenseConditionInput
   $input: CreateExpenseInput!
@@ -204,6 +375,48 @@ export const createHistoryExpense =
     APITypes.CreateHistoryExpenseMutationVariables,
     APITypes.CreateHistoryExpenseMutation
   >;
+export const createPredictedExpense =
+  /* GraphQL */ `mutation CreatePredictedExpense(
+  $condition: ModelPredictedExpenseConditionInput
+  $input: CreatePredictedExpenseInput!
+) {
+  createPredictedExpense(condition: $condition, input: $input) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.CreatePredictedExpenseMutationVariables,
+    APITypes.CreatePredictedExpenseMutation
+  >;
 export const createPreference = /* GraphQL */ `mutation CreatePreference(
   $condition: ModelPreferenceConditionInput
   $input: CreatePreferenceInput!
@@ -360,6 +573,66 @@ export const deleteBankAccount = /* GraphQL */ `mutation DeleteBankAccount(
   APITypes.DeleteBankAccountMutationVariables,
   APITypes.DeleteBankAccountMutation
 >;
+export const deleteConversationChat =
+  /* GraphQL */ `mutation DeleteConversationChat(
+  $condition: ModelConversationChatConditionInput
+  $input: DeleteConversationChatInput!
+) {
+  deleteConversationChat(condition: $condition, input: $input) {
+    createdAt
+    id
+    messages {
+      nextToken
+      __typename
+    }
+    metadata
+    name
+    owner
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.DeleteConversationChatMutationVariables,
+    APITypes.DeleteConversationChatMutation
+  >;
+export const deleteConversationMessageChat =
+  /* GraphQL */ `mutation DeleteConversationMessageChat(
+  $condition: ModelConversationMessageChatConditionInput
+  $input: DeleteConversationMessageChatInput!
+) {
+  deleteConversationMessageChat(condition: $condition, input: $input) {
+    aiContext
+    associatedUserMessageId
+    content {
+      text
+      __typename
+    }
+    conversation {
+      createdAt
+      id
+      metadata
+      name
+      owner
+      updatedAt
+      __typename
+    }
+    conversationId
+    createdAt
+    id
+    owner
+    role
+    toolConfiguration {
+      __typename
+    }
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.DeleteConversationMessageChatMutationVariables,
+    APITypes.DeleteConversationMessageChatMutation
+  >;
 export const deleteExpense = /* GraphQL */ `mutation DeleteExpense(
   $condition: ModelExpenseConditionInput
   $input: DeleteExpenseInput!
@@ -431,6 +704,10 @@ export const deleteExpenseType = /* GraphQL */ `mutation DeleteExpenseType(
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -561,6 +838,48 @@ export const deleteHistoryExpense =
     APITypes.DeleteHistoryExpenseMutationVariables,
     APITypes.DeleteHistoryExpenseMutation
   >;
+export const deletePredictedExpense =
+  /* GraphQL */ `mutation DeletePredictedExpense(
+  $condition: ModelPredictedExpenseConditionInput
+  $input: DeletePredictedExpenseInput!
+) {
+  deletePredictedExpense(condition: $condition, input: $input) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.DeletePredictedExpenseMutationVariables,
+    APITypes.DeletePredictedExpenseMutation
+  >;
 export const deletePreference = /* GraphQL */ `mutation DeletePreference(
   $condition: ModelPreferenceConditionInput
   $input: DeletePreferenceInput!
@@ -642,6 +961,10 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency
@@ -705,6 +1028,29 @@ export const updateBankAccount = /* GraphQL */ `mutation UpdateBankAccount(
   APITypes.UpdateBankAccountMutationVariables,
   APITypes.UpdateBankAccountMutation
 >;
+export const updateConversationChat =
+  /* GraphQL */ `mutation UpdateConversationChat(
+  $condition: ModelConversationChatConditionInput
+  $input: UpdateConversationChatInput!
+) {
+  updateConversationChat(condition: $condition, input: $input) {
+    createdAt
+    id
+    messages {
+      nextToken
+      __typename
+    }
+    metadata
+    name
+    owner
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.UpdateConversationChatMutationVariables,
+    APITypes.UpdateConversationChatMutation
+  >;
 export const updateExpense = /* GraphQL */ `mutation UpdateExpense(
   $condition: ModelExpenseConditionInput
   $input: UpdateExpenseInput!
@@ -751,6 +1097,10 @@ export const updateExpenseType = /* GraphQL */ `mutation UpdateExpenseType(
     id
     name
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     updatedAt
     user {
       createdAt
@@ -881,6 +1231,48 @@ export const updateHistoryExpense =
     APITypes.UpdateHistoryExpenseMutationVariables,
     APITypes.UpdateHistoryExpenseMutation
   >;
+export const updatePredictedExpense =
+  /* GraphQL */ `mutation UpdatePredictedExpense(
+  $condition: ModelPredictedExpenseConditionInput
+  $input: UpdatePredictedExpenseInput!
+) {
+  updatePredictedExpense(condition: $condition, input: $input) {
+    category
+    createdAt
+    date
+    expenseType {
+      createdAt
+      id
+      name
+      owner
+      updatedAt
+      userId
+      __typename
+    }
+    expenseTypeId
+    id
+    owner
+    predictedAmount
+    updatedAt
+    user {
+      createdAt
+      email
+      firstName
+      id
+      lastName
+      owner
+      profileOwner
+      role
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.UpdatePredictedExpenseMutationVariables,
+    APITypes.UpdatePredictedExpenseMutation
+  >;
 export const updatePreference = /* GraphQL */ `mutation UpdatePreference(
   $condition: ModelPreferenceConditionInput
   $input: UpdatePreferenceInput!
@@ -962,6 +1354,10 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
     id
     lastName
     owner
+    predictedExpenses {
+      nextToken
+      __typename
+    }
     preference {
       createdAt
       currency

@@ -1,5 +1,5 @@
 /* tslint:disable */
-
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type BankAccount = {
@@ -59,6 +59,7 @@ export type User = {
   id?: string | null;
   lastName?: string | null;
   owner?: string | null;
+  predictedExpenses?: ModelPredictedExpenseConnection | null;
   preference?: Preference | null;
   profileOwner: string;
   role?: string | null;
@@ -85,6 +86,7 @@ export type ExpenseType = {
   id: string;
   name: string;
   owner?: string | null;
+  predictedExpenses?: ModelPredictedExpenseConnection | null;
   updatedAt: string;
   user?: User | null;
   userId: string;
@@ -177,6 +179,40 @@ export type ModelExpenseConnection = {
   nextToken?: string | null;
 };
 
+export type ModelPredictedExpenseConnection = {
+  __typename: "ModelPredictedExpenseConnection";
+  items: Array<PredictedExpense | null>;
+  nextToken?: string | null;
+};
+
+export type PredictedExpense = {
+  __typename: "PredictedExpense";
+  category?: PredictedExpenseCategory | null;
+  createdAt: string;
+  date: string;
+  expenseType?: ExpenseType | null;
+  expenseTypeId?: string | null;
+  id: string;
+  owner?: string | null;
+  predictedAmount?: number | null;
+  updatedAt: string;
+  user?: User | null;
+};
+
+export enum PredictedExpenseCategory {
+  Debt = "Debt",
+  Food = "Food",
+  Healthcare = "Healthcare",
+  Housing = "Housing",
+  Insurance = "Insurance",
+  Miscellaneous = "Miscellaneous",
+  Personal = "Personal",
+  Recreation = "Recreation",
+  Savings = "Savings",
+  Transportation = "Transportation",
+  Utilities = "Utilities",
+}
+
 export type Preference = {
   __typename: "Preference";
   createdAt: string;
@@ -257,6 +293,133 @@ export enum BankAccountType {
   Line_of_Credit = "Line_of_Credit",
   Savings = "Savings",
 }
+
+export type ConversationChat = {
+  __typename: "ConversationChat";
+  createdAt: string;
+  id: string;
+  messages?: ModelConversationMessageChatConnection | null;
+  metadata?: string | null;
+  name?: string | null;
+  owner?: string | null;
+  updatedAt: string;
+};
+
+export type ModelConversationMessageChatConnection = {
+  __typename: "ModelConversationMessageChatConnection";
+  items: Array<ConversationMessageChat | null>;
+  nextToken?: string | null;
+};
+
+export type ConversationMessageChat = {
+  __typename: "ConversationMessageChat";
+  aiContext?: string | null;
+  associatedUserMessageId?: string | null;
+  content?: Array<AmplifyAIContentBlock | null> | null;
+  conversation?: ConversationChat | null;
+  conversationId: string;
+  createdAt: string;
+  id: string;
+  owner?: string | null;
+  role?: AmplifyAIConversationParticipantRole | null;
+  toolConfiguration?: AmplifyAIToolConfiguration | null;
+  updatedAt: string;
+};
+
+export type AmplifyAIConversationMessage = {
+  __typename: "AmplifyAIConversationMessage";
+  aiContext?: string | null;
+  associatedUserMessageId?: string | null;
+  content?: Array<AmplifyAIContentBlock | null> | null;
+  conversationId: string;
+  createdAt?: string | null;
+  id: string;
+  owner?: string | null;
+  role?: AmplifyAIConversationParticipantRole | null;
+  toolConfiguration?: AmplifyAIToolConfiguration | null;
+  updatedAt?: string | null;
+};
+
+export type AmplifyAIContentBlock = {
+  __typename: "AmplifyAIContentBlock";
+  document?: AmplifyAIDocumentBlock | null;
+  image?: AmplifyAIImageBlock | null;
+  text?: string | null;
+  toolResult?: AmplifyAIToolResultBlock | null;
+  toolUse?: AmplifyAIToolUseBlock | null;
+};
+
+export type AmplifyAIDocumentBlock = {
+  __typename: "AmplifyAIDocumentBlock";
+  format: string;
+  name: string;
+  source: AmplifyAIDocumentBlockSource;
+};
+
+export type AmplifyAIDocumentBlockSource = {
+  __typename: "AmplifyAIDocumentBlockSource";
+  bytes?: string | null;
+};
+
+export type AmplifyAIImageBlock = {
+  __typename: "AmplifyAIImageBlock";
+  format: string;
+  source: AmplifyAIImageBlockSource;
+};
+
+export type AmplifyAIImageBlockSource = {
+  __typename: "AmplifyAIImageBlockSource";
+  bytes?: string | null;
+};
+
+export type AmplifyAIToolResultBlock = {
+  __typename: "AmplifyAIToolResultBlock";
+  content: Array<AmplifyAIToolResultContentBlock>;
+  status?: string | null;
+  toolUseId: string;
+};
+
+export type AmplifyAIToolResultContentBlock = {
+  __typename: "AmplifyAIToolResultContentBlock";
+  document?: AmplifyAIDocumentBlock | null;
+  image?: AmplifyAIImageBlock | null;
+  json?: string | null;
+  text?: string | null;
+};
+
+export type AmplifyAIToolUseBlock = {
+  __typename: "AmplifyAIToolUseBlock";
+  input: string;
+  name: string;
+  toolUseId: string;
+};
+
+export enum AmplifyAIConversationParticipantRole {
+  assistant = "assistant",
+  user = "user",
+}
+
+export type AmplifyAIToolConfiguration = {
+  __typename: "AmplifyAIToolConfiguration";
+  tools?: Array<AmplifyAITool | null> | null;
+};
+
+export type AmplifyAITool = {
+  __typename: "AmplifyAITool";
+  toolSpec?: AmplifyAIToolSpecification | null;
+};
+
+export type AmplifyAIToolSpecification = {
+  __typename: "AmplifyAIToolSpecification";
+  description?: string | null;
+  inputSchema: AmplifyAIToolInputSchema;
+  name: string;
+};
+
+export type AmplifyAIToolInputSchema = {
+  __typename: "AmplifyAIToolInputSchema";
+  json?: string | null;
+};
 
 export type ModelBankAccountFilterInput = {
   and?: Array<ModelBankAccountFilterInput | null> | null;
@@ -348,6 +511,43 @@ export enum ModelSortDirection {
   ASC = "ASC",
   DESC = "DESC",
 }
+
+export type ModelConversationChatFilterInput = {
+  and?: Array<ModelConversationChatFilterInput | null> | null;
+  createdAt?: ModelStringInput | null;
+  id?: ModelIDInput | null;
+  metadata?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  not?: ModelConversationChatFilterInput | null;
+  or?: Array<ModelConversationChatFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type ModelConversationChatConnection = {
+  __typename: "ModelConversationChatConnection";
+  items: Array<ConversationChat | null>;
+  nextToken?: string | null;
+};
+
+export type ModelConversationMessageChatFilterInput = {
+  aiContext?: ModelStringInput | null;
+  and?: Array<ModelConversationMessageChatFilterInput | null> | null;
+  associatedUserMessageId?: ModelIDInput | null;
+  conversationId?: ModelIDInput | null;
+  createdAt?: ModelStringInput | null;
+  id?: ModelIDInput | null;
+  not?: ModelConversationMessageChatFilterInput | null;
+  or?: Array<ModelConversationMessageChatFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  role?: ModelAmplifyAIConversationParticipantRoleInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type ModelAmplifyAIConversationParticipantRoleInput = {
+  eq?: AmplifyAIConversationParticipantRole | null;
+  ne?: AmplifyAIConversationParticipantRole | null;
+};
 
 export type ModelExpenseFilterInput = {
   and?: Array<ModelExpenseFilterInput | null> | null;
@@ -442,6 +642,25 @@ export type ModelHistoryExpenseCategoryInput = {
   ne?: HistoryExpenseCategory | null;
 };
 
+export type ModelPredictedExpenseFilterInput = {
+  and?: Array<ModelPredictedExpenseFilterInput | null> | null;
+  category?: ModelPredictedExpenseCategoryInput | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  expenseTypeId?: ModelStringInput | null;
+  id?: ModelIDInput | null;
+  not?: ModelPredictedExpenseFilterInput | null;
+  or?: Array<ModelPredictedExpenseFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  predictedAmount?: ModelFloatInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type ModelPredictedExpenseCategoryInput = {
+  eq?: PredictedExpenseCategory | null;
+  ne?: PredictedExpenseCategory | null;
+};
+
 export type ModelPreferenceFilterInput = {
   and?: Array<ModelPreferenceFilterInput | null> | null;
   createdAt?: ModelStringInput | null;
@@ -531,6 +750,117 @@ export type ModelUserConnection = {
   nextToken?: string | null;
 };
 
+export type AmplifyAIContentBlockInput = {
+  document?: AmplifyAIDocumentBlockInput | null;
+  image?: AmplifyAIImageBlockInput | null;
+  text?: string | null;
+  toolResult?: AmplifyAIToolResultBlockInput | null;
+  toolUse?: AmplifyAIToolUseBlockInput | null;
+};
+
+export type AmplifyAIDocumentBlockInput = {
+  format: string;
+  name: string;
+  source: AmplifyAIDocumentBlockSourceInput;
+};
+
+export type AmplifyAIDocumentBlockSourceInput = {
+  bytes?: string | null;
+};
+
+export type AmplifyAIImageBlockInput = {
+  format: string;
+  source: AmplifyAIImageBlockSourceInput;
+};
+
+export type AmplifyAIImageBlockSourceInput = {
+  bytes?: string | null;
+};
+
+export type AmplifyAIToolResultBlockInput = {
+  content: Array<AmplifyAIToolResultContentBlockInput>;
+  status?: string | null;
+  toolUseId: string;
+};
+
+export type AmplifyAIToolResultContentBlockInput = {
+  document?: AmplifyAIDocumentBlockInput | null;
+  image?: AmplifyAIImageBlockInput | null;
+  json?: string | null;
+  text?: string | null;
+};
+
+export type AmplifyAIToolUseBlockInput = {
+  input: string;
+  name: string;
+  toolUseId: string;
+};
+
+export type AmplifyAIToolConfigurationInput = {
+  tools?: Array<AmplifyAIToolInput | null> | null;
+};
+
+export type AmplifyAIToolInput = {
+  toolSpec?: AmplifyAIToolSpecificationInput | null;
+};
+
+export type AmplifyAIToolSpecificationInput = {
+  description?: string | null;
+  inputSchema: AmplifyAIToolInputSchemaInput;
+  name: string;
+};
+
+export type AmplifyAIToolInputSchemaInput = {
+  json?: string | null;
+};
+
+export type CreateConversationMessageChatAssistantInput = {
+  associatedUserMessageId?: string | null;
+  content?: Array<AmplifyAIContentBlockInput | null> | null;
+  conversationId?: string | null;
+};
+
+export type CreateConversationMessageChatAssistantStreamingInput = {
+  accumulatedTurnContent?: Array<AmplifyAIContentBlockInput | null> | null;
+  associatedUserMessageId: string;
+  contentBlockDeltaIndex?: number | null;
+  contentBlockDoneAtIndex?: number | null;
+  contentBlockIndex?: number | null;
+  contentBlockText?: string | null;
+  contentBlockToolUse?: string | null;
+  conversationId: string;
+  errors?: Array<AmplifyAIConversationTurnErrorInput | null> | null;
+  p?: string | null;
+  stopReason?: string | null;
+};
+
+export type AmplifyAIConversationTurnErrorInput = {
+  errorType: string;
+  message: string;
+};
+
+export type AmplifyAIConversationMessageStreamPart = {
+  __typename: "AmplifyAIConversationMessageStreamPart";
+  associatedUserMessageId: string;
+  contentBlockDeltaIndex?: number | null;
+  contentBlockDoneAtIndex?: number | null;
+  contentBlockIndex?: number | null;
+  contentBlockText?: string | null;
+  contentBlockToolUse?: AmplifyAIToolUseBlock | null;
+  conversationId: string;
+  errors?: Array<AmplifyAIConversationTurnError | null> | null;
+  id: string;
+  owner?: string | null;
+  p?: string | null;
+  stopReason?: string | null;
+};
+
+export type AmplifyAIConversationTurnError = {
+  __typename: "AmplifyAIConversationTurnError";
+  errorType: string;
+  message: string;
+};
+
 export type ModelBankAccountConditionInput = {
   and?: Array<ModelBankAccountConditionInput | null> | null;
   balance?: ModelFloatInput | null;
@@ -550,6 +880,46 @@ export type CreateBankAccountInput = {
   name?: string | null;
   type?: BankAccountType | null;
   userId: string;
+};
+
+export type ModelConversationChatConditionInput = {
+  and?: Array<ModelConversationChatConditionInput | null> | null;
+  createdAt?: ModelStringInput | null;
+  metadata?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  not?: ModelConversationChatConditionInput | null;
+  or?: Array<ModelConversationChatConditionInput | null> | null;
+  owner?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type CreateConversationChatInput = {
+  id?: string | null;
+  metadata?: string | null;
+  name?: string | null;
+};
+
+export type ModelConversationMessageChatConditionInput = {
+  aiContext?: ModelStringInput | null;
+  and?: Array<ModelConversationMessageChatConditionInput | null> | null;
+  associatedUserMessageId?: ModelIDInput | null;
+  conversationId?: ModelIDInput | null;
+  createdAt?: ModelStringInput | null;
+  not?: ModelConversationMessageChatConditionInput | null;
+  or?: Array<ModelConversationMessageChatConditionInput | null> | null;
+  owner?: ModelStringInput | null;
+  role?: ModelAmplifyAIConversationParticipantRoleInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type CreateConversationMessageChatInput = {
+  aiContext?: string | null;
+  associatedUserMessageId?: string | null;
+  content?: Array<AmplifyAIContentBlockInput | null> | null;
+  conversationId: string;
+  id?: string | null;
+  role?: AmplifyAIConversationParticipantRole | null;
+  toolConfiguration?: AmplifyAIToolConfigurationInput | null;
 };
 
 export type ModelExpenseConditionInput = {
@@ -657,6 +1027,28 @@ export type CreateHistoryExpenseInput = {
   userId: string;
 };
 
+export type ModelPredictedExpenseConditionInput = {
+  and?: Array<ModelPredictedExpenseConditionInput | null> | null;
+  category?: ModelPredictedExpenseCategoryInput | null;
+  createdAt?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  expenseTypeId?: ModelStringInput | null;
+  not?: ModelPredictedExpenseConditionInput | null;
+  or?: Array<ModelPredictedExpenseConditionInput | null> | null;
+  owner?: ModelStringInput | null;
+  predictedAmount?: ModelFloatInput | null;
+  updatedAt?: ModelStringInput | null;
+};
+
+export type CreatePredictedExpenseInput = {
+  category?: PredictedExpenseCategory | null;
+  date: string;
+  expenseTypeId?: string | null;
+  id?: string | null;
+  owner?: string | null;
+  predictedAmount?: number | null;
+};
+
 export type ModelPreferenceConditionInput = {
   and?: Array<ModelPreferenceConditionInput | null> | null;
   createdAt?: ModelStringInput | null;
@@ -739,6 +1131,14 @@ export type DeleteBankAccountInput = {
   id: string;
 };
 
+export type DeleteConversationChatInput = {
+  id: string;
+};
+
+export type DeleteConversationMessageChatInput = {
+  id: string;
+};
+
 export type DeleteExpenseInput = {
   id: string;
 };
@@ -752,6 +1152,10 @@ export type DeleteHistoryBankAccountInput = {
 };
 
 export type DeleteHistoryExpenseInput = {
+  id: string;
+};
+
+export type DeletePredictedExpenseInput = {
   id: string;
 };
 
@@ -769,6 +1173,12 @@ export type UpdateBankAccountInput = {
   name?: string | null;
   type?: BankAccountType | null;
   userId?: string | null;
+};
+
+export type UpdateConversationChatInput = {
+  id: string;
+  metadata?: string | null;
+  name?: string | null;
 };
 
 export type UpdateExpenseInput = {
@@ -812,6 +1222,15 @@ export type UpdateHistoryExpenseInput = {
   expenseTypeId?: string | null;
   id: string;
   userId?: string | null;
+};
+
+export type UpdatePredictedExpenseInput = {
+  category?: PredictedExpenseCategory | null;
+  date?: string | null;
+  expenseTypeId?: string | null;
+  id: string;
+  owner?: string | null;
+  predictedAmount?: number | null;
 };
 
 export type UpdatePreferenceInput = {
@@ -904,6 +1323,19 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array<string | null> | null;
 };
 
+export type ModelSubscriptionConversationMessageChatFilterInput = {
+  aiContext?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionConversationMessageChatFilterInput | null> | null;
+  associatedUserMessageId?: ModelSubscriptionIDInput | null;
+  conversationId?: ModelSubscriptionIDInput | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  id?: ModelSubscriptionIDInput | null;
+  or?: Array<ModelSubscriptionConversationMessageChatFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  role?: ModelSubscriptionStringInput | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
+};
+
 export type ModelSubscriptionExpenseFilterInput = {
   and?: Array<ModelSubscriptionExpenseFilterInput | null> | null;
   assigned?: ModelSubscriptionFloatInput | null;
@@ -969,6 +1401,19 @@ export type ModelSubscriptionHistoryExpenseFilterInput = {
   or?: Array<ModelSubscriptionHistoryExpenseFilterInput | null> | null;
   updatedAt?: ModelSubscriptionStringInput | null;
   userId?: ModelSubscriptionStringInput | null;
+};
+
+export type ModelSubscriptionPredictedExpenseFilterInput = {
+  and?: Array<ModelSubscriptionPredictedExpenseFilterInput | null> | null;
+  category?: ModelSubscriptionStringInput | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  date?: ModelSubscriptionStringInput | null;
+  expenseTypeId?: ModelSubscriptionStringInput | null;
+  id?: ModelSubscriptionIDInput | null;
+  or?: Array<ModelSubscriptionPredictedExpenseFilterInput | null> | null;
+  owner?: ModelStringInput | null;
+  predictedAmount?: ModelSubscriptionFloatInput | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
 };
 
 export type ModelSubscriptionPreferenceFilterInput = {
@@ -1050,6 +1495,60 @@ export type GetBankAccountQuery = {
   } | null;
 };
 
+export type GetConversationChatQueryVariables = {
+  id: string;
+};
+
+export type GetConversationChatQuery = {
+  getConversationChat?: {
+    __typename: "ConversationChat";
+    createdAt: string;
+    id: string;
+    messages?: {
+      __typename: "ModelConversationMessageChatConnection";
+      nextToken?: string | null;
+    } | null;
+    metadata?: string | null;
+    name?: string | null;
+    owner?: string | null;
+    updatedAt: string;
+  } | null;
+};
+
+export type GetConversationMessageChatQueryVariables = {
+  id: string;
+};
+
+export type GetConversationMessageChatQuery = {
+  getConversationMessageChat?: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+    conversationId: string;
+    createdAt: string;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt: string;
+  } | null;
+};
+
 export type GetExpenseQueryVariables = {
   id: string;
 };
@@ -1121,6 +1620,10 @@ export type GetExpenseTypeQuery = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1241,6 +1744,45 @@ export type GetHistoryExpenseQuery = {
   } | null;
 };
 
+export type GetPredictedExpenseQueryVariables = {
+  id: string;
+};
+
+export type GetPredictedExpenseQuery = {
+  getPredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type GetPreferenceQueryVariables = {
   userId: string;
 };
@@ -1322,6 +1864,10 @@ export type GetUserQuery = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -1404,6 +1950,52 @@ export type ListBankAccountsQuery = {
       type?: BankAccountType | null;
       updatedAt: string;
       userId: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListConversationChatsQueryVariables = {
+  filter?: ModelConversationChatFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type ListConversationChatsQuery = {
+  listConversationChats?: {
+    __typename: "ModelConversationChatConnection";
+    items: Array<{
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListConversationMessageChatsQueryVariables = {
+  filter?: ModelConversationMessageChatFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+};
+
+export type ListConversationMessageChatsQuery = {
+  listConversationMessageChats?: {
+    __typename: "ModelConversationMessageChatConnection";
+    items: Array<{
+      __typename: "ConversationMessageChat";
+      aiContext?: string | null;
+      associatedUserMessageId?: string | null;
+      conversationId: string;
+      createdAt: string;
+      id: string;
+      owner?: string | null;
+      role?: AmplifyAIConversationParticipantRole | null;
+      updatedAt: string;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -1637,6 +2229,58 @@ export type ListHistoryExpensesQuery = {
   } | null;
 };
 
+export type ListPredictedExpenseByOwnerQueryVariables = {
+  filter?: ModelPredictedExpenseFilterInput | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  owner: string;
+  sortDirection?: ModelSortDirection | null;
+};
+
+export type ListPredictedExpenseByOwnerQuery = {
+  listPredictedExpenseByOwner?: {
+    __typename: "ModelPredictedExpenseConnection";
+    items: Array<{
+      __typename: "PredictedExpense";
+      category?: PredictedExpenseCategory | null;
+      createdAt: string;
+      date: string;
+      expenseTypeId?: string | null;
+      id: string;
+      owner?: string | null;
+      predictedAmount?: number | null;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
+export type ListPredictedExpensesQueryVariables = {
+  filter?: ModelPredictedExpenseFilterInput | null;
+  id?: string | null;
+  limit?: number | null;
+  nextToken?: string | null;
+  sortDirection?: ModelSortDirection | null;
+};
+
+export type ListPredictedExpensesQuery = {
+  listPredictedExpenses?: {
+    __typename: "ModelPredictedExpenseConnection";
+    items: Array<{
+      __typename: "PredictedExpense";
+      category?: PredictedExpenseCategory | null;
+      createdAt: string;
+      date: string;
+      expenseTypeId?: string | null;
+      id: string;
+      owner?: string | null;
+      predictedAmount?: number | null;
+      updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
+  } | null;
+};
+
 export type ListPreferencesQueryVariables = {
   filter?: ModelPreferenceFilterInput | null;
   limit?: number | null;
@@ -1708,6 +2352,108 @@ export type ListUsersQuery = {
   } | null;
 };
 
+export type ChatMutationVariables = {
+  aiContext?: string | null;
+  content?: Array<AmplifyAIContentBlockInput | null> | null;
+  conversationId: string;
+  toolConfiguration?: AmplifyAIToolConfigurationInput | null;
+};
+
+export type ChatMutation = {
+  chat: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversationId: string;
+    createdAt?: string | null;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt?: string | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
+export type CreateAssistantResponseChatMutationVariables = {
+  input: CreateConversationMessageChatAssistantInput;
+};
+
+export type CreateAssistantResponseChatMutation = {
+  createAssistantResponseChat?: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+    conversationId: string;
+    createdAt: string;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt: string;
+  } | null;
+};
+
+export type CreateAssistantResponseStreamChatMutationVariables = {
+  input: CreateConversationMessageChatAssistantStreamingInput;
+};
+
+export type CreateAssistantResponseStreamChatMutation = {
+  createAssistantResponseStreamChat?: {
+    __typename: "AmplifyAIConversationMessageStreamPart";
+    associatedUserMessageId: string;
+    contentBlockDeltaIndex?: number | null;
+    contentBlockDoneAtIndex?: number | null;
+    contentBlockIndex?: number | null;
+    contentBlockText?: string | null;
+    contentBlockToolUse?: {
+      __typename: "AmplifyAIToolUseBlock";
+      input: string;
+      name: string;
+      toolUseId: string;
+    } | null;
+    conversationId: string;
+    errors?: Array<{
+      __typename: "AmplifyAIConversationTurnError";
+      errorType: string;
+      message: string;
+    } | null> | null;
+    id: string;
+    owner?: string | null;
+    p?: string | null;
+    stopReason?: string | null;
+  } | null;
+};
+
 export type CreateBankAccountMutationVariables = {
   condition?: ModelBankAccountConditionInput | null;
   input: CreateBankAccountInput;
@@ -1740,6 +2486,62 @@ export type CreateBankAccountMutation = {
       updatedAt: string;
     } | null;
     userId: string;
+  } | null;
+};
+
+export type CreateConversationChatMutationVariables = {
+  condition?: ModelConversationChatConditionInput | null;
+  input: CreateConversationChatInput;
+};
+
+export type CreateConversationChatMutation = {
+  createConversationChat?: {
+    __typename: "ConversationChat";
+    createdAt: string;
+    id: string;
+    messages?: {
+      __typename: "ModelConversationMessageChatConnection";
+      nextToken?: string | null;
+    } | null;
+    metadata?: string | null;
+    name?: string | null;
+    owner?: string | null;
+    updatedAt: string;
+  } | null;
+};
+
+export type CreateConversationMessageChatMutationVariables = {
+  condition?: ModelConversationMessageChatConditionInput | null;
+  input: CreateConversationMessageChatInput;
+};
+
+export type CreateConversationMessageChatMutation = {
+  createConversationMessageChat?: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+    conversationId: string;
+    createdAt: string;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt: string;
   } | null;
 };
 
@@ -1816,6 +2618,10 @@ export type CreateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -1938,6 +2744,46 @@ export type CreateHistoryExpenseMutation = {
   } | null;
 };
 
+export type CreatePredictedExpenseMutationVariables = {
+  condition?: ModelPredictedExpenseConditionInput | null;
+  input: CreatePredictedExpenseInput;
+};
+
+export type CreatePredictedExpenseMutation = {
+  createPredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type CreatePreferenceMutationVariables = {
   condition?: ModelPreferenceConditionInput | null;
   input: CreatePreferenceInput;
@@ -2021,6 +2867,10 @@ export type CreateUserMutation = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -2088,6 +2938,62 @@ export type DeleteBankAccountMutation = {
       updatedAt: string;
     } | null;
     userId: string;
+  } | null;
+};
+
+export type DeleteConversationChatMutationVariables = {
+  condition?: ModelConversationChatConditionInput | null;
+  input: DeleteConversationChatInput;
+};
+
+export type DeleteConversationChatMutation = {
+  deleteConversationChat?: {
+    __typename: "ConversationChat";
+    createdAt: string;
+    id: string;
+    messages?: {
+      __typename: "ModelConversationMessageChatConnection";
+      nextToken?: string | null;
+    } | null;
+    metadata?: string | null;
+    name?: string | null;
+    owner?: string | null;
+    updatedAt: string;
+  } | null;
+};
+
+export type DeleteConversationMessageChatMutationVariables = {
+  condition?: ModelConversationMessageChatConditionInput | null;
+  input: DeleteConversationMessageChatInput;
+};
+
+export type DeleteConversationMessageChatMutation = {
+  deleteConversationMessageChat?: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+    conversationId: string;
+    createdAt: string;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt: string;
   } | null;
 };
 
@@ -2164,6 +3070,10 @@ export type DeleteExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2286,6 +3196,46 @@ export type DeleteHistoryExpenseMutation = {
   } | null;
 };
 
+export type DeletePredictedExpenseMutationVariables = {
+  condition?: ModelPredictedExpenseConditionInput | null;
+  input: DeletePredictedExpenseInput;
+};
+
+export type DeletePredictedExpenseMutation = {
+  deletePredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type DeletePreferenceMutationVariables = {
   condition?: ModelPreferenceConditionInput | null;
   input: DeletePreferenceInput;
@@ -2369,6 +3319,10 @@ export type DeleteUserMutation = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -2436,6 +3390,27 @@ export type UpdateBankAccountMutation = {
       updatedAt: string;
     } | null;
     userId: string;
+  } | null;
+};
+
+export type UpdateConversationChatMutationVariables = {
+  condition?: ModelConversationChatConditionInput | null;
+  input: UpdateConversationChatInput;
+};
+
+export type UpdateConversationChatMutation = {
+  updateConversationChat?: {
+    __typename: "ConversationChat";
+    createdAt: string;
+    id: string;
+    messages?: {
+      __typename: "ModelConversationMessageChatConnection";
+      nextToken?: string | null;
+    } | null;
+    metadata?: string | null;
+    name?: string | null;
+    owner?: string | null;
+    updatedAt: string;
   } | null;
 };
 
@@ -2512,6 +3487,10 @@ export type UpdateExpenseTypeMutation = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2634,6 +3613,46 @@ export type UpdateHistoryExpenseMutation = {
   } | null;
 };
 
+export type UpdatePredictedExpenseMutationVariables = {
+  condition?: ModelPredictedExpenseConditionInput | null;
+  input: UpdatePredictedExpenseInput;
+};
+
+export type UpdatePredictedExpenseMutation = {
+  updatePredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type UpdatePreferenceMutationVariables = {
   condition?: ModelPreferenceConditionInput | null;
   input: UpdatePreferenceInput;
@@ -2717,6 +3736,10 @@ export type UpdateUserMutation = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -2752,6 +3775,37 @@ export type UpdateUserMutation = {
   } | null;
 };
 
+export type OnCreateAssistantResponseChatSubscriptionVariables = {
+  conversationId?: string | null;
+};
+
+export type OnCreateAssistantResponseChatSubscription = {
+  onCreateAssistantResponseChat?: {
+    __typename: "AmplifyAIConversationMessageStreamPart";
+    associatedUserMessageId: string;
+    contentBlockDeltaIndex?: number | null;
+    contentBlockDoneAtIndex?: number | null;
+    contentBlockIndex?: number | null;
+    contentBlockText?: string | null;
+    contentBlockToolUse?: {
+      __typename: "AmplifyAIToolUseBlock";
+      input: string;
+      name: string;
+      toolUseId: string;
+    } | null;
+    conversationId: string;
+    errors?: Array<{
+      __typename: "AmplifyAIConversationTurnError";
+      errorType: string;
+      message: string;
+    } | null> | null;
+    id: string;
+    owner?: string | null;
+    p?: string | null;
+    stopReason?: string | null;
+  } | null;
+};
+
 export type OnCreateBankAccountSubscriptionVariables = {
   filter?: ModelSubscriptionBankAccountFilterInput | null;
   owner?: string | null;
@@ -2784,6 +3838,41 @@ export type OnCreateBankAccountSubscription = {
       updatedAt: string;
     } | null;
     userId: string;
+  } | null;
+};
+
+export type OnCreateConversationMessageChatSubscriptionVariables = {
+  filter?: ModelSubscriptionConversationMessageChatFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnCreateConversationMessageChatSubscription = {
+  onCreateConversationMessageChat?: {
+    __typename: "ConversationMessageChat";
+    aiContext?: string | null;
+    associatedUserMessageId?: string | null;
+    content?: Array<{
+      __typename: "AmplifyAIContentBlock";
+      text?: string | null;
+    } | null> | null;
+    conversation?: {
+      __typename: "ConversationChat";
+      createdAt: string;
+      id: string;
+      metadata?: string | null;
+      name?: string | null;
+      owner?: string | null;
+      updatedAt: string;
+    } | null;
+    conversationId: string;
+    createdAt: string;
+    id: string;
+    owner?: string | null;
+    role?: AmplifyAIConversationParticipantRole | null;
+    toolConfiguration?: {
+      __typename: "AmplifyAIToolConfiguration";
+    } | null;
+    updatedAt: string;
   } | null;
 };
 
@@ -2860,6 +3949,10 @@ export type OnCreateExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -2981,6 +4074,46 @@ export type OnCreateHistoryExpenseSubscription = {
   } | null;
 };
 
+export type OnCreatePredictedExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionPredictedExpenseFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnCreatePredictedExpenseSubscription = {
+  onCreatePredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type OnCreatePreferenceSubscriptionVariables = {
   filter?: ModelSubscriptionPreferenceFilterInput | null;
   owner?: string | null;
@@ -3064,6 +4197,10 @@ export type OnCreateUserSubscription = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -3207,6 +4344,10 @@ export type OnDeleteExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -3328,6 +4469,46 @@ export type OnDeleteHistoryExpenseSubscription = {
   } | null;
 };
 
+export type OnDeletePredictedExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionPredictedExpenseFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnDeletePredictedExpenseSubscription = {
+  onDeletePredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type OnDeletePreferenceSubscriptionVariables = {
   filter?: ModelSubscriptionPreferenceFilterInput | null;
   owner?: string | null;
@@ -3411,6 +4592,10 @@ export type OnDeleteUserSubscription = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
@@ -3554,6 +4739,10 @@ export type OnUpdateExpenseTypeSubscription = {
     id: string;
     name: string;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     updatedAt: string;
     user?: {
       __typename: "User";
@@ -3675,6 +4864,46 @@ export type OnUpdateHistoryExpenseSubscription = {
   } | null;
 };
 
+export type OnUpdatePredictedExpenseSubscriptionVariables = {
+  filter?: ModelSubscriptionPredictedExpenseFilterInput | null;
+  owner?: string | null;
+};
+
+export type OnUpdatePredictedExpenseSubscription = {
+  onUpdatePredictedExpense?: {
+    __typename: "PredictedExpense";
+    category?: PredictedExpenseCategory | null;
+    createdAt: string;
+    date: string;
+    expenseType?: {
+      __typename: "ExpenseType";
+      createdAt: string;
+      id: string;
+      name: string;
+      owner?: string | null;
+      updatedAt: string;
+      userId: string;
+    } | null;
+    expenseTypeId?: string | null;
+    id: string;
+    owner?: string | null;
+    predictedAmount?: number | null;
+    updatedAt: string;
+    user?: {
+      __typename: "User";
+      createdAt: string;
+      email?: string | null;
+      firstName?: string | null;
+      id?: string | null;
+      lastName?: string | null;
+      owner?: string | null;
+      profileOwner: string;
+      role?: string | null;
+      updatedAt: string;
+    } | null;
+  } | null;
+};
+
 export type OnUpdatePreferenceSubscriptionVariables = {
   filter?: ModelSubscriptionPreferenceFilterInput | null;
   owner?: string | null;
@@ -3758,6 +4987,10 @@ export type OnUpdateUserSubscription = {
     id?: string | null;
     lastName?: string | null;
     owner?: string | null;
+    predictedExpenses?: {
+      __typename: "ModelPredictedExpenseConnection";
+      nextToken?: string | null;
+    } | null;
     preference?: {
       __typename: "Preference";
       createdAt: string;
