@@ -675,7 +675,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/backend-cli@npm:^1.4.2":
+"@aws-amplify/backend-cli@npm:^1.7.0":
   version: 1.7.0
   resolution: "@aws-amplify/backend-cli@npm:1.7.0"
   dependencies:
@@ -815,7 +815,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/backend@npm:^1.8.0":
+"@aws-amplify/backend@npm:^1.16.0":
   version: 1.16.0
   resolution: "@aws-amplify/backend@npm:1.16.0"
   dependencies:
@@ -1814,7 +1814,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-amplify/ui-react@npm:^6.7.1":
+"@aws-amplify/ui-react@npm:^6.11.1":
   version: 6.11.1
   resolution: "@aws-amplify/ui-react@npm:6.11.1"
   dependencies:
@@ -19265,9 +19265,9 @@ __metadata:
   dependencies:
     "@ant-design/icons": "npm:^5.5.2"
     "@ant-design/plots": "npm:^2.3.3"
-    "@aws-amplify/backend": "npm:^1.8.0"
-    "@aws-amplify/backend-cli": "npm:^1.4.2"
-    "@aws-amplify/ui-react": "npm:^6.7.1"
+    "@aws-amplify/backend": "npm:^1.16.0"
+    "@aws-amplify/backend-cli": "npm:^1.7.0"
+    "@aws-amplify/ui-react": "npm:^6.11.1"
     "@aws-sdk/crc64-nvme-crt": "npm:^3.796.0"
     "@aws-sdk/signature-v4-crt": "npm:^3.796.0"
     "@emotion/react": "npm:^11.13.5"
