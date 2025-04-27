@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Box, Modal, IconButton, Typography, Paper } from "@mui/material";
+import {
+  useListExpenseByUserId,
+  useListHistoryExpenseByUserId,
+} from "../hooks";
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import { AIConversation, createAIHooks } from "@aws-amplify/ui-react-ai";
@@ -10,7 +14,9 @@ const client = generateClient<Schema>({ authMode: "userPool" });
 const { useAIConversation } = createAIHooks(client);
 
 const ChatModal: React.FC = () => {
-  const [open, setOpen] = useState(true);
+  const { expenseTypesWithExpenses } = useListExpenseByUserId();
+  const { historyExpenses } = useListHistoryExpenseByUserId();
+  const [open, setOpen] = useState(false);
   const [
     {
       data: { messages },
@@ -74,12 +80,42 @@ const ChatModal: React.FC = () => {
             </IconButton>
           </Box>
 
-          {/* AI Conversation */}
-          <AIConversation
-            messages={messages}
-            isLoading={isLoading}
-            handleSendMessage={handleSendMessage}
-          />
+          {/* Scrollable Chat Content */}
+          <Box
+            sx={{
+              flexGrow: 1,
+
+              overflowY: "auto",
+              height: "100vh",
+              scrollbarWidth: "thin", // For Firefox
+              scrollbarColor: "#bfbfbf transparent", // For Firefox
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "#bfbfbf",
+                borderRadius: "8px",
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                backgroundColor: "#a6a6a6",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "transparent",
+              },
+            }}
+          >
+            <AIConversation
+              messages={messages}
+              isLoading={isLoading}
+              aiContext={() => {
+                return {
+                  expenseTypesWithExpenses,
+                  historyExpenses,
+                };
+              }}
+              handleSendMessage={handleSendMessage}
+            />
+          </Box>
         </Paper>
       </Modal>
     </>
