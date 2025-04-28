@@ -39,7 +39,7 @@ const schema = a
         inferenceConfiguration: {
           topP: 0.9,
           temperature: 0.7,
-          maxTokens: 3000,
+          maxTokens: 4000,
         },
       })
       .authorization((allow) => allow.owner()),
