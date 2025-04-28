@@ -21,9 +21,11 @@ const ChatModal: React.FC = () => {
     {
       data: { messages },
       isLoading,
+      errors,
     },
     handleSendMessage,
   ] = useAIConversation("chat");
+  console.log('errors', errors);
 
   const toggleModal = () => {
     setOpen(!open);
