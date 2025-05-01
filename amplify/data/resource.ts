@@ -34,22 +34,13 @@ const schema = a
     PredictedExpense,
     chat: a
       .conversation({
-        aiModel: a.ai.model("Amazon Nova Micro"),
+        aiModel: a.ai.model("Claude 3 Sonnet"),
         systemPrompt: systemPrompt,
-        tools: [
-          {
-            name: "Expense",
-            model: a.ref("Expense"),
-            modelOperation: "list",
-            description: "List all expenses",
-          },
-          {
-            name: "HistoryExpense",
-            model: a.ref("HistoryExpense"),
-            modelOperation: "list",
-            description: "List all historical expenses",
-          },
-        ],
+        inferenceConfiguration: {
+          topP: 0.9,
+          temperature: 0.7,
+          maxTokens: 4000,
+        },
       })
       .authorization((allow) => allow.owner()),
   })
