@@ -7,6 +7,7 @@ import {
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ReflectPage from "./pages/ReflectPage";
+import ImportPage from "./pages/ImportPage";
 import LandingPage from "./pages/LandingPage";
 import { Amplify } from "aws-amplify";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -35,6 +36,14 @@ const router = createBrowserRouter(
         element={
           <ProtectedRoute>
             <ReflectPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/import"
+        element={
+          <ProtectedRoute>
+            <ImportPage />
           </ProtectedRoute>
         }
       />
