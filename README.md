@@ -1,29 +1,23 @@
-# React + TypeScript + Vite
+# Budget AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Budget AI is a web application for managing personal finances. It is built with **React**, **TypeScript** and **Vite**, using **AWS Amplify** for authentication and data access. The app provides budgeting tools such as expense tracking, goal planning and simple visualizations.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Install dependencies
+yarn install
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+# Start the development server
+yarn dev
 ```
+
+## Useful Scripts
+
+- `yarn lint` – run ESLint
+- `yarn format` – format files with Prettier
+
+## Project Structure
 
 ## Running tests
 

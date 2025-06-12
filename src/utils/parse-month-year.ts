@@ -1,11 +1,12 @@
 /**
- * Helper to parse a month-year string into a month number and year number,
- * and provides utility to get the previous month's name.
+ * Helper to parse a month-year string into numeric month and year values and
+ * returns helpers {@code getPreviousMonthName} and {@code geFollowingMonthName}
+ * to retrieve the previous and next month names.
  */
 function parseMonthYear(monthYear: string): {
   month: number;
   year: number;
-  geFollowingMonthName: () => string;
+  getFollowingMonthName: () => string;
   getPreviousMonthName: () => string;
 } {
   // Parse the input string, e.g., "Dec 2024" -> monthName = "Dec", year = "2024"
@@ -42,12 +43,12 @@ function parseMonthYear(monthYear: string): {
     return reverseMonthMap[prevMonthNum] || "Jan"; // Fallback to Jan if unknown
   };
 
-  const geFollowingMonthName = (): string => {
+  const getFollowingMonthName = (): string => {
     const nextMonthNum = month === 11 ? 0 : month + 1;
     return reverseMonthMap[nextMonthNum] || "Jan"; // Fallback to Jan if unknown
   };
 
-  return { month, year, getPreviousMonthName, geFollowingMonthName };
+  return { month, year, getPreviousMonthName, getFollowingMonthName };
 }
 
 export { parseMonthYear };

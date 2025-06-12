@@ -59,9 +59,9 @@ function SpendingBreakdownView(): JSX.Element {
     setSelectedMonthYear(`${prevMonth} ${prevYear}`);
   };
   const handleNextMonth = () => {
-    const { month, year, geFollowingMonthName } =
+    const { month, year, getFollowingMonthName } =
       parseMonthYear(selectedMonthYear);
-    const nextMonth = geFollowingMonthName();
+    const nextMonth = getFollowingMonthName();
     const nextYear = month === 11 ? year + 1 : year;
     setSelectedMonthYear(`${nextMonth} ${nextYear}`);
   };
