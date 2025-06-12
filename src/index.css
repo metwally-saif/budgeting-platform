@@ -144,7 +144,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 :root {
-  font-family: "Parkinsans", serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-optical-sizing: auto;

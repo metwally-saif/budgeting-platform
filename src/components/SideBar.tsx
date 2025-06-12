@@ -201,10 +201,58 @@ export default function SideBar({ refresh }: { refresh: () => void }) {
                     },
               ]}
             />
-          </ListItemButton>
-        </ListItem>
-        <Divider />
-        <List>
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding sx={{ display: "block" }}>
+        <ListItemButton
+          onClick={() => navigate("/import")}
+          sx={[
+            {
+              minHeight: 48,
+              px: 2.5,
+            },
+            open
+              ? {
+                  justifyContent: "initial",
+                }
+              : {
+                  justifyContent: "center",
+                },
+          ]}
+        >
+          <ListItemIcon
+            sx={[
+              {
+                minWidth: 0,
+                justifyContent: "center",
+              },
+              open
+                ? {
+                    mr: 3,
+                  }
+                : {
+                    mr: "auto",
+                  },
+            ]}
+          >
+            <AddIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Import"
+            sx={[
+              open
+                ? {
+                    opacity: 1,
+                  }
+                : {
+                    opacity: 0,
+                  },
+            ]}
+          />
+        </ListItemButton>
+      </ListItem>
+      <Divider />
+      <List>
           {bankAccounts?.map((account) => (
             <ListItem
               key={account.name}

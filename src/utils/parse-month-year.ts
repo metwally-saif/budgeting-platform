@@ -1,6 +1,7 @@
 /**
- * Helper to parse a month-year string into a month number and year number.
- * It also provides utilities to get the previous and following month names.
+ * Helper to parse a month-year string into numeric month and year values and
+ * returns helpers {@code getPreviousMonthName} and {@code geFollowingMonthName}
+ * to retrieve the previous and next month names.
  */
 function parseMonthYear(monthYear: string): {
   month: number;
