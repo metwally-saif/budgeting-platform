@@ -6,7 +6,7 @@
 function parseMonthYear(monthYear: string): {
   month: number;
   year: number;
-  geFollowingMonthName: () => string;
+  getFollowingMonthName: () => string;
   getPreviousMonthName: () => string;
 } {
   // Parse the input string, e.g., "Dec 2024" -> monthName = "Dec", year = "2024"
@@ -43,12 +43,12 @@ function parseMonthYear(monthYear: string): {
     return reverseMonthMap[prevMonthNum] || "Jan"; // Fallback to Jan if unknown
   };
 
-  const geFollowingMonthName = (): string => {
+  const getFollowingMonthName = (): string => {
     const nextMonthNum = month === 11 ? 0 : month + 1;
     return reverseMonthMap[nextMonthNum] || "Jan"; // Fallback to Jan if unknown
   };
 
-  return { month, year, getPreviousMonthName, geFollowingMonthName };
+  return { month, year, getPreviousMonthName, getFollowingMonthName };
 }
 
 export { parseMonthYear };
