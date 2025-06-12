@@ -12,7 +12,8 @@
     "format:check": "prettier --check \"**/*.{js,ts,tsx,json,yml,md}\"",
     "codegen": "npx ampx generate graphql-client-code --format graphql-codegen  --out amplify/graphql",
     "sandbox": "npx ampx sandbox",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
@@ -63,6 +64,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0",
-    "vite": "^6.0.1"
+    "vite": "^6.0.1",
+    "vitest": "^1.0.0"
   }
 }
