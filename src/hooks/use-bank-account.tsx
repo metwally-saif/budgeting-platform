@@ -6,13 +6,12 @@ import {
   CreateBankAccountInput,
   UpdateBankAccountInput,
   DeleteBankAccountInput,
-  BankAccountType,
   BankAccount,
 } from "../../amplify/graphql/API";
 import { useAddHistoryBankAccount } from ".";
 
 export function useBankAccount() {
-  const [bankAccount, setBankAccount] = useState<BankAccountType | null>(null);
+  const [bankAccount, setBankAccount] = useState<BankAccount | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   // Memoize the client to prevent recreation on every render
@@ -32,7 +31,7 @@ export function useBankAccount() {
           setError(new Error("BankAccount not found"));
           return;
         }
-        setBankAccount(data as unknown as BankAccountType);
+        setBankAccount(data as BankAccount);
       } catch (error) {
         setError(error as Error);
       }
